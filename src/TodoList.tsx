@@ -30,4 +30,5 @@ const TodoList = ({title, tasks}: TodolistPropsType) => (
 );
 
 export default TodoList;
-gdddd
+
+const a = 5;
