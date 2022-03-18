@@ -9,5 +9,3 @@ const TodoListHeader = ({title}: TodoListHeaderPropsType) => {
 };
 
 export default TodoListHeader;
-
-let a = 5;
