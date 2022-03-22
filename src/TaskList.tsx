@@ -1,17 +1,22 @@
 import React from 'react';
 import Task from "./Task";
-import {TaskType} from "./TodoList";
+import {RemoveTaskType, TaskType} from "./TodoList";
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
+    removeTask: RemoveTaskType
 }
 
-const TaskList = ({tasks}: TaskListPropsType) => {
+const TaskList = ({tasks, removeTask}: TaskListPropsType) => {
     return (
         <ul>
-            <Task {...tasks[0]} />
-            <Task {...tasks[1]} />
-            <Task {...tasks[2]} />
+            {
+                tasks.map(task =>
+                    <Task key={task.id}
+                          {...task}
+                          removeTask={removeTask}
+                    />)
+            }
         </ul>
     );
 };

@@ -1,11 +1,14 @@
 import React from 'react';
-import {TaskType} from "./TodoList";
+import {RemoveTaskType, TaskType} from "./TodoList";
 
-type TaskPropsType = TaskType
+type TaskPropsType = TaskType & {
+    removeTask: RemoveTaskType
+}
 
-const Task = ({isDone, title}: TaskPropsType) => {
+const Task = ({isDone, title, id, removeTask}: TaskPropsType) => {
     return (
         <li>
+            <button onClick={() => removeTask(id)}>X</button>
             <input
                 type="checkbox"
                 checked={isDone}/>

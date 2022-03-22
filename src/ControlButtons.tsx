@@ -1,11 +1,16 @@
 import React from 'react';
+import {FilterTaskType} from "./TodoList";
 
-const ControlButtons = () => {
+type ControlButtonsPropsType = {
+    filterTask: FilterTaskType
+}
+
+const ControlButtons = ({filterTask}: ControlButtonsPropsType) => {
     return (
         <div>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            <button onClick={() => filterTask('all')}>All</button>
+            <button onClick={() => filterTask('active')}>Active</button>
+            <button onClick={() => filterTask('completed')}>Completed</button>
         </div>
     );
 };
