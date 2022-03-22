@@ -8,11 +8,6 @@ const task1: Array<TaskType> = [
     {id: 3, title: 'React', isDone: true},
 ];
 
-const task2: Array<TaskType> = [
-    {id: 1, title: '11', isDone: false},
-    {id: 2, title: '44', isDone: false},
-    {id: 3, title: '55', isDone: true},
-];
 
 const App = () => (
     <div className="App">
@@ -20,10 +15,6 @@ const App = () => (
         <TodoList
             title={'What to learn'}
             tasks={task1} />
-
-        <TodoList
-            title={'What to buy'}
-            tasks={task2} />
 
     </div>
 );
