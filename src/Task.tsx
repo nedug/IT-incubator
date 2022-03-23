@@ -6,9 +6,14 @@ type TaskPropsType = TaskType & {
 }
 
 const Task = ({isDone, title, id, removeTask}: TaskPropsType) => {
+
+    const onClickHandler = () => {
+        removeTask(id)
+    };
+
     return (
         <li>
-            <button onClick={() => removeTask(id)}>X</button>
+            <button onClick={onClickHandler}>X</button>
             <input
                 type="checkbox"
                 checked={isDone}/>

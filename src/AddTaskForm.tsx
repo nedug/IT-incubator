@@ -1,10 +1,41 @@
-import React from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {addNewTaskType} from "./TodoList";
 
-const AddTaskForm = () => {
+type AddTaskFormPropsType = {
+    addNewTask: addNewTaskType
+}
+
+const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
+
+    const [valueInput, setValueInput] = useState('');
+
+    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setValueInput(e.target.value);
+    };
+
+    const onKeyDownInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (!valueInput) return;
+        if (e.key === 'Enter') {
+            addNewTask(valueInput);
+            setValueInput('');
+        }
+    };
+
+    const onClickBtnHandler = () => {
+        if (!valueInput) return;
+        setValueInput('');
+        addNewTask(valueInput);
+    };
+
+
     return (
         <div>
-            <input/>
-            <button>+</button>
+            <input value={valueInput}
+                   onChange={onChangeInputHandler}
+                   onKeyDown={onKeyDownInputHandler}
+            />
+
+            <button onClick={onClickBtnHandler}>+</button>
         </div>
     );
 };

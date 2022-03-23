@@ -10,24 +10,30 @@ type TodolistPropsType = {
     tasks: Array<TaskType>
     removeTask: RemoveTaskType
     filterTask: FilterTaskType
+    addNewTask: addNewTaskType
 }
 
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
 
-export type RemoveTaskType = (id: number) => void
+export type RemoveTaskType = (id: string) => void
 export type FilterTaskType = (filter: FilterTask) => void
+export type addNewTaskType = (valueInput: string) => void
 
-const TodoList = ({title, tasks, removeTask, filterTask}: TodolistPropsType) => (
+
+const TodoList = ({title, tasks, removeTask, filterTask, addNewTask}: TodolistPropsType) => (
     <div>
         <TodoListHeader title={title}/>
-        <AddTaskForm/>
+
+        <AddTaskForm addNewTask={addNewTask}/>
+
         <TaskList tasks={tasks}
                   removeTask={removeTask}
         />
+
         <ControlButtons filterTask={filterTask}/>
     </div>
 );

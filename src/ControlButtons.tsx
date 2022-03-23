@@ -6,11 +6,15 @@ type ControlButtonsPropsType = {
 }
 
 const ControlButtons = ({filterTask}: ControlButtonsPropsType) => {
+    const onClickAllHandler = () => filterTask('all');
+    const onClickActiveHandler = () => filterTask('active');
+    const onClickCompletedHandler = () => filterTask('completed');
+
     return (
         <div>
-            <button onClick={() => filterTask('all')}>All</button>
-            <button onClick={() => filterTask('active')}>Active</button>
-            <button onClick={() => filterTask('completed')}>Completed</button>
+            <button onClick={onClickAllHandler}>All</button>
+            <button onClick={onClickActiveHandler}>Active</button>
+            <button onClick={onClickCompletedHandler}>Completed</button>
         </div>
     );
 };
