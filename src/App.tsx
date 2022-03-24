@@ -3,7 +3,11 @@ import './App.css';
 import TodoList, {TaskType} from "./TodoList";
 import {v1} from "uuid";
 
-export type FilterTask = 'all' | 'active' |'completed'
+export enum SortedTask {
+    all = 'all',
+    active = 'active',
+    completed = 'completed',
+}
 
 
 const App = () => {
@@ -14,7 +18,7 @@ const App = () => {
         {id: v1(), title: 'React', isDone: false},
     ]);
 
-    const [filteredTask, setTFilteredTask] = useState<FilterTask>('all');
+    const [filteredTask, setTFilteredTask] = useState(SortedTask.all);
 
 
     const removeTask = (id: string) => {
@@ -26,7 +30,7 @@ const App = () => {
         setTasks([newTask, ...tasks]);
     }
 
-    const filterTask = (filter: FilterTask) => {
+    const filterTask = (filter: SortedTask) => {
         setTFilteredTask(filter);
     }
 

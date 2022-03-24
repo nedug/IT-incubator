@@ -3,7 +3,7 @@ import TodoListHeader from "./TodoListHeader";
 import TaskList from "./TaskList";
 import ControlButtons from "./ControlButtons";
 import AddTaskForm from "./AddTaskForm";
-import {FilterTask} from "./App";
+import {SortedTask} from "./App";
 
 type TodolistPropsType = {
     title: string
@@ -20,7 +20,7 @@ export type TaskType = {
 }
 
 export type RemoveTaskType = (id: string) => void
-export type FilterTaskType = (filter: FilterTask) => void
+export type FilterTaskType = (filter: SortedTask) => void
 export type addNewTaskType = (valueInput: string) => void
 
 
