@@ -37,15 +37,20 @@ const App = () => {
     }
 
     const changeStatusTask = (taskID: string, isDone: boolean) => {
-        // let task = tasks.find(t => t.id === taskID); /* Поиск нужной таски чкркз find */
+        // let task = tasks.find(t => t.id === taskID); /* Поиск нужной таски через FIND */
         // if (task) task.isDone = isDone;
         // setTasks([...tasks]);
 
-        let newTasks = tasks.map(t => {
+        // let newTasks = tasks.map(t => { /* Новый массив через MAP */
+        //     if (t.id === taskID) t.isDone = isDone;
+        //     return t;
+        // })
+        // setTasks(newTasks);
+
+        tasks.forEach(t => {
             if (t.id === taskID) t.isDone = isDone;
-            return t;
         })
-        setTasks(newTasks);
+        setTasks([...tasks]);
     };
 
 
