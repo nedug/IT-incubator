@@ -3,6 +3,8 @@ import './App.css';
 import TodoList, {TaskType} from "./TodoList";
 import {v1} from "uuid";
 
+// export type FilterTask = 'all' | 'active' |'completed'
+
 export enum SortedTask {
     all = 'all',
     active = 'active',
@@ -34,6 +36,18 @@ const App = () => {
         setTFilteredTask(filter);
     }
 
+    const changeStatusTask = (taskID: string, isDone: boolean) => {
+        // let task = tasks.find(t => t.id === taskID); /* Поиск нужной таски чкркз find */
+        // if (task) task.isDone = isDone;
+        // setTasks([...tasks]);
+
+        let newTasks = tasks.map(t => {
+            if (t.id === taskID) t.isDone = isDone;
+            return t;
+        })
+        setTasks(newTasks);
+    };
+
 
     let taskForTodolist = tasks;
     if (filteredTask === 'active') {
@@ -51,6 +65,7 @@ const App = () => {
                 removeTask={removeTask}
                 filterTask={filterTask}
                 addNewTask={addNewTask}
+                changeStatusTask={changeStatusTask}
             />
         </div>
     )

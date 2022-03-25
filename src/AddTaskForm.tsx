@@ -14,17 +14,18 @@ const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
     };
 
     const onKeyDownInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (!valueInput) return;
         if (e.key === 'Enter') {
-            addNewTask(valueInput);
-            setValueInput('');
+            onClickBtnHandler();
         }
     };
 
     const onClickBtnHandler = () => {
-        if (!valueInput) return;
+        if (!valueInput.trim()) {
+            setValueInput('');
+            return;
+        }
         setValueInput('');
-        addNewTask(valueInput);
+        addNewTask(valueInput.trim());
     };
 
 

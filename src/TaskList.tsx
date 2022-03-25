@@ -1,13 +1,14 @@
 import React from 'react';
 import Task from "./Task";
-import {RemoveTaskType, TaskType} from "./TodoList";
+import {changeStatusTaskType, RemoveTaskType, TaskType} from "./TodoList";
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
     removeTask: RemoveTaskType
+    changeStatusTask: changeStatusTaskType
 }
 
-const TaskList = ({tasks, removeTask}: TaskListPropsType) => {
+const TaskList = ({tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
     return (
         <ul>
             {
@@ -15,6 +16,7 @@ const TaskList = ({tasks, removeTask}: TaskListPropsType) => {
                     <Task key={task.id}
                           {...task}
                           removeTask={removeTask}
+                          changeStatusTask={changeStatusTask}
                     />)
             }
         </ul>
