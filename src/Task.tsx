@@ -20,7 +20,7 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask}: TaskPropsType) 
     };
 
     return (
-        <li>
+        <li className={isDone ? 'is-done' : ''}>
             <button onClick={onClickHandler}>X</button>
 
             <input

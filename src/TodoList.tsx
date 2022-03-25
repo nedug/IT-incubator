@@ -12,6 +12,7 @@ type TodolistPropsType = {
     filterTask: FilterTaskType
     addNewTask: addNewTaskType
     changeStatusTask: changeStatusTaskType
+    filteredTask: SortedTask
 }
 
 export type TaskType = {
@@ -26,7 +27,7 @@ export type addNewTaskType = (valueInput: string) => void
 export type changeStatusTaskType = (taskID: string, isDone: boolean) => void
 
 
-const TodoList = ({title, tasks, removeTask, filterTask, addNewTask, changeStatusTask}: TodolistPropsType) => (
+const TodoList = ({title, tasks, removeTask, filterTask, addNewTask, changeStatusTask, filteredTask}: TodolistPropsType) => (
     <div>
         <TodoListHeader title={title}/>
 
@@ -37,7 +38,10 @@ const TodoList = ({title, tasks, removeTask, filterTask, addNewTask, changeStatu
                   changeStatusTask={changeStatusTask}
         />
 
-        <ControlButtons filterTask={filterTask}/>
+        <ControlButtons
+            filterTask={filterTask}
+            filteredTask={filteredTask}
+        />
     </div>
 );
 

@@ -4,9 +4,10 @@ import {SortedTask} from "./App";
 
 type ControlButtonsPropsType = {
     filterTask: FilterTaskType
+    filteredTask: SortedTask
 }
 
-const ControlButtons = ({filterTask}: ControlButtonsPropsType) => {
+const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => {
 
     const onClickFilterTask = (filter: SortedTask) => {
         return () => filterTask(filter);
@@ -14,9 +15,18 @@ const ControlButtons = ({filterTask}: ControlButtonsPropsType) => {
 
     return (
         <div>
-            <button onClick={onClickFilterTask(SortedTask.all)}>All</button>
-            <button onClick={onClickFilterTask(SortedTask.active)}>Active</button>
-            <button onClick={onClickFilterTask(SortedTask.completed)}>Completed</button>
+            <button
+                onClick={onClickFilterTask(SortedTask.all)}
+                className={filteredTask === SortedTask.all ? 'active-filter' : ''}
+            >All</button>
+            <button
+                onClick={onClickFilterTask(SortedTask.active)}
+                className={filteredTask === SortedTask.active ? 'active-filter' : ''}
+            >Active</button>
+            <button
+                onClick={onClickFilterTask(SortedTask.completed)}
+                className={filteredTask === SortedTask.completed ? 'active-filter' : ''}
+            >Completed</button>
         </div>
     );
 };

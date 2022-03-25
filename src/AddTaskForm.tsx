@@ -8,8 +8,10 @@ type AddTaskFormPropsType = {
 const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
 
     const [valueInput, setValueInput] = useState('');
+    const [error, setError] = useState<null | string>(null);
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setError(null);
         setValueInput(e.target.value);
     };
 
@@ -21,6 +23,7 @@ const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
 
     const onClickBtnHandler = () => {
         if (!valueInput.trim()) {
+            setError('Title is required');
             setValueInput('');
             return;
         }
@@ -34,9 +37,12 @@ const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
             <input value={valueInput}
                    onChange={onChangeInputHandler}
                    onKeyDown={onKeyDownInputHandler}
+                   className={error ? 'error' : ''}
             />
 
             <button onClick={onClickBtnHandler}>+</button>
+
+            {error && <div className='error-message'>{error}</div>}
         </div>
     );
 };
