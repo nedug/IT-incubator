@@ -30,6 +30,7 @@ const App = () => {
     const addNewTask = (valueInput: string) => {
         const newTask = {id: v1(), title: valueInput, isDone: false};
         setTasks([newTask, ...tasks]);
+        setTFilteredTask(SortedTask.active);
     }
 
     const filterTask = (filter: SortedTask) => {
@@ -47,10 +48,12 @@ const App = () => {
         // })
         // setTasks(newTasks);
 
-        tasks.forEach(t => {
-            if (t.id === taskID) t.isDone = isDone;
-        })
-        setTasks([...tasks]);
+        // tasks.forEach(t => {
+        //     if (t.id === taskID) t.isDone = isDone;
+        // })
+        // setTasks([...tasks]);
+
+        setTasks(tasks.map(t => t.id === taskID ? {...t, isDone: isDone} : t));
     };
 
 
@@ -67,15 +70,14 @@ const App = () => {
             <TodoList
                 title={'What to learn'}
                 tasks={taskForTodolist}
+                filteredTask={filteredTask}
                 removeTask={removeTask}
                 filterTask={filterTask}
                 addNewTask={addNewTask}
                 changeStatusTask={changeStatusTask}
-                filteredTask={filteredTask}
             />
         </div>
     )
 };
-
 
 export default App;

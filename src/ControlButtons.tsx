@@ -7,6 +7,7 @@ type ControlButtonsPropsType = {
     filteredTask: SortedTask
 }
 
+
 const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => {
 
     const onClickFilterTask = (filter: SortedTask) => {

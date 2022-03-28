@@ -6,6 +6,7 @@ type TaskPropsType = TaskType & {
     changeStatusTask: changeStatusTaskType
 }
 
+
 const Task = ({isDone, title, id, removeTask, changeStatusTask}: TaskPropsType) => {
 
     const onClickHandler = () => {

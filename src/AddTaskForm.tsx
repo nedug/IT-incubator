@@ -1,17 +1,25 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {addNewTaskType} from "./TodoList";
+import classes from './Error.module.css';
+// import styled from 'styled-components';
+
+// const ErrorMessage = styled.div`
+//     color: red;
+// `;
 
 type AddTaskFormPropsType = {
     addNewTask: addNewTaskType
 }
 
+
 const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
 
     const [valueInput, setValueInput] = useState('');
-    const [error, setError] = useState<null | string>(null);
+    const [error, setError] = useState<boolean>(false);
+    // const [error, setError] = useState<null | string>(null);
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError(null);
+        setError(false);
         setValueInput(e.target.value);
     };
 
@@ -22,27 +30,29 @@ const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
     };
 
     const onClickBtnHandler = () => {
-        if (!valueInput.trim()) {
-            setError('Title is required');
+        const valueInputTrim = valueInput.trim();
+        if (!valueInputTrim) {
+            setError(true);
             setValueInput('');
             return;
         }
         setValueInput('');
-        addNewTask(valueInput.trim());
+        addNewTask(valueInputTrim);
     };
 
 
     return (
         <div>
             <input value={valueInput}
+                   className={error ? 'error' : ''}
                    onChange={onChangeInputHandler}
                    onKeyDown={onKeyDownInputHandler}
-                   className={error ? 'error' : ''}
             />
 
             <button onClick={onClickBtnHandler}>+</button>
 
-            {error && <div className='error-message'>{error}</div>}
+            {error && <div className={classes.error__message}>Title is required</div>}
+            {/*{error && <ErrorMessage>Title is required</ErrorMessage>}*/}
         </div>
     );
 };
