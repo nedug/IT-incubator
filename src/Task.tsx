@@ -1,24 +1,25 @@
 import React, {ChangeEvent} from 'react';
-import {changeStatusTaskType, RemoveTaskType, TaskType} from "./TodoList";
+import {/*changeStatusTaskType,*/ RemoveTaskType, TaskType} from "./TodoList";
 
 type TaskPropsType = TaskType & {
     removeTask: RemoveTaskType
-    changeStatusTask: changeStatusTaskType
+    // changeStatusTask: changeStatusTaskType
+    callback: (checked: boolean) => void
 }
 
 
-const Task = ({isDone, title, id, removeTask, changeStatusTask}: TaskPropsType) => {
+const Task = ({isDone, title, id, removeTask, callback/*, changeStatusTask*/}: TaskPropsType) => {
 
     const onClickHandler = () => {
         removeTask(id);
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        // changeStatusTask(id, !isDone); /* Передача обратного значения isDone */
-
-        const newStatusTask = e.target.checked;
-        changeStatusTask(id, newStatusTask);
+        callback(e.target.checked);
     };
+    // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //     changeStatusTask(id, e.target.checked);
+    // };
 
     return (
         <li className={isDone ? 'is-done' : ''}>

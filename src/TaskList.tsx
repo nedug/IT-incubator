@@ -16,10 +16,9 @@ const EmptyListStyle: CSSProperties = {
 
 const TaskList = ({tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
 
-    // const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    //     const newStatusTask = e.target.checked;
-    //     changeStatusTask(id, newStatusTask);
-    // };
+    const onChangeHandler = (tID: string, checked: boolean) => { /* Вынос функции наверх */
+        changeStatusTask(tID, checked);
+    };
 
     return (
         tasks.length
@@ -30,7 +29,8 @@ const TaskList = ({tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
                         <Task key={task.id}
                               {...task}
                               removeTask={removeTask}
-                              changeStatusTask={changeStatusTask}
+                              callback={(checked) => onChangeHandler(task.id, checked)}
+                              // changeStatusTask={changeStatusTask}
                         />)
                 }
             </ul>
