@@ -1,10 +1,27 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
-const Checkbox = () => {
+type CheckboxProsType = {
+    isDone: boolean
+    callback: (checked: boolean) => void
+}
+
+const Checkbox = ({isDone, callback}: CheckboxProsType) => {
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        callback(e.currentTarget.checked);
+    };
+
     return (
-        <div>
 
-        </div>
+        <input
+            type="checkbox"
+
+            checked={isDone}
+
+            // onChange={(e) => callback(e.currentTarget.checked)}
+            onChange={onChangeHandler}
+        />
+
     );
 };
 
