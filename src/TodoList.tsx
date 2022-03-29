@@ -6,6 +6,7 @@ import AddTaskForm from "./AddTaskForm";
 import {SortedTask} from "./App";
 
 type TodolistPropsType = {
+    id: string
     title: string
     tasks: Array<TaskType>
     removeTask: RemoveTaskType
@@ -22,12 +23,12 @@ export type TaskType = {
 }
 
 export type RemoveTaskType = (id: string) => void
-export type FilterTaskType = (filter: SortedTask) => void
+export type FilterTaskType = (filter: SortedTask, id: string) => void
 export type addNewTaskType = (valueInput: string) => void
 export type changeStatusTaskType = (taskID: string, isDone: boolean) => void
 
 
-const TodoList = ({title, tasks, removeTask, filterTask, addNewTask, changeStatusTask, filteredTask}: TodolistPropsType) => (
+const TodoList = ({id, title, tasks, removeTask, filterTask, addNewTask, changeStatusTask, filteredTask}: TodolistPropsType) => (
     <div>
         <TodoListHeader title={title}/>
 
@@ -41,6 +42,7 @@ const TodoList = ({title, tasks, removeTask, filterTask, addNewTask, changeStatu
         <ControlButtons
             filterTask={filterTask}
             filteredTask={filteredTask}
+            id={id}
         />
     </div>
 );

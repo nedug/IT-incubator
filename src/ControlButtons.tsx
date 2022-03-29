@@ -5,13 +5,14 @@ import {SortedTask} from "./App";
 type ControlButtonsPropsType = {
     filterTask: FilterTaskType
     filteredTask: SortedTask
+    id: string
 }
 
 
-const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => {
+const ControlButtons = ({id, filterTask, filteredTask}: ControlButtonsPropsType) => {
 
     const onClickFilterTask = (filter: SortedTask) => {
-        return () => filterTask(filter);
+        return () => filterTask(filter, id);
     };
 
     return (
