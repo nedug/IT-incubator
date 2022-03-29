@@ -16,10 +16,6 @@ const EmptyListStyle: CSSProperties = {
 
 const TaskList = ({tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
 
-    const onChangeHandler = (tID: string, checked: boolean) => { /* Вынос функции наверх */
-        changeStatusTask(tID, checked);
-    };
-
     return (
         tasks.length
             ?
@@ -29,8 +25,7 @@ const TaskList = ({tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
                         <Task key={task.id}
                               {...task}
                               removeTask={removeTask}
-                              callback={(checked) => onChangeHandler(task.id, checked)}
-                              // changeStatusTask={changeStatusTask}
+                              changeStatusTask={changeStatusTask}
                         />)
                 }
             </ul>
