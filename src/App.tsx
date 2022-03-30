@@ -10,7 +10,9 @@ export enum SortedTask {
 }
 
 type todoListType = {
-    id: string, title: string, filter: SortedTask
+    id: string
+    title: string
+    filter: SortedTask
 }
 
 
@@ -60,7 +62,6 @@ const App = () => {
     return (
         <div className="App">
             {todoListAll.map(tl => {
-
                 let taskForTodolist = tasks;
 
                 if (tl.filter === 'active') {
@@ -69,7 +70,6 @@ const App = () => {
                 if (tl.filter === 'completed') {
                     taskForTodolist = tasks.filter(task => task.isDone === true);
                 }
-
                     return <TodoList
                         key={tl.id}
                         id={tl.id}

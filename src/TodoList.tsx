@@ -40,9 +40,9 @@ const TodoList = ({id, title, tasks, removeTask, filterTask, addNewTask, changeS
         />
 
         <ControlButtons
+            id={id}
             filterTask={filterTask}
             filteredTask={filteredTask}
-            id={id}
         />
     </div>
 );
