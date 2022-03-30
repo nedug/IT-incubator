@@ -8,12 +8,12 @@ import classes from './Error.module.css';
 // `;
 
 type AddTaskFormPropsType = {
-    todoListID: string
-    addNewTask: addNewTaskType
+    // todoListID: string
+    addNewTask: /*addNewTaskType*/ (valueInput: string) => void
 }
 
 
-const AddTaskForm = ({todoListID, addNewTask}: AddTaskFormPropsType) => {
+const AddTaskForm = ({/*todoListID,*/ addNewTask}: AddTaskFormPropsType) => {
 
     const [valueInput, setValueInput] = useState('');
     const [error, setError] = useState<boolean>(false);
@@ -39,7 +39,7 @@ const AddTaskForm = ({todoListID, addNewTask}: AddTaskFormPropsType) => {
         }
         setValueInput('');
 
-        addNewTask(valueInputTrim, todoListID);
+        addNewTask(valueInputTrim/*, todoListID*/);
     };
 
 

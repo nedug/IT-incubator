@@ -2,16 +2,16 @@ import React from 'react';
 import {removeTodolistType} from "./TodoList";
 
 type TodoListHeaderPropsType = {
-    todoListID: string
+    // todoListID: string
     title: string
-    removeTodolist: removeTodolistType
+    removeTodolist: /*removeTodolistType*/ () => void
 }
 
 
-const TodoListHeader = ({todoListID, title, removeTodolist}: TodoListHeaderPropsType) => {
+const TodoListHeader = ({/*todoListID,*/ title, removeTodolist}: TodoListHeaderPropsType) => {
 
     const onClickHandler = () => {
-        removeTodolist(todoListID);
+        removeTodolist(/*todoListID*/);
     };
 
     return <h3>{title}

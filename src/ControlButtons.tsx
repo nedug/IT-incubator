@@ -3,16 +3,16 @@ import {FilterTaskType} from "./TodoList";
 import {SortedTask} from "./App";
 
 type ControlButtonsPropsType = {
-    todoListID: string
-    filterTask: FilterTaskType
+    // todoListID: string
+    filterTask: (filter: SortedTask) => void
     filteredTask: SortedTask
 }
 
 
-const ControlButtons = ({todoListID, filterTask, filteredTask}: ControlButtonsPropsType) => {
+const ControlButtons = ({/*todoListID,*/ filterTask, filteredTask}: ControlButtonsPropsType) => {
 
     const onClickFilterTask = (filter: SortedTask) => {
-        return () => filterTask(filter, todoListID);
+        return () => filterTask(filter/*, todoListID*/);
     };
 
     return (

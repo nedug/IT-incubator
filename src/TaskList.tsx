@@ -3,10 +3,10 @@ import Task from "./Task";
 import {changeStatusTaskType, RemoveTaskType, TaskType} from "./TodoList";
 
 type TaskListPropsType = {
-    todoListID: string
+    // todoListID: string
     tasks: Array<TaskType>
-    removeTask: RemoveTaskType
-    changeStatusTask: changeStatusTaskType
+    removeTask: (id: string) => void
+    changeStatusTask: (taskID: string, isDone: boolean) => void
 }
 
 const EmptyListStyle: CSSProperties = {
@@ -15,7 +15,7 @@ const EmptyListStyle: CSSProperties = {
 }
 
 
-const TaskList = ({todoListID, tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
+const TaskList = ({/*todoListID,*/ tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
 
     return (
         tasks.length
@@ -25,7 +25,7 @@ const TaskList = ({todoListID, tasks, removeTask, changeStatusTask}: TaskListPro
                     tasks.map(task =>
                         <Task key={task.id}
                               {...task}
-                              todoListID={todoListID}
+                              // todoListID={todoListID}
                               removeTask={removeTask}
                               changeStatusTask={changeStatusTask}
                         />)
