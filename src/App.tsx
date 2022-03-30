@@ -9,10 +9,14 @@ export enum SortedTask {
     completed = 'completed',
 }
 
-type todoListAllType = {
+type TodoListAllStateType = {
     id: string
     title: string
     filter: SortedTask
+}
+
+type TasksStateType = {
+    [key: string]: Array<TaskType>
 }
 
 
@@ -21,12 +25,12 @@ const App = () => {
     const todoListID1 = v1();
     const todoListID2 = v1();
 
-    const [todoListAll, setTodoListAll] = useState<Array<todoListAllType>>([
+    const [todoListAll, setTodoListAll] = useState<Array<TodoListAllStateType>>([
         {id: todoListID1, title: 'What to learn', filter: SortedTask.all},
         {id: todoListID2, title: 'What to buy', filter: SortedTask.completed},
     ]);
 
-    const [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useState<TasksStateType>({
         [todoListID1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JS', isDone: true},
@@ -38,13 +42,6 @@ const App = () => {
         ],
     });
 
-    /*const [tasks, setTasks] = useState<Array<TaskType>>([
-        {id: v1(), title: 'HTML&CSS', isDone: true},
-        {id: v1(), title: 'JS', isDone: true},
-        {id: v1(), title: 'React', isDone: false},
-    ]);*/
-
-    // const [filteredTask, setTFilteredTask] = useState(SortedTask.all);
 
     const removeTask = (TaskID: string, TodoListID: string) => {
 
@@ -100,15 +97,6 @@ const App = () => {
                                 return tasks[tl.id];
                         }
                     };
-
-                    // let taskForTodolist = tasks[tl.id];
-                    //
-                    // if (tl.filter === SortedTask.active) {
-                    //     taskForTodolist = taskForTodolist.filter(task => task.isDone === false);
-                    // }
-                    // if (tl.filter === SortedTask.completed) {
-                    //     taskForTodolist = taskForTodolist.filter(task => task.isDone === true);
-                    // }
 
                     return <TodoList
                         key={tl.id}
