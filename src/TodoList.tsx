@@ -6,7 +6,7 @@ import AddTaskForm from "./AddTaskForm";
 import {SortedTask} from "./App";
 
 type TodolistPropsType = {
-    id: string
+    todoListID: string
     title: string
     tasks: Array<TaskType>
     removeTask: RemoveTaskType
@@ -14,6 +14,7 @@ type TodolistPropsType = {
     addNewTask: addNewTaskType
     changeStatusTask: changeStatusTaskType
     filteredTask: SortedTask
+    removeTodolist: removeTodolistType
 }
 
 export type TaskType = {
@@ -22,25 +23,35 @@ export type TaskType = {
     isDone: boolean
 }
 
-export type RemoveTaskType = (id: string) => void
-export type FilterTaskType = (filter: SortedTask, id: string) => void
-export type addNewTaskType = (valueInput: string) => void
-export type changeStatusTaskType = (taskID: string, isDone: boolean) => void
+export type RemoveTaskType = (id: string, TodoListID: string) => void
+export type FilterTaskType = (filter: SortedTask, TodoListID: string) => void
+export type addNewTaskType = (valueInput: string, TodoListID: string) => void
+export type changeStatusTaskType = (taskID: string, isDone: boolean, TodoListID: string) => void
+export type removeTodolistType = (TodoListID: string) => void
 
 
-const TodoList = ({id, title, tasks, removeTask, filterTask, addNewTask, changeStatusTask, filteredTask}: TodolistPropsType) => (
+const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask, changeStatusTask, filteredTask, removeTodolist}: TodolistPropsType) => (
     <div>
-        <TodoListHeader title={title}/>
+        <TodoListHeader
+            todoListID={todoListID}
+            title={title}
+            removeTodolist={removeTodolist}
+        />
 
-        <AddTaskForm addNewTask={addNewTask}/>
+        <AddTaskForm
+            todoListID={todoListID}
+            addNewTask={addNewTask}
+        />
 
-        <TaskList tasks={tasks}
-                  removeTask={removeTask}
-                  changeStatusTask={changeStatusTask}
+        <TaskList
+            todoListID={todoListID}
+            tasks={tasks}
+            removeTask={removeTask}
+            changeStatusTask={changeStatusTask}
         />
 
         <ControlButtons
-            id={id}
+            todoListID={todoListID}
             filterTask={filterTask}
             filteredTask={filteredTask}
         />

@@ -3,19 +3,20 @@ import {changeStatusTaskType, RemoveTaskType, TaskType} from "./TodoList";
 import Checkbox from "./Components/Checkbox";
 
 type TaskPropsType = TaskType & {
+    todoListID: string
     removeTask: RemoveTaskType
     changeStatusTask: changeStatusTaskType
 }
 
 
-const Task = ({isDone, title, id, removeTask, changeStatusTask}: TaskPropsType) => {
+const Task = ({todoListID, isDone, title, id, removeTask, changeStatusTask}: TaskPropsType) => {
 
     const onClickHandler = () => {
-        removeTask(id);
+        removeTask(id, todoListID);
     };
 
     const onChangeHandler = (checked: boolean) => {
-        changeStatusTask(id, checked);
+        changeStatusTask(id, checked, todoListID);
     };
 
     return (
