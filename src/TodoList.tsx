@@ -32,7 +32,6 @@ export type removeTodolistType = (TodoListID: string) => void
 
 const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask, changeStatusTask, filteredTask, removeTodolist}: TodolistPropsType) => {
 
-
     const removeTodolistCallback = () => {
         removeTodolist(todoListID);
     };
@@ -57,25 +56,21 @@ const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask,
    return (
        <div>
         <TodoListHeader
-            // todoListID={todoListID}
             title={title}
             removeTodolist={removeTodolistCallback}
         />
 
         <AddTaskForm
-            // todoListID={todoListID}
             addNewTask={addNewTaskCallback}
         />
 
         <TaskList
-            // todoListID={todoListID}
             tasks={tasks}
             removeTask={removeTaskCallback}
             changeStatusTask={changeStatusTaskCallback}
         />
 
         <ControlButtons
-            // todoListID={todoListID}
             filteredTask={filteredTask}
             filterTask={filterTaskCallback}
         />
