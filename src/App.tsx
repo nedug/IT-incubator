@@ -49,20 +49,12 @@ const App = () => {
             ...tasks,
             [TodoListID]: tasks[TodoListID].filter(task => task.id !== TaskID)
         });
-
-        // const newTasks = {...tasks};
-        // newTasks[TodoListID] = newTasks[TodoListID].filter(task => task.id !== TaskID);
-        // setTasks(newTasks);
     };
 
     const addNewTask = (valueInput: string, TodoListID: string) => {
 
         const newTask = {id: v1(), title: valueInput, isDone: false};
         setTasks({...tasks, [TodoListID]: [newTask, ...tasks[TodoListID]]});
-
-        // const newTask = {id: v1(), title: valueInput, isDone: false};
-        // tasks[TodoListID] = [newTask, ...tasks[TodoListID]];
-        // setTasks({...tasks});
 
         filterTask(SortedTask.active, TodoListID);
     };
@@ -78,9 +70,6 @@ const App = () => {
             ...tasks,
             [TodoListID]: tasks[TodoListID].map(t => t.id === taskID ? {...t, isDone: isDone} : t)
         });
-
-        // tasks[TodoListID] = tasks[TodoListID].map(t => t.id === taskID ? {...t, isDone: isDone} : t);
-        // setTasks({...tasks});
     };
 
     const removeTodolist = (TodoListID: string) => {
@@ -92,36 +81,37 @@ const App = () => {
     };
 
 
+    const todoListAllForRender = todoListAll.map(tl => {
+
+        const getFilteredTaskForRender = () => {
+
+            switch (tl.filter) {
+                case SortedTask.active:
+                    return tasks[tl.id].filter(task => !task.isDone);
+                case SortedTask.completed:
+                    return tasks[tl.id].filter(task => task.isDone);
+                default:
+                    return tasks[tl.id];
+            }
+        };
+
+        return <TodoList
+            key={tl.id}
+            todoListID={tl.id}
+            title={tl.title}
+            tasks={getFilteredTaskForRender()}
+            filteredTask={tl.filter}
+            removeTask={removeTask}
+            filterTask={filterTask}
+            addNewTask={addNewTask}
+            changeStatusTask={changeStatusTask}
+            removeTodolist={removeTodolist}
+        />
+    })
+
     return (
         <div className="App">
-            {todoListAll.map(tl => {
-
-                    const getFilteredTaskForRender = () => {
-
-                        switch (tl.filter) {
-                            case SortedTask.active:
-                                return tasks[tl.id].filter(task => !task.isDone);
-                            case SortedTask.completed:
-                                return tasks[tl.id].filter(task => task.isDone);
-                            default:
-                                return tasks[tl.id];
-                        }
-                    };
-
-                    return <TodoList
-                        key={tl.id}
-                        todoListID={tl.id}
-                        title={tl.title}
-                        tasks={getFilteredTaskForRender()}
-                        filteredTask={tl.filter}
-                        removeTask={removeTask}
-                        filterTask={filterTask}
-                        addNewTask={addNewTask}
-                        changeStatusTask={changeStatusTask}
-                        removeTodolist={removeTodolist}
-                    />
-                }
-            )}
+            {todoListAllForRender}
         </div>
     )
 };
