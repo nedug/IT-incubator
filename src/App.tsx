@@ -97,6 +97,19 @@ const App = () => {
         });
     };
 
+    const changeTitleTask = (TodoListID: string, TaskID: string, newInputValue: string) => {
+
+        setTasks({
+            ...tasks,
+            [TodoListID]: tasks[TodoListID].map(t => t.id === TaskID ? {...t, title: newInputValue} : t)
+        });
+    };
+
+    const changeTitleTodoList = (TodoListID: string, newInputValue: string) => {
+
+        setTodoListAll(todoListAll.map(tl => tl.id === TodoListID ? {...tl, title: newInputValue} : tl));
+    };
+
 
     const todoListAllForRender = todoListAll.map(tl => {
 
@@ -123,6 +136,8 @@ const App = () => {
             addNewTask={addNewTask}
             changeStatusTask={changeStatusTask}
             removeTodolist={removeTodolist}
+            changeTitleTaskFromApp={changeTitleTask}
+            changeTitleTodoListFromApp={changeTitleTodoList}
         />
     })
 

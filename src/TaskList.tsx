@@ -6,6 +6,7 @@ type TaskListPropsType = {
     tasks: Array<TaskType>
     removeTask: (id: string) => void
     changeStatusTask: (taskID: string, isDone: boolean) => void
+    changeTitleTaskFromTodoList: (TaskID: string, newInputValue: string) => void
 }
 
 const EmptyListStyle: CSSProperties = {
@@ -14,7 +15,12 @@ const EmptyListStyle: CSSProperties = {
 }
 
 
-const TaskList = ({tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
+const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoList}: TaskListPropsType) => {
+
+    const changeTitleTask = (TaskID: string, newInputValue: string) => {
+        changeTitleTaskFromTodoList(TaskID, newInputValue);
+    };
+
 
     return (
         tasks.length
@@ -26,6 +32,7 @@ const TaskList = ({tasks, removeTask, changeStatusTask}: TaskListPropsType) => {
                               {...task}
                               removeTask={removeTask}
                               changeStatusTask={changeStatusTask}
+                              changeTitleTaskFromTaskList={changeTitleTask}
                         />)
                 }
             </ul>

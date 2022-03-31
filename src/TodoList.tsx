@@ -15,6 +15,8 @@ type TodolistPropsType = {
     changeStatusTask: changeStatusTaskType
     filteredTask: SortedTask
     removeTodolist: removeTodolistType
+    changeTitleTaskFromApp: changeTitleTaskFromAppType
+    changeTitleTodoListFromApp: changeTitleTodoListFromAppType
 }
 
 export type TaskType = {
@@ -28,9 +30,11 @@ export type FilterTaskType = (filter: SortedTask, TodoListID: string) => void
 export type addNewTaskType = (valueInput: string, TodoListID: string) => void
 export type changeStatusTaskType = (taskID: string, isDone: boolean, TodoListID: string) => void
 export type removeTodolistType = (TodoListID: string) => void
+export type changeTitleTaskFromAppType = (TodoListID: string, TaskID: string, newInputValue: string) => void
+export type changeTitleTodoListFromAppType = (TodoListID: string, newInputValue: string) => void
 
 
-const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask, changeStatusTask, filteredTask, removeTodolist}: TodolistPropsType) => {
+const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask, changeStatusTask, filteredTask, removeTodolist, changeTitleTaskFromApp, changeTitleTodoListFromApp}: TodolistPropsType) => {
 
     const removeTodolistCallback = () => {
         removeTodolist(todoListID);
@@ -52,30 +56,40 @@ const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask,
         changeStatusTask(taskID, isDone, todoListID);
     };
 
+    const changeTitleTask = (TaskID: string, newInputValue: string) => {
+        changeTitleTaskFromApp(todoListID, TaskID, newInputValue);
+    };
 
-   return (
-       <div>
-        <TodoListHeader
-            title={title}
-            removeTodolist={removeTodolistCallback}
-        />
+    const changeTitleTodoList = (newInputValue: string) => {
+        changeTitleTodoListFromApp(todoListID, newInputValue);
+    };
 
-        <AddItemForm
-            addNewItem={addNewTaskCallback}
-        />
 
-        <TaskList
-            tasks={tasks}
-            removeTask={removeTaskCallback}
-            changeStatusTask={changeStatusTaskCallback}
-        />
+    return (
+        <div>
+            <TodoListHeader
+                title={title}
+                removeTodolist={removeTodolistCallback}
+                changeTitleTodoListFromTodoList={changeTitleTodoList}
+            />
 
-        <ControlButtons
-            filteredTask={filteredTask}
-            filterTask={filterTaskCallback}
-        />
-    </div>
-   )
+            <AddItemForm
+                addNewItem={addNewTaskCallback}
+            />
+
+            <TaskList
+                tasks={tasks}
+                removeTask={removeTaskCallback}
+                changeStatusTask={changeStatusTaskCallback}
+                changeTitleTaskFromTodoList={changeTitleTask}
+            />
+
+            <ControlButtons
+                filteredTask={filteredTask}
+                filterTask={filterTaskCallback}
+            />
+        </div>
+    )
 };
 
 export default TodoList;
