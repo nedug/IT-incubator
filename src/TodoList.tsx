@@ -2,7 +2,7 @@ import React from "react";
 import TodoListHeader from "./TodoListHeader";
 import TaskList from "./TaskList";
 import ControlButtons from "./ControlButtons";
-import AddTaskForm from "./AddTaskForm";
+import AddItemForm from "./AddItemForm";
 import {SortedTask} from "./App";
 
 type TodolistPropsType = {
@@ -60,8 +60,8 @@ const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask,
             removeTodolist={removeTodolistCallback}
         />
 
-        <AddTaskForm
-            addNewTask={addNewTaskCallback}
+        <AddItemForm
+            addNewItem={addNewTaskCallback}
         />
 
         <TaskList

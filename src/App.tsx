@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./TodoList";
 import {v1} from "uuid";
+import AddItemForm from "./AddItemForm";
 
 export enum SortedTask {
     all = 'all',
@@ -80,6 +81,22 @@ const App = () => {
         setTasks({...tasks});
     };
 
+    const addNewTodolistCallback = (valueInput: string) => {
+
+        const newTodolist: TodoListAllStateType = {
+            id: v1(), title: valueInput, filter: SortedTask.all
+        };
+        setTodoListAll([
+            newTodolist,
+            ...todoListAll
+        ]);
+
+        setTasks({
+            ...tasks,
+            [newTodolist.id]: []
+        });
+    };
+
 
     const todoListAllForRender = todoListAll.map(tl => {
 
@@ -111,6 +128,8 @@ const App = () => {
 
     return (
         <div className="App">
+            <AddItemForm addNewItem={addNewTodolistCallback}/>
+
             {todoListAllForRender}
         </div>
     )

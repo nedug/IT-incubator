@@ -1,12 +1,12 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import classes from './Error.module.css';
 
-type AddTaskFormPropsType = {
-    addNewTask: (valueInput: string) => void
+type AddItemFormPropsType = {
+    addNewItem: (valueInput: string) => void
 }
 
 
-const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
+const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
 
     const [valueInput, setValueInput] = useState('');
     const [error, setError] = useState<boolean>(false);
@@ -31,7 +31,7 @@ const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
         }
         setValueInput('');
 
-        addNewTask(valueInputTrim);
+        addNewItem(valueInputTrim);
     };
 
 
@@ -50,4 +50,4 @@ const AddTaskForm = ({addNewTask}: AddTaskFormPropsType) => {
     );
 };
 
-export default AddTaskForm;
+export default AddItemForm;
