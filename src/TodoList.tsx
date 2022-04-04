@@ -68,30 +68,33 @@ const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask,
 
     return (
         <Grid item>
-            <Paper style={{padding: '20px'}}>
-                <div>
-                    <TodoListHeader
-                        title={title}
-                        removeTodolist={removeTodolistCallback}
-                        changeTitleTodoListFromTodoList={changeTitleTodoList}
-                    />
+            <Paper style={{
+                padding: '20px',
+                boxShadow: '1px 1px 4px 2px rgb(0 0 0 / 20%)',
+            }}>
 
-                    <AddItemForm
-                        addNewItem={addNewTaskCallback}
-                    />
+                <TodoListHeader
+                    title={title}
+                    removeTodolist={removeTodolistCallback}
+                    changeTitleTodoListFromTodoList={changeTitleTodoList}
+                />
 
-                    <TaskList
-                        tasks={tasks}
-                        removeTask={removeTaskCallback}
-                        changeStatusTask={changeStatusTaskCallback}
-                        changeTitleTaskFromTodoList={changeTitleTask}
-                    />
+                <AddItemForm
+                    addNewItem={addNewTaskCallback}
+                />
 
-                    <ControlButtons
-                        filteredTask={filteredTask}
-                        filterTask={filterTaskCallback}
-                    />
-                </div>
+                <TaskList
+                    tasks={tasks}
+                    removeTask={removeTaskCallback}
+                    changeStatusTask={changeStatusTaskCallback}
+                    changeTitleTaskFromTodoList={changeTitleTask}
+                />
+
+                <ControlButtons
+                    filteredTask={filteredTask}
+                    filterTask={filterTaskCallback}
+                />
+
             </Paper>
         </Grid>
     )

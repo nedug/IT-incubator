@@ -15,8 +15,9 @@ const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => 
     };
 
     return (
-        <div>
+        <div style={{padding: '5px 0'}}>
             <Button
+                size={"small"}
                 variant={filteredTask === SortedTask.all ? 'contained' : 'text'}
                 onClick={onClickFilterTask(SortedTask.all)}
             >
@@ -24,6 +25,7 @@ const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => 
             </Button>
 
             <Button
+                size={"small"}
                 color={"primary"}
                 variant={filteredTask === SortedTask.active ? 'contained' : 'text'}
                 onClick={onClickFilterTask(SortedTask.active)}
@@ -32,6 +34,7 @@ const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => 
             </Button>
 
             <Button
+                size={"small"}
                 color={"secondary"}
                 variant={filteredTask === SortedTask.completed ? 'contained' : 'text'}
                 onClick={onClickFilterTask(SortedTask.completed)}

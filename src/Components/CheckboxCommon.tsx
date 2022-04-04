@@ -15,6 +15,7 @@ const CheckboxCommon = ({isDone, callback}: CheckboxPropsType) => {
 
     return (
         <Checkbox
+            size={"small"}
             checked={isDone}
             onChange={onChangeStatusHandler}
         />

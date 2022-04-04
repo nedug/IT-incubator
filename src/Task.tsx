@@ -29,7 +29,10 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskF
 
     return (
         <div style={isDone ? {opacity: '0.5'} : {opacity: 'inherit'}}>
-            <IconButton onClick={onClickHandler}>
+            <IconButton
+                size={"small"}
+                onClick={onClickHandler}
+            >
                 <Delete/>
             </IconButton>
 

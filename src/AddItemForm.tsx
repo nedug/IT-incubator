@@ -39,6 +39,7 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
     return (
         <div>
             <TextField
+                size={"small"}
                 variant={"outlined"}
                 label={error ? 'empty value' : 'type value'}
                 value={valueInput}
@@ -50,6 +51,7 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
             />
 
             <IconButton
+                size={"small"}
                 color={"primary"}
                 onClick={onClickBtnHandler}
             >
