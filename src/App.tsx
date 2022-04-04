@@ -161,7 +161,6 @@ const App = () => {
             </AppBar>
 
             <Container fixed>
-
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForm addNewItem={addNewTodolistCallback}/>
                 </Grid>
@@ -169,7 +168,6 @@ const App = () => {
                 <Grid container spacing={1}>
                     {todoListAllForRender}
                 </Grid>
-
             </Container>
         </div>
     )
