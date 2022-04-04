@@ -1,6 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import classes from './Error.module.css';
-import {Button} from "@mui/material";
 
 type AddItemFormPropsType = {
     addNewItem: (valueInput: string) => void
@@ -45,8 +44,6 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
             />
 
             <button onClick={onClickBtnHandler}>+</button>
-
-            {/*<Button variant={"contained"} color={"primary"} />*/}
 
             {error && <div className={classes.error__message}>Title is required</div>}
         </div>
