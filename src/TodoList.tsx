@@ -4,6 +4,7 @@ import TaskList from "./TaskList";
 import ControlButtons from "./ControlButtons";
 import AddItemForm from "./AddItemForm";
 import {SortedTask} from "./App";
+import {Grid, Paper} from "@material-ui/core";
 
 type TodolistPropsType = {
     todoListID: string
@@ -66,29 +67,33 @@ const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask,
 
 
     return (
-        <div>
-            <TodoListHeader
-                title={title}
-                removeTodolist={removeTodolistCallback}
-                changeTitleTodoListFromTodoList={changeTitleTodoList}
-            />
+        <Grid item>
+            <Paper style={{padding: '20px'}}>
+                <div>
+                    <TodoListHeader
+                        title={title}
+                        removeTodolist={removeTodolistCallback}
+                        changeTitleTodoListFromTodoList={changeTitleTodoList}
+                    />
 
-            <AddItemForm
-                addNewItem={addNewTaskCallback}
-            />
+                    <AddItemForm
+                        addNewItem={addNewTaskCallback}
+                    />
 
-            <TaskList
-                tasks={tasks}
-                removeTask={removeTaskCallback}
-                changeStatusTask={changeStatusTaskCallback}
-                changeTitleTaskFromTodoList={changeTitleTask}
-            />
+                    <TaskList
+                        tasks={tasks}
+                        removeTask={removeTaskCallback}
+                        changeStatusTask={changeStatusTaskCallback}
+                        changeTitleTaskFromTodoList={changeTitleTask}
+                    />
 
-            <ControlButtons
-                filteredTask={filteredTask}
-                filterTask={filterTaskCallback}
-            />
-        </div>
+                    <ControlButtons
+                        filteredTask={filteredTask}
+                        filterTask={filterTaskCallback}
+                    />
+                </div>
+            </Paper>
+        </Grid>
     )
 };
 

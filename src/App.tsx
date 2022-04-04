@@ -3,6 +3,8 @@ import './App.css';
 import TodoList, {TaskType} from "./TodoList";
 import {v1} from "uuid";
 import AddItemForm from "./AddItemForm";
+import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "@material-ui/core";
+import {Menu} from "@material-ui/icons";
 
 export enum SortedTask {
     all = 'all',
@@ -86,6 +88,7 @@ const App = () => {
         const newTodolist: TodoListAllStateType = {
             id: v1(), title: valueInput, filter: SortedTask.all
         };
+
         setTodoListAll([
             newTodolist,
             ...todoListAll
@@ -139,13 +142,35 @@ const App = () => {
             changeTitleTaskFromApp={changeTitleTask}
             changeTitleTodoListFromApp={changeTitleTodoList}
         />
+
     })
 
     return (
         <div className="App">
-            <AddItemForm addNewItem={addNewTodolistCallback}/>
 
-            {todoListAllForRender}
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6">
+                        News
+                    </Typography>
+                    <Button color={"inherit"}>Login</Button>
+                </Toolbar>
+            </AppBar>
+
+            <Container fixed>
+
+                <Grid container style={{padding: '20px'}}>
+                    <AddItemForm addNewItem={addNewTodolistCallback}/>
+                </Grid>
+
+                <Grid container spacing={1}>
+                    {todoListAllForRender}
+                </Grid>
+
+            </Container>
         </div>
     )
 };

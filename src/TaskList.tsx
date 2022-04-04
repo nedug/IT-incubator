@@ -11,7 +11,8 @@ type TaskListPropsType = {
 
 const EmptyListStyle: CSSProperties = {
     fontSize: "small",
-    color: "green",
+    color: "#858585",
+    padding: "10px",
 }
 
 
@@ -25,7 +26,7 @@ const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoL
     return (
         tasks.length
             ?
-            <ul>
+            <div>
                 {
                     tasks.map(task =>
                         <Task key={task.id}
@@ -35,9 +36,9 @@ const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoL
                               changeTitleTaskFromTaskList={changeTitleTask}
                         />)
                 }
-            </ul>
+            </div>
             :
-            <span style={EmptyListStyle}>TaskList is empty. Add new Task</span>
+            <div style={EmptyListStyle}>TaskList is empty. Add new Task</div>
     );
 };
 

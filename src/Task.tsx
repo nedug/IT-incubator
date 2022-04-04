@@ -1,7 +1,9 @@
 import React from 'react';
 import {TaskType} from "./TodoList";
-import Checkbox from "./Components/Checkbox";
+import CheckboxCommon from "./Components/CheckboxCommon";
 import {EditableSpan} from "./EditableSpan";
+import {Delete} from "@material-ui/icons";
+import {IconButton} from "@material-ui/core";
 
 type TaskPropsType = TaskType & {
     removeTask: (taskID: string) => void
@@ -26,10 +28,12 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskF
 
 
     return (
-        <li className={isDone ? 'is-done' : ''}>
-            <button onClick={onClickHandler}>X</button>
+        <div style={isDone ? {opacity: '0.5'} : {opacity: 'inherit'}}>
+            <IconButton onClick={onClickHandler}>
+                <Delete/>
+            </IconButton>
 
-            <Checkbox
+            <CheckboxCommon
                 isDone={isDone}
                 callback={checked => onChangeHandler(checked)}
             />
@@ -38,7 +42,7 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskF
                 title={title}
                 changeTitleTaskCallback={changeTitleTask}
             />
-        </li>
+        </div>
     );
 };
 

@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import classes from './Error.module.css';
+import {IconButton, TextField} from "@material-ui/core";
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
 type AddItemFormPropsType = {
     addNewItem: (valueInput: string) => void
@@ -37,15 +38,23 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
 
     return (
         <div>
-            <input value={valueInput}
-                   className={error ? 'error' : ''}
-                   onChange={onChangeInputHandler}
-                   onKeyDown={onKeyDownInputHandler}
+            <TextField
+                variant={"outlined"}
+                label={error ? 'empty value' : 'type value'}
+                value={valueInput}
+                className={error ? 'error' : ''}
+                error={error}
+                helperText={error ? 'Title is required' : null}
+                onChange={onChangeInputHandler}
+                onKeyDown={onKeyDownInputHandler}
             />
 
-            <button onClick={onClickBtnHandler}>+</button>
-
-            {error && <div className={classes.error__message}>Title is required</div>}
+            <IconButton
+                color={"primary"}
+                onClick={onClickBtnHandler}
+            >
+                <AddCircleOutlineOutlinedIcon/>
+            </IconButton>
         </div>
     );
 };

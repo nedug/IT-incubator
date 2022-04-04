@@ -1,5 +1,6 @@
 import React from 'react';
 import {SortedTask} from "./App";
+import {Button} from "@material-ui/core";
 
 type ControlButtonsPropsType = {
     filterTask: (filter: SortedTask) => void
@@ -15,20 +16,28 @@ const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => 
 
     return (
         <div>
-            <button
+            <Button
+                variant={filteredTask === SortedTask.all ? 'contained' : 'text'}
                 onClick={onClickFilterTask(SortedTask.all)}
-                className={filteredTask === SortedTask.all ? 'active-filter' : ''}
-            >All</button>
+            >
+                All
+            </Button>
 
-            <button
+            <Button
+                color={"primary"}
+                variant={filteredTask === SortedTask.active ? 'contained' : 'text'}
                 onClick={onClickFilterTask(SortedTask.active)}
-                className={filteredTask === SortedTask.active ? 'active-filter' : ''}
-            >Active</button>
+            >
+                Active
+            </Button>
 
-            <button
+            <Button
+                color={"secondary"}
+                variant={filteredTask === SortedTask.completed ? 'contained' : 'text'}
                 onClick={onClickFilterTask(SortedTask.completed)}
-                className={filteredTask === SortedTask.completed ? 'active-filter' : ''}
-            >Completed</button>
+            >
+                Completed
+            </Button>
         </div>
     );
 };

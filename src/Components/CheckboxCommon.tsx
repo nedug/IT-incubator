@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import {Checkbox} from "@material-ui/core";
 
 type CheckboxPropsType = {
     isDone: boolean
@@ -6,19 +7,18 @@ type CheckboxPropsType = {
 }
 
 
-const Checkbox = ({isDone, callback}: CheckboxPropsType) => {
+const CheckboxCommon = ({isDone, callback}: CheckboxPropsType) => {
 
     const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
         callback(e.currentTarget.checked)
     };
 
     return (
-        <input
-            type="checkbox"
+        <Checkbox
             checked={isDone}
             onChange={onChangeStatusHandler}
         />
     );
 };
 
-export default Checkbox;
+export default CheckboxCommon;

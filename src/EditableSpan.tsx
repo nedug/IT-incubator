@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
+import {TextField} from "@material-ui/core";
 
 type EditableSpanType = {
     title: string
@@ -28,7 +29,7 @@ export const EditableSpan = ({title, changeTitleTaskCallback}: EditableSpanType)
 
     return editMode
         ?
-        <input
+        <TextField
             value={inputValue}
             onChange={onChangeInputHandler}
             onBlur={onBlurInputHandler}
