@@ -37,7 +37,7 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
 
 
     return (
-        <div>
+        <div style={{display: 'flex', alignItems: 'center',}}>
             <TextField
                 size={"small"}
                 variant={"outlined"}
@@ -45,7 +45,7 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
                 value={valueInput}
                 className={error ? 'error' : ''}
                 error={error}
-                helperText={error ? 'Title is required' : null}
+                helperText={error && 'Title is required'}
                 onChange={onChangeInputHandler}
                 onKeyDown={onKeyDownInputHandler}
             />

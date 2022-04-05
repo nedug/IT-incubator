@@ -7,9 +7,9 @@ import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "
 import {Menu} from "@material-ui/icons";
 
 export enum SortedTask {
-    all = 'all',
-    active = 'active',
-    completed = 'completed',
+    all = 'All',
+    active = 'Active',
+    completed = 'Completed',
 }
 
 type TodoListAllStateType = {
@@ -21,7 +21,6 @@ type TodoListAllStateType = {
 type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-
 
 const App = () => {
 
@@ -142,21 +141,25 @@ const App = () => {
             changeTitleTaskFromApp={changeTitleTask}
             changeTitleTodoListFromApp={changeTitleTodoList}
         />
-
     })
 
     return (
         <div className="App">
 
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
                     </IconButton>
                     <Typography variant="h6">
-                        News
+                        TodoList
                     </Typography>
-                    <Button color={"inherit"}>Login</Button>
+                    <Button
+                        variant={"outlined"}
+                        color={"secondary"}
+                    >
+                        Login
+                    </Button>
                 </Toolbar>
             </AppBar>
 
@@ -165,10 +168,11 @@ const App = () => {
                     <AddItemForm addNewItem={addNewTodolistCallback}/>
                 </Grid>
 
-                <Grid container spacing={1}>
+                <Grid container spacing={2}>
                     {todoListAllForRender}
                 </Grid>
             </Container>
+
         </div>
     )
 };

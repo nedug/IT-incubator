@@ -22,13 +22,15 @@ const TodoListHeader = ({title, removeTodolist, changeTitleTodoListFromTodoList}
 
 
     return (
-        <h3>
+        <h3 style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', margin: '0 0 5px', padding: '0'}}>
             <EditableSpan
                 title={title}
                 changeTitleTaskCallback={changeTitleTodoList}
             />
 
-            <IconButton onClick={onClickHandler}>
+            <IconButton
+                style={{color: '#1e1e1e'}}
+                onClick={onClickHandler}>
                 <Delete/>
             </IconButton>
         </h3>

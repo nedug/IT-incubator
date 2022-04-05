@@ -31,9 +31,10 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskF
         <div style={isDone ? {opacity: '0.5'} : {opacity: 'inherit'}}>
             <IconButton
                 size={"small"}
+                style={{color: '#70b070'}}
                 onClick={onClickHandler}
             >
-                <Delete/>
+                <Delete fontSize={"small"}/>
             </IconButton>
 
             <CheckboxCommon

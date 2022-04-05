@@ -68,11 +68,10 @@ const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask,
 
     return (
         <Grid item>
-            <Paper style={{
-                padding: '20px',
-                boxShadow: '1px 1px 4px 2px rgb(0 0 0 / 20%)',
-            }}>
-
+            <Paper
+                elevation={4}
+                style={{padding: '20px'}}
+            >
                 <TodoListHeader
                     title={title}
                     removeTodolist={removeTodolistCallback}
@@ -94,7 +93,6 @@ const TodoList = ({todoListID, title, tasks, removeTask, filterTask, addNewTask,
                     filteredTask={filteredTask}
                     filterTask={filterTaskCallback}
                 />
-
             </Paper>
         </Grid>
     )

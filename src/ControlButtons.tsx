@@ -15,31 +15,34 @@ const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => 
     };
 
     return (
-        <div style={{padding: '5px 0'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <Button
                 size={"small"}
-                variant={filteredTask === SortedTask.all ? 'contained' : 'text'}
+                disableElevation
+                variant={filteredTask === SortedTask.all ? 'contained' : 'outlined'}
                 onClick={onClickFilterTask(SortedTask.all)}
             >
-                All
+                {SortedTask.all}
             </Button>
 
             <Button
                 size={"small"}
                 color={"primary"}
-                variant={filteredTask === SortedTask.active ? 'contained' : 'text'}
+                disableElevation
+                variant={filteredTask === SortedTask.active ? 'contained' : 'outlined'}
                 onClick={onClickFilterTask(SortedTask.active)}
             >
-                Active
+                {SortedTask.active}
             </Button>
 
             <Button
                 size={"small"}
                 color={"secondary"}
-                variant={filteredTask === SortedTask.completed ? 'contained' : 'text'}
+                disableElevation
+                variant={filteredTask === SortedTask.completed ? 'contained' : 'outlined'}
                 onClick={onClickFilterTask(SortedTask.completed)}
             >
-                Completed
+                {SortedTask.completed}
             </Button>
         </div>
     );

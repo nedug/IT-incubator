@@ -26,7 +26,7 @@ const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoL
     return (
         tasks.length
             ?
-            <div>
+            <div style={{margin: '10px 0'}}>
                 {
                     tasks.map(task =>
                         <Task key={task.id}
