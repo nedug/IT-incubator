@@ -12,7 +12,7 @@ export enum SortedTask {
     completed = 'Completed',
 }
 
-type TodoListAllStateType = {
+export type TodoListAllStateType = {
     id: string
     title: string
     filter: SortedTask
