@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
 import Checkbox from "./Checkbox";
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     isDone: boolean
