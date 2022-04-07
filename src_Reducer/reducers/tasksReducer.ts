@@ -3,13 +3,14 @@ import {TaskType} from "../Todolist";
 /* Reducer - функция принимает 'state' и 'action' и возвращает измененный 'state' */
 export const TasksReducer = (state: Array<TaskType>, action: TasksReducerType): Array<TaskType> => {
 
-    switch (action.title) {
+    switch (action.type) {
         case "REMOVE-TASK":
             return state.filter(t => t.id !== action.payload.id);
 
-        case "ADD-NEW-TASK":
+        case "ADD-NEW-TASK": {
             let newTask = {id: action.payload.newTaskID, title: action.payload.title, isDone: false};
             return [newTask, ...state];
+        }
 
         case "CHANGE-STATUS-TASK":
             return state.map(t => t.id === action.payload.taskID ? {...t, isDone: action.payload.isDone} : t);
@@ -32,7 +33,7 @@ type removeTaskACType = ReturnType<typeof removeTaskAC>  /* => {title: 'Remove-T
 
 export const removeTaskAC = (id: string) => {
     return {
-        title: 'REMOVE-TASK',  /* Обязательное поле для Reducer */
+        type: 'REMOVE-TASK',  /* Обязательное поле для Reducer */
         payload: {id},
     } as const
     /* Возвращаемый ОБЪЕКТ как неизменяемую КОНСТАНТУ, все поля объекта становятся 'readonly'.
@@ -44,7 +45,7 @@ type addNewTaskACType = ReturnType<typeof addNewTaskAC>
 
 export const addNewTaskAC = (title: string, newTaskID: string) => {
     return {
-        title: 'ADD-NEW-TASK',
+        type: 'ADD-NEW-TASK',
         payload: {title, newTaskID},
     } as const
 }
@@ -54,7 +55,7 @@ type changeStatusTaskACType = ReturnType<typeof changeStatusTaskAC>
 
 export const changeStatusTaskAC = (taskID: string, isDone: boolean) => {
     return {
-        title: 'CHANGE-STATUS-TASK',
+        type: 'CHANGE-STATUS-TASK',
         payload: {taskID, isDone},
     } as const
 }

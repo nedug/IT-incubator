@@ -127,7 +127,8 @@ const App = () => {
             }
         };
 
-        return <TodoList
+        return (
+            <TodoList
             key={tl.id}
             todoListID={tl.id}
             title={tl.title}
@@ -140,7 +141,7 @@ const App = () => {
             removeTodolist={removeTodolist}
             changeTitleTaskFromApp={changeTitleTask}
             changeTitleTodoListFromApp={changeTitleTodoList}
-        />
+        />)
     })
 
     return (

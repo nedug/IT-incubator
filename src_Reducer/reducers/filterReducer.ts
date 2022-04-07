@@ -1,7 +1,7 @@
 import {FilterValuesType} from "../App";
 
 export const filterReducer = (state: FilterValuesType, action: changeFilterACType): FilterValuesType => {
-    switch (action.title) {
+    switch (action.type) {
         case "CHANGE-FILTER-TASK":
             return action.payload.value;
 
@@ -14,7 +14,7 @@ type changeFilterACType = ReturnType<typeof changeFilterAC>
 
 export const changeFilterAC = (value: FilterValuesType) => {
     return {
-        title: 'CHANGE-FILTER-TASK',
+        type: 'CHANGE-FILTER-TASK',
         payload: {value},
     } as const
 }
