@@ -1,8 +1,8 @@
 import {v1} from 'uuid';
 import {SortedTask, TasksStateType, TodoListAllStateType} from '../App';
-import {changeFilterTodolistAC, changeTitleTodolistAC, newTodolistAC, removeTodolistAC, todoListReducer} from "./todoListReducer";
+import {addNewTodolistAC, changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, todoListReducer} from "./todoListReducer";
 import {useState} from "react";
-import {addTaskAC, changeStatusTaskAC, removeTaskAC, tasksReducer} from "./tasksReducer";
+import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksReducer} from "./tasksReducer";
 
 
 test('correct task should be removed from correct array', () => {
@@ -75,7 +75,7 @@ test('status of task should be changed', () => {
 });
 
 
-test('status of task should be changed', () => {
+test('title of task should be changed', () => {
 
     const startState: TasksStateType = {
         'todoListID1': [
@@ -90,10 +90,38 @@ test('status of task should be changed', () => {
         ],
     };
 
-    const endState = tasksReducer(startState, changeStatusTaskAC('todoListID2', '2', true))
+    const endState = tasksReducer(startState, changeTitleTaskAC('todoListID2', '2', 'Table'))
 
-    expect(endState['todoListID2'][1].isDone).toBeTruthy();
-    expect(endState['todoListID1'][1].isDone).toBeFalsy();
+    expect(endState['todoListID2'][1].title).toBe('Table');
+    expect(endState['todoListID1'][1].title).toBe('JS');
+});
+
+
+test('new array should be added when new todolist is added', () => {
+
+    const startState: TasksStateType = {
+        'todoListID1': [
+            {id: '1', title: 'HTML&CSS', isDone: true},
+            {id: '2', title: 'JS', isDone: false},
+            {id: '3', title: 'React', isDone: false},
+        ],
+        'todoListID2': [
+            {id: '1', title: 'Milk', isDone: true},
+            {id: '2', title: 'Book', isDone: false},
+            {id: '3', title: 'Tea', isDone: false},
+        ],
+    };
+
+    const endState = tasksReducer(startState, addNewTodolistAC('New TodoList'));
+
+    const endStateKeys = Object.keys(endState);
+
+    const newTodolistId = endStateKeys.find(k => k !== 'todoListID1' && k !== 'todoListID2');
+
+    if (!newTodolistId) throw Error('new key should be added');
+
+    expect(endStateKeys.length).toBe(3);
+    expect(endState[newTodolistId]).toEqual([]);
 });
 
 
