@@ -129,19 +129,19 @@ const App = () => {
 
         return (
             <TodoList
-            key={tl.id}
-            todoListID={tl.id}
-            title={tl.title}
-            tasks={getFilteredTaskForRender()}
-            filteredTask={tl.filter}
-            removeTask={removeTask}
-            filterTask={filterTask}
-            addNewTask={addNewTask}
-            changeStatusTask={changeStatusTask}
-            removeTodolist={removeTodolist}
-            changeTitleTaskFromApp={changeTitleTask}
-            changeTitleTodoListFromApp={changeTitleTodoList}
-        />)
+                key={tl.id}
+                todoListID={tl.id}
+                title={tl.title}
+                tasks={getFilteredTaskForRender()}
+                filteredTask={tl.filter}
+                removeTask={removeTask}
+                filterTask={filterTask}
+                addNewTask={addNewTask}
+                changeStatusTask={changeStatusTask}
+                removeTodolist={removeTodolist}
+                changeTitleTaskFromApp={changeTitleTask}
+                changeTitleTodoListFromApp={changeTitleTodoList}
+            />)
     })
 
     return (

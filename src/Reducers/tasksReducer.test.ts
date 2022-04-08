@@ -1,7 +1,5 @@
-import {v1} from 'uuid';
-import {SortedTask, TasksStateType, TodoListAllStateType} from '../App';
-import {addNewTodolistAC, changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, todoListReducer} from "./todoListReducer";
-import {useState} from "react";
+import {TasksStateType} from '../App';
+import {addNewTodolistAC, removeTodolistAC} from "./todoListReducer";
 import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksReducer} from "./tasksReducer";
 
 
@@ -125,5 +123,30 @@ test('new array should be added when new todolist is added', () => {
 });
 
 
+test('property with todolist should be removed', () => {
 
+    const startState: TasksStateType = {
+        'todoListID1': [
+            {id: '1', title: 'HTML&CSS', isDone: true},
+            {id: '2', title: 'JS', isDone: false},
+            {id: '3', title: 'React', isDone: false},
+        ],
+        'todoListID2': [
+            {id: '1', title: 'Milk', isDone: true},
+            {id: '2', title: 'Book', isDone: false},
+            {id: '3', title: 'Tea', isDone: false},
+        ],
+    };
+
+    const endState = tasksReducer(startState, removeTodolistAC('todoListID2'));
+
+    const endStateKeys = Object.keys(endState);
+
+    expect(endStateKeys.length).toBe(1);
+    expect(endStateKeys[0]).toBe('todoListID1');
+
+    expect(endState['todoListID2']).toBe(undefined); /* одно и тоже разным способом */
+    expect(endState['todoListID2']).toBeUndefined();
+    expect(endState['todoListID2']).not.toBeDefined();
+});
 
