@@ -8,7 +8,7 @@ export const TasksReducer = (state: Array<TaskType>, action: TasksReducerType): 
             return state.filter(t => t.id !== action.payload.id);
 
         case "ADD-NEW-TASK": {
-            let newTask = {id: action.payload.newTaskID, title: action.payload.title, isDone: false};
+            const newTask = {id: action.payload.newTaskID, title: action.payload.title, isDone: false};
             return [newTask, ...state];
         }
 
