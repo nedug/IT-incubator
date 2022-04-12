@@ -23,6 +23,7 @@ export type TasksStateType = {
 }
 
 const App = () => {
+    'test'
 
     const todoListID1 = v1();
     const todoListID2 = v1();
