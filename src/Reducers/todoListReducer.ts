@@ -33,7 +33,7 @@ export const todoListReducer = (state: Array<TodoListAllStateType>, action: todo
             const newTodolist: TodoListAllStateType = {
                 id: action.payload.todolistId, title: action.payload.newTodolistTitle, filter: SortedTask.all
             };
-            return [...state, newTodolist]
+            return [newTodolist, ...state]
         }
 
         case 'CHANGE-TODOLIST-TITLE': {
