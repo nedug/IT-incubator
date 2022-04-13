@@ -1,5 +1,13 @@
-import {SortedTask, TodoListAllStateType} from "../App";
+import {TodoListAllStateType} from "../App";
 import {v1} from "uuid";
+import {todoListID1, todoListID2} from "./tasksReducer";
+
+
+export enum SortedTask {
+    all = 'All',
+    active = 'Active',
+    completed = 'Completed',
+}
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST'
@@ -22,7 +30,12 @@ type todoListReducerType = RemoveTodolistActionType | AddTodolistActionType
     | ChangeTodolistTitleActionType | ChangeTodolistFilterActionType
 
 
-export const todoListReducer = (state: Array<TodoListAllStateType>, action: todoListReducerType): Array<TodoListAllStateType> => {
+const initialState: Array<TodoListAllStateType> = [
+    {id: todoListID1, title: 'What to learn', filter: SortedTask.all},
+    {id: todoListID2, title: 'What to buy', filter: SortedTask.completed},
+];
+
+export const todoListReducer = (state: Array<TodoListAllStateType> = initialState, action: todoListReducerType): Array<TodoListAllStateType> => {
     switch (action.type) {
 
         case 'REMOVE-TODOLIST': {
@@ -45,7 +58,7 @@ export const todoListReducer = (state: Array<TodoListAllStateType>, action: todo
         }
 
         default:
-            throw new Error("I don't understand this type")
+            return state;
     }
 };
 

@@ -3,8 +3,8 @@ import TodoListHeader from "./TodoListHeader";
 import TaskList from "./TaskList";
 import ControlButtons from "./ControlButtons";
 import AddItemForm from "./AddItemForm";
-import {SortedTask} from "./App";
 import {Grid, Paper} from "@material-ui/core";
+import {SortedTask} from "./State/todoListReducer";
 
 type TodolistPropsType = {
     todoListID: string
