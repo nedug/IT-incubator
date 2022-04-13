@@ -5,8 +5,8 @@ import {v1} from "uuid";
 import AddItemForm from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {addNewTodolistAC, changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, todoListReducer} from "./Reducers/todoListReducer";
-import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksReducer} from "./Reducers/tasksReducer";
+import {addNewTodolistAC, changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, todoListReducer} from "./State/todoListReducer";
+import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksReducer} from "./State/tasksReducer";
 
 export enum SortedTask {
     all = 'All',
