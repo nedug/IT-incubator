@@ -10,7 +10,7 @@ type AddItemFormPropsType = {
 const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
 
     const [valueInput, setValueInput] = useState('');
-    const [error, setError] = useState<boolean>(false);
+    const [error, setError] = useState(false);
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setError(false);
