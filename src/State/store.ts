@@ -17,3 +17,7 @@ export const store = createStore(rootReducer, composeWithDevTools());
 
 // @ts-ignore
 window.store = store;
+
+const x = () => {
+
+}
