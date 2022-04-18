@@ -6,7 +6,7 @@ import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "
 import {Menu} from "@material-ui/icons";
 import {addNewTodolistAC, SortedTask} from "./State/todoListReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./State/state";
+import {AppRootStateType} from "./State/store";
 
 
 export type TodoListAllStateType = {

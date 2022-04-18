@@ -6,7 +6,7 @@ import AddItemForm from "./AddItemForm";
 import {Grid, Paper} from "@material-ui/core";
 import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, SortedTask} from "./State/todoListReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./State/state";
+import {AppRootStateType} from "./State/store";
 import {TodoListAllStateType} from "./App";
 import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC} from "./State/tasksReducer";
 
