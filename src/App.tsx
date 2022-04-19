@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./TodoList";
 import AddItemForm from "./AddItemForm";
@@ -21,11 +21,15 @@ export type TasksStateType = {
 
 const App = () => {
 
+    console.log('App')
+
     const todoListAll = useSelector<AppRootStateType, Array<TodoListAllStateType>>(state => state.todoLists);
 
     const dispatch = useDispatch();
 
-    const addNewTodolistCallback = (valueInput: string) => dispatch(addNewTodolistAC(valueInput));
+    const addNewTodolistCallback = useCallback((valueInput: string) => {
+        dispatch(addNewTodolistAC(valueInput))
+    }, [dispatch]);
 
     const todoListAllForRender = todoListAll.map(tl => {
 
@@ -36,6 +40,7 @@ const App = () => {
             />
         )
     })
+
 
     return (
         <div className="App">

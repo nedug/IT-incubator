@@ -7,13 +7,17 @@ type AddItemFormPropsType = {
 }
 
 
-const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
+const AddItemForm = React.memo( ({addNewItem}: AddItemFormPropsType) => {
+
+    console.log('AddItemForm')
 
     const [valueInput, setValueInput] = useState('');
     const [error, setError] = useState(false);
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError(false);
+        if (error) {
+            setError(false);
+        }
         setValueInput(e.target.value);
     };
 
@@ -59,6 +63,8 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
             </IconButton>
         </div>
     );
-};
+});
+
+AddItemForm.displayName = 'AddItemForm'; /* Для ESLint */
 
 export default AddItemForm;

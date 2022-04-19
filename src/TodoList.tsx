@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import TodoListHeader from "./TodoListHeader";
 import TaskList from "./TaskList";
 import ControlButtons from "./ControlButtons";
@@ -21,23 +21,29 @@ export type TaskType = {
 }
 
 
-const TodoList = ({todoList}: TodolistPropsType) => {
+const TodoList = React.memo(({todoList}: TodolistPropsType) => {
+
+    console.log('TodoList')
 
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todoList.id]);
 
     const dispatch = useDispatch();
 
-    const removeTodolistCallback = () => dispatch(removeTodolistAC(todoList.id));
+    const removeTodolistCallback = useCallback(() => {
+        dispatch(removeTodolistAC(todoList.id))
+    }, [dispatch, todoList.id]);
 
-    const addNewTaskCallback = (valueInputTrim: string) => {
+    const filterTaskCallback = useCallback((filter: SortedTask) => {
+        dispatch(changeFilterTodolistAC(todoList.id, filter))
+    }, [dispatch, todoList.id]);
+
+    const addNewTaskCallback = useCallback((valueInputTrim: string) => {
         dispatch(addTaskAC(todoList.id, valueInputTrim));
 
         if (todoList.filter === SortedTask.completed) {
             filterTaskCallback(SortedTask.active);
         }
-    };
-
-    const filterTaskCallback = (filter: SortedTask) => dispatch(changeFilterTodolistAC(todoList.id, filter));
+    }, [dispatch, filterTaskCallback, todoList.id/*, todoList.filter*/]);
 
     const removeTaskCallback = (taskID: string) => dispatch(removeTaskAC(todoList.id, taskID));
 
@@ -45,7 +51,9 @@ const TodoList = ({todoList}: TodolistPropsType) => {
 
     const changeTitleTask = (TaskID: string, newInputValue: string) => dispatch(changeTitleTaskAC(todoList.id, TaskID, newInputValue));
 
-    const changeTitleTodoList = (newInputValue: string) => dispatch(changeTitleTodolistAC(todoList.id, newInputValue));
+    const changeTitleTodoList = useCallback((newInputValue: string) => {
+        dispatch(changeTitleTodolistAC(todoList.id, newInputValue))
+    }, [dispatch, todoList.id]);
 
     const getFilteredTaskForRender = () => {
 
@@ -90,6 +98,8 @@ const TodoList = ({todoList}: TodolistPropsType) => {
             </Paper>
         </Grid>
     )
-};
+});
+
+TodoList.displayName = 'TodoList';
 
 export default TodoList;

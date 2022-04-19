@@ -10,7 +10,9 @@ type TodoListHeaderPropsType = {
 }
 
 
-const TodoListHeader = ({title, removeTodolist, changeTitleTodoListFromTodoList}: TodoListHeaderPropsType) => {
+const TodoListHeader = React.memo(({title, removeTodolist, changeTitleTodoListFromTodoList}: TodoListHeaderPropsType) => {
+
+    console.log('TodoListHeader')
 
     const onClickHandler = () => {
         removeTodolist();
@@ -35,6 +37,8 @@ const TodoListHeader = ({title, removeTodolist, changeTitleTodoListFromTodoList}
             </IconButton>
         </h3>
     )
-};
+});
+
+TodoListHeader.displayName = 'TodoListHeader';
 
 export default TodoListHeader;

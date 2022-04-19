@@ -8,7 +8,9 @@ type ControlButtonsPropsType = {
 }
 
 
-const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => {
+const ControlButtons = React.memo(({filterTask, filteredTask}: ControlButtonsPropsType) => {
+
+    console.log('ControlButtons')
 
     const onClickFilterTask = (filter: SortedTask) => {
         return () => filterTask(filter);
@@ -46,6 +48,8 @@ const ControlButtons = ({filterTask, filteredTask}: ControlButtonsPropsType) => 
             </Button>
         </div>
     );
-};
+});
+
+ControlButtons.displayName = 'ControlButtons';
 
 export default ControlButtons;

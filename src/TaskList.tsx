@@ -28,13 +28,14 @@ const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoL
             ?
             <div style={{margin: '10px 0'}}>
                 {
-                    tasks.map(task =>
+                    tasks.map(task => (
                         <Task key={task.id}
                               {...task}
                               removeTask={removeTask}
                               changeStatusTask={changeStatusTask}
                               changeTitleTaskFromTaskList={changeTitleTask}
-                        />)
+                        />
+                    ))
                 }
             </div>
             :
