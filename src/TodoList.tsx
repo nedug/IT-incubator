@@ -43,13 +43,19 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
         if (todoList.filter === SortedTask.completed) {
             filterTaskCallback(SortedTask.active);
         }
-    }, [dispatch, filterTaskCallback, todoList.id/*, todoList.filter*/]);
+    }, [dispatch, filterTaskCallback, todoList.id, todoList.filter]);
 
-    const removeTaskCallback = (taskID: string) => dispatch(removeTaskAC(todoList.id, taskID));
+    const removeTaskCallback = useCallback((taskID: string) => {
+        dispatch(removeTaskAC(todoList.id, taskID))
+    }, [dispatch, todoList.id]);
 
-    const changeStatusTaskCallback = (taskID: string, isDone: boolean) => dispatch(changeStatusTaskAC(todoList.id, taskID, isDone));
+    const changeStatusTaskCallback = useCallback((taskID: string, isDone: boolean) => {
+        dispatch(changeStatusTaskAC(todoList.id, taskID, isDone))
+    }, [dispatch, todoList.id]);
 
-    const changeTitleTask = (TaskID: string, newInputValue: string) => dispatch(changeTitleTaskAC(todoList.id, TaskID, newInputValue));
+    const changeTitleTask = useCallback((TaskID: string, newInputValue: string) => {
+        dispatch(changeTitleTaskAC(todoList.id, TaskID, newInputValue))
+    }, [dispatch, todoList.id]);
 
     const changeTitleTodoList = useCallback((newInputValue: string) => {
         dispatch(changeTitleTodolistAC(todoList.id, newInputValue))

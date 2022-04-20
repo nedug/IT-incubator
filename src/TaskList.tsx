@@ -1,4 +1,4 @@
-import React, {CSSProperties} from 'react';
+import React, {CSSProperties, useCallback} from 'react';
 import Task from "./Task";
 import {TaskType} from "./TodoList";
 
@@ -16,11 +16,13 @@ const EmptyListStyle: CSSProperties = {
 }
 
 
-const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoList}: TaskListPropsType) => {
+const TaskList = React.memo(({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoList}: TaskListPropsType) => {
 
-    const changeTitleTask = (TaskID: string, newInputValue: string) => {
+    console.log('TaskList')
+
+    const changeTitleTask = useCallback((TaskID: string, newInputValue: string) => {
         changeTitleTaskFromTodoList(TaskID, newInputValue);
-    };
+    }, [changeTitleTaskFromTodoList]);
 
 
     return (
@@ -41,6 +43,8 @@ const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoL
             :
             <div style={EmptyListStyle}>TaskList is empty. Add new Task</div>
     );
-};
+});
+
+TaskList.displayName = 'TaskList';
 
 export default TaskList;

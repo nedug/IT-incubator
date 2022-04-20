@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Button} from "@material-ui/core";
 import {SortedTask} from "./State/todoListReducer";
 
@@ -12,9 +12,9 @@ const ControlButtons = React.memo(({filterTask, filteredTask}: ControlButtonsPro
 
     console.log('ControlButtons')
 
-    const onClickFilterTask = (filter: SortedTask) => {
+    const onClickFilterTask = useCallback((filter: SortedTask) => {
         return () => filterTask(filter);
-    };
+    }, [filterTask]);
 
     return (
         <div style={{display: 'flex', justifyContent: 'space-between'}}>

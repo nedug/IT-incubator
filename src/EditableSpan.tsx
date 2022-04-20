@@ -7,7 +7,9 @@ type EditableSpanType = {
 }
 
 
-export const EditableSpan = ({title, changeTitleTaskCallback}: EditableSpanType) => {
+export const EditableSpan = React.memo(({title, changeTitleTaskCallback}: EditableSpanType) => {
+
+    console.log('EditableSpan')
 
     const [editMode, setEditMode] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState<string>('');
@@ -39,4 +41,6 @@ export const EditableSpan = ({title, changeTitleTaskCallback}: EditableSpanType)
         <span
             onDoubleClick={onDoubleClickSpanHandler}
         >{title}</span>
-};
+});
+
+EditableSpan.displayName = 'EditableSpan';

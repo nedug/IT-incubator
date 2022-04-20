@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {TaskType} from "./TodoList";
 import CheckboxCommon from "./Components/CheckboxCommon";
 import {EditableSpan} from "./EditableSpan";
@@ -12,19 +12,25 @@ type TaskPropsType = TaskType & {
 }
 
 
-const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskFromTaskList}: TaskPropsType) => {
+const Task = React.memo(({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskFromTaskList}: TaskPropsType) => {
 
-    const onClickHandler = () => {
+    console.log('Task')
+
+    const onClickHandler = useCallback(() => {
         removeTask(id);
-    };
+    }, [removeTask, id]);
 
-    const onChangeHandler = (checked: boolean) => {
+    const onChangeHandler = useCallback((checked: boolean) => {
         changeStatusTask(id, checked);
-    };
+    }, [changeStatusTask, id]);
 
-    const changeTitleTask = (newInputValue: string) => {
+    const changeTitleTask = useCallback((newInputValue: string) => {
         changeTitleTaskFromTaskList(id, newInputValue);
-    };
+    }, [changeTitleTaskFromTaskList, id]);
+
+    const checkboxCallback = useCallback((checked: boolean) => {
+        onChangeHandler(checked);
+    }, [onChangeHandler]);
 
 
     return (
@@ -39,7 +45,7 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskF
 
             <CheckboxCommon
                 isDone={isDone}
-                callback={checked => onChangeHandler(checked)}
+                callback={checkboxCallback}
             />
 
             <EditableSpan
@@ -48,7 +54,9 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskF
             />
         </div>
     );
-};
+});
+
+Task.displayName = 'Task';
 
 export default Task;
 

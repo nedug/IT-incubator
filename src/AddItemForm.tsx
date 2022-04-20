@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
 import {IconButton, TextField} from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
@@ -27,7 +27,7 @@ const AddItemForm = React.memo( ({addNewItem}: AddItemFormPropsType) => {
         }
     };
 
-    const onClickBtnHandler = () => {
+    const onClickBtnHandler = useCallback(() => {
         const valueInputTrim = valueInput.trim();
         if (!valueInputTrim) {
             setError(true);
@@ -37,7 +37,7 @@ const AddItemForm = React.memo( ({addNewItem}: AddItemFormPropsType) => {
         setValueInput('');
 
         addNewItem(valueInputTrim);
-    };
+    }, [addNewItem, valueInput]);
 
 
     return (
