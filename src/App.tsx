@@ -20,8 +20,6 @@ export type TasksStateType = {
 }
 
 const App = () => {
-    
-    варваовао
 
     console.log('App')
 

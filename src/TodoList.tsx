@@ -95,10 +95,10 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
                     removeTask={removeTaskCallback}
                     changeStatusTask={changeStatusTaskCallback}
                     changeTitleTaskFromTodoList={changeTitleTask}
-                    тртрт
                 />
 
                 <ControlButtons
+                    filteredTask={todoList.filter}
                     filterTask={filterTaskCallback}
                 />
             </Paper>
