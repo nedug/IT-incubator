@@ -66,27 +66,27 @@ export const todoListReducer = (state: Array<TodoListAllStateType> = initialStat
 export const removeTodolistAC = (todolistId: string): RemoveTodolistActionType => {
     return {
         type: 'REMOVE-TODOLIST',
-        payload: {todolistId}
+        payload: {todolistId,},
     }
 };
 
 export const addNewTodolistAC = (newTodolistTitle: string): AddTodolistActionType => {
     return {
         type: 'ADD-NEW-TODOLIST',
-        payload: {newTodolistTitle, todolistId: v1()}
+        payload: {newTodolistTitle, todolistId: v1(),},
     }
 };
 
 export const changeTitleTodolistAC = (todolistId: string, newTodolistTitle: string): ChangeTodolistTitleActionType => {
     return {
         type: 'CHANGE-TODOLIST-TITLE',
-        payload: {newTodolistTitle, todolistId}
+        payload: {newTodolistTitle, todolistId,},
     }
 };
 
 export const changeFilterTodolistAC = (todolistId: string, filter: SortedTask): ChangeTodolistFilterActionType => {
     return {
         type: 'CHANGE-TODOLIST-FILTER',
-        payload: {todolistId, filter}
+        payload: {todolistId, filter,},
     }
 };
