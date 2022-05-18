@@ -32,7 +32,6 @@ const App = () => {
     }, [dispatch]);
 
     const todoListAllForRender = todoListAll.map(tl => {
-
         return (
             <TodoList
                 key={tl.id}
