@@ -28,7 +28,7 @@ const TaskList = React.memo(({todolist, /*tasks,*/ /*removeTask, changeStatusTas
     /*const changeTitleTask = useCallback((TaskID: string, newInputValue: string) => {
         changeTitleTaskFromTodoList(TaskID, newInputValue);
     }, [changeTitleTaskFromTodoList]);*/
-
+    
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
 
     const getFilteredTaskForRender = () => {
