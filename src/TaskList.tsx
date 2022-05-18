@@ -21,25 +21,12 @@ const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
 
     console.log('TaskList')
 
-    const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
+    // const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
 
-    // const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => {
-    //
-    //     const tasks = state.tasks[todolist.id];
-    //
-    //     switch (todolist.filter) {
-    //         case SortedTask.active:
-    //             return tasks.filter(task => !task.isDone);
-    //         case SortedTask.completed:
-    //             return tasks.filter(task => task.isDone);
-    //         default:
-    //             return tasks;
-    //     }
-    //
-    // });
+    const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => {
 
+        const tasks = state.tasks[todolist.id];
 
-    const getFilteredTaskForRender = () => {
         switch (todolist.filter) {
             case SortedTask.active:
                 return tasks.filter(task => !task.isDone);
@@ -48,7 +35,19 @@ const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
             default:
                 return tasks;
         }
-    }
+    });
+
+
+   /* const getFilteredTaskForRender = () => {
+        switch (todolist.filter) {
+            case SortedTask.active:
+                return tasks.filter(task => !task.isDone);
+            case SortedTask.completed:
+                return tasks.filter(task => task.isDone);
+            default:
+                return tasks;
+        }
+    }*/
 
 
     return (
@@ -56,7 +55,7 @@ const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
             ?
             <div style={{margin: '10px 0'}}>
                 {
-                    getFilteredTaskForRender().map(task => (
+                    tasks.map(task => (
                         <Task key={task.id}
                               {...task}
                               todolistId={todolist.id}
