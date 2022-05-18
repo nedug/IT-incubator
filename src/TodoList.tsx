@@ -61,17 +61,7 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
         dispatch(changeTitleTodolistAC(todoList.id, newInputValue))
     }, [dispatch, todoList.id]);
 
-    const getFilteredTaskForRender = () => {
-
-        switch (todoList.filter) {
-            case SortedTask.active:
-                return tasks.filter(task => !task.isDone);
-            case SortedTask.completed:
-                return tasks.filter(task => task.isDone);
-            default:
-                return tasks;
-        }
-    }
+    
 
 
     return (
