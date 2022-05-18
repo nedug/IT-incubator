@@ -45,8 +45,8 @@ const Task = React.memo(({todolistId, isDone, title, id, /*removeTask, changeSta
     }, [changeTitleTaskFromTaskList, id]);*/
 
     const changeTitleTask = useCallback((newInputValue: string) => {
-       dispatch(changeTitleTaskAC(todolistId, id, newInputValue))
-   }, [dispatch, todolistId, id]);
+        dispatch(changeTitleTaskAC(todolistId, id, newInputValue))
+    }, [dispatch, todolistId, id]);
 
 
     const checkboxCallback = useCallback((checked: boolean) => {

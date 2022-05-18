@@ -1,10 +1,14 @@
 import React, {CSSProperties, useCallback} from 'react';
 import Task from "./Task";
 import {TaskType} from "./TodoList";
+import {TodoListAllStateType} from "./App";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "./State/store";
+import {SortedTask} from "./State/todoListReducer";
 
 type TaskListPropsType = {
-    tasks: Array<TaskType>
-    todolistId: string
+    // tasks: Array<TaskType>
+    todolist: TodoListAllStateType
     // removeTask: (id: string) => void
     // changeStatusTask: (taskID: string, isDone: boolean) => void
     // changeTitleTaskFromTodoList: (TaskID: string, newInputValue: string) => void
@@ -17,7 +21,7 @@ const EmptyListStyle: CSSProperties = {
 }
 
 
-const TaskList = React.memo(({todolistId, tasks, /*removeTask, changeStatusTask, changeTitleTaskFromTodoList*/}: TaskListPropsType) => {
+const TaskList = React.memo(({todolist, /*tasks,*/ /*removeTask, changeStatusTask, changeTitleTaskFromTodoList*/}: TaskListPropsType) => {
 
     console.log('TaskList')
 
@@ -25,19 +29,32 @@ const TaskList = React.memo(({todolistId, tasks, /*removeTask, changeStatusTask,
         changeTitleTaskFromTodoList(TaskID, newInputValue);
     }, [changeTitleTaskFromTodoList]);*/
 
+    const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
+
+    const getFilteredTaskForRender = () => {
+        switch (todolist.filter) {
+            case SortedTask.active:
+                return tasks.filter(task => !task.isDone);
+            case SortedTask.completed:
+                return tasks.filter(task => task.isDone);
+            default:
+                return tasks;
+        }
+    }
+
 
     return (
         tasks.length
             ?
             <div style={{margin: '10px 0'}}>
                 {
-                    tasks.map(task => (
+                    getFilteredTaskForRender().map(task => (
                         <Task key={task.id}
                               {...task}
-                              todolistId={todolistId}
-                              // removeTask={removeTask}
-                              // changeStatusTask={changeStatusTask}
-                              // changeTitleTaskFromTaskList={changeTitleTask}
+                              todolistId={todolist.id}
+                            // removeTask={removeTask}
+                            // changeStatusTask={changeStatusTask}
+                            // changeTitleTaskFromTaskList={changeTitleTask}
                         />
                     ))
                 }

@@ -25,7 +25,7 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
 
     console.log('TodoList')
 
-    const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todoList.id]);
+    // const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todoList.id]);
 
     const dispatch = useDispatch();
 
@@ -45,6 +45,10 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
         }
     }, [dispatch, filterTaskCallback, todoList.id, todoList.filter]);
 
+    const changeTitleTodoList = useCallback((newInputValue: string) => {
+        dispatch(changeTitleTodolistAC(todoList.id, newInputValue))
+    }, [dispatch, todoList.id]);
+
     /*const removeTaskCallback = useCallback((taskID: string) => {
         dispatch(removeTaskAC(todoList.id, taskID))
     }, [dispatch, todoList.id]);*/
@@ -57,11 +61,8 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
         dispatch(changeTitleTaskAC(todoList.id, TaskID, newInputValue))
     }, [dispatch, todoList.id]);*/
 
-    const changeTitleTodoList = useCallback((newInputValue: string) => {
-        dispatch(changeTitleTodolistAC(todoList.id, newInputValue))
-    }, [dispatch, todoList.id]);
 
-    const getFilteredTaskForRender = () => {
+    /*const getFilteredTaskForRender = () => {
 
         switch (todoList.filter) {
             case SortedTask.active:
@@ -71,7 +72,7 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
             default:
                 return tasks;
         }
-    }
+    }*/
 
 
     return (
@@ -91,8 +92,8 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
                 />
 
                 <TaskList
-                    tasks={getFilteredTaskForRender()}
-                    todolistId={todoList.id}
+                    // tasks={getFilteredTaskForRender()}
+                    todolist={todoList}
                     // removeTask={removeTaskCallback}
                     // changeStatusTask={changeStatusTaskCallback}
                     // changeTitleTaskFromTodoList={changeTitleTask}
