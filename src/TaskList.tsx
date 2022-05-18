@@ -4,9 +4,10 @@ import {TaskType} from "./TodoList";
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
-    changeStatusTask: (taskID: string, isDone: boolean) => void
-    changeTitleTaskFromTodoList: (TaskID: string, newInputValue: string) => void
+    todolistId: string
+    // removeTask: (id: string) => void
+    // changeStatusTask: (taskID: string, isDone: boolean) => void
+    // changeTitleTaskFromTodoList: (TaskID: string, newInputValue: string) => void
 }
 
 const EmptyListStyle: CSSProperties = {
@@ -16,13 +17,13 @@ const EmptyListStyle: CSSProperties = {
 }
 
 
-const TaskList = React.memo(({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoList}: TaskListPropsType) => {
+const TaskList = React.memo(({todolistId, tasks, /*removeTask, changeStatusTask, changeTitleTaskFromTodoList*/}: TaskListPropsType) => {
 
     console.log('TaskList')
 
-    const changeTitleTask = useCallback((TaskID: string, newInputValue: string) => {
+    /*const changeTitleTask = useCallback((TaskID: string, newInputValue: string) => {
         changeTitleTaskFromTodoList(TaskID, newInputValue);
-    }, [changeTitleTaskFromTodoList]);
+    }, [changeTitleTaskFromTodoList]);*/
 
 
     return (
@@ -33,9 +34,10 @@ const TaskList = React.memo(({tasks, removeTask, changeStatusTask, changeTitleTa
                     tasks.map(task => (
                         <Task key={task.id}
                               {...task}
-                              removeTask={removeTask}
-                              changeStatusTask={changeStatusTask}
-                              changeTitleTaskFromTaskList={changeTitleTask}
+                              todolistId={todolistId}
+                              // removeTask={removeTask}
+                              // changeStatusTask={changeStatusTask}
+                              // changeTitleTaskFromTaskList={changeTitleTask}
                         />
                     ))
                 }

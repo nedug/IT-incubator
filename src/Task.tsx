@@ -4,29 +4,50 @@ import CheckboxCommon from "./Components/CheckboxCommon";
 import {EditableSpan} from "./EditableSpan";
 import {Delete} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
+import {changeStatusTaskAC, changeTitleTaskAC, removeTaskAC} from "./State/tasksReducer";
+import {useDispatch} from "react-redux";
 
 type TaskPropsType = TaskType & {
-    removeTask: (taskID: string) => void
-    changeStatusTask: (taskID: string, isDone: boolean) => void
-    changeTitleTaskFromTaskList: (taskID: string, newInputValue: string) => void
+    todolistId: string
+    // removeTask: (taskID: string) => void
+    // changeStatusTask: (taskID: string, isDone: boolean) => void
+    // changeTitleTaskFromTaskList: (taskID: string, newInputValue: string) => void
 }
 
 
-const Task = React.memo(({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskFromTaskList}: TaskPropsType) => {
+const Task = React.memo(({todolistId, isDone, title, id, /*removeTask, changeStatusTask, changeTitleTaskFromTaskList*/}: TaskPropsType) => {
 
     console.log('Task')
 
-    const onClickHandler = useCallback(() => {
+    const dispatch = useDispatch();
+
+
+    /*const onClickHandler1 = useCallback(() => {
         removeTask(id);
-    }, [removeTask, id]);
+    }, [removeTask, id]);*/
+
+    const onClickHandler = useCallback(() => {
+        dispatch(removeTaskAC(todolistId, id))
+    }, [dispatch, todolistId, id]);
+
+
+    /*const onChangeHandler = useCallback((checked: boolean) => {
+        changeStatusTask(id, checked);
+    }, [changeStatusTask, id]);*/
 
     const onChangeHandler = useCallback((checked: boolean) => {
-        changeStatusTask(id, checked);
-    }, [changeStatusTask, id]);
+        dispatch(changeStatusTaskAC(todolistId, id, checked))
+    }, [dispatch, todolistId, id]);
+
+
+    /*const changeTitleTask = useCallback((newInputValue: string) => {
+        changeTitleTaskFromTaskList(id, newInputValue);
+    }, [changeTitleTaskFromTaskList, id]);*/
 
     const changeTitleTask = useCallback((newInputValue: string) => {
-        changeTitleTaskFromTaskList(id, newInputValue);
-    }, [changeTitleTaskFromTaskList, id]);
+       dispatch(changeTitleTaskAC(todolistId, id, newInputValue))
+   }, [dispatch, todolistId, id]);
+
 
     const checkboxCallback = useCallback((checked: boolean) => {
         onChangeHandler(checked);

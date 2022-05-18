@@ -45,17 +45,17 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
         }
     }, [dispatch, filterTaskCallback, todoList.id, todoList.filter]);
 
-    const removeTaskCallback = useCallback((taskID: string) => {
+    /*const removeTaskCallback = useCallback((taskID: string) => {
         dispatch(removeTaskAC(todoList.id, taskID))
-    }, [dispatch, todoList.id]);
+    }, [dispatch, todoList.id]);*/
 
-    const changeStatusTaskCallback = useCallback((taskID: string, isDone: boolean) => {
+    /*const changeStatusTaskCallback = useCallback((taskID: string, isDone: boolean) => {
         dispatch(changeStatusTaskAC(todoList.id, taskID, isDone))
-    }, [dispatch, todoList.id]);
+    }, [dispatch, todoList.id]);*/
 
-    const changeTitleTask = useCallback((TaskID: string, newInputValue: string) => {
+    /*const changeTitleTask = useCallback((TaskID: string, newInputValue: string) => {
         dispatch(changeTitleTaskAC(todoList.id, TaskID, newInputValue))
-    }, [dispatch, todoList.id]);
+    }, [dispatch, todoList.id]);*/
 
     const changeTitleTodoList = useCallback((newInputValue: string) => {
         dispatch(changeTitleTodolistAC(todoList.id, newInputValue))
@@ -92,9 +92,10 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
 
                 <TaskList
                     tasks={getFilteredTaskForRender()}
-                    removeTask={removeTaskCallback}
-                    changeStatusTask={changeStatusTaskCallback}
-                    changeTitleTaskFromTodoList={changeTitleTask}
+                    todolistId={todoList.id}
+                    // removeTask={removeTaskCallback}
+                    // changeStatusTask={changeStatusTaskCallback}
+                    // changeTitleTaskFromTodoList={changeTitleTask}
                 />
 
                 <ControlButtons
