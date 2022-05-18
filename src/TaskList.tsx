@@ -21,8 +21,6 @@ const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
 
     console.log('TaskList')
 
-    // const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
-
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => {
 
         const tasks = state.tasks[todolist.id];
@@ -36,18 +34,6 @@ const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
                 return tasks;
         }
     });
-
-
-   /* const getFilteredTaskForRender = () => {
-        switch (todolist.filter) {
-            case SortedTask.active:
-                return tasks.filter(task => !task.isDone);
-            case SortedTask.completed:
-                return tasks.filter(task => task.isDone);
-            default:
-                return tasks;
-        }
-    }*/
 
 
     return (
