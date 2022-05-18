@@ -1,6 +1,7 @@
 import {TodoListAllStateType} from "../App";
 import {v1} from "uuid";
 import {todoListID1, todoListID2} from "./tasksReducer";
+import {AppRootStateType} from "./store";
 
 
 export enum SortedTask {
@@ -90,3 +91,6 @@ export const changeFilterTodolistAC = (todolistId: string, filter: SortedTask): 
         payload: {todolistId, filter,},
     }
 };
+
+
+export const selectTodoLists = (state: AppRootStateType): Array<TodoListAllStateType> => state.todoLists;
