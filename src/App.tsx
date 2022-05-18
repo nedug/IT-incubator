@@ -4,8 +4,9 @@ import TodoList, {TaskType} from "./TodoList";
 import AddItemForm from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {addNewTodolistAC, selectTodoLists, SortedTask} from "./State/todoListReducer";
+import {addNewTodolistAC, SortedTask} from "./State/todoListReducer";
 import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./State/store";
 
 
 export type TodoListAllStateType = {
@@ -22,7 +23,7 @@ const App = () => {
 
     console.log('App')
 
-    const todoListAll = useSelector(selectTodoLists);
+    const todoListAll = useSelector<AppRootStateType, Array<TodoListAllStateType>>(state => state.todoLists);
 
     const dispatch = useDispatch();
 
