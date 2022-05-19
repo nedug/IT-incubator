@@ -2140,6 +2140,25 @@
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
 
+"@storybook/addon-storysource@^6.5.0":
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-6.5.0.tgz#37804e950509ad6801da230614f7b2e09dc0a0ed"
+  integrity sha512-4VJDBsH8iPp9/TXv73lqbm0qD5oj/t+J6lM3RFG1HRLQ7ORMKmPKLM/HiWXTdyXi32Vb3B4dU14TyEgySzFNTg==
+  dependencies:
+    "@storybook/addons" "6.5.0"
+    "@storybook/api" "6.5.0"
+    "@storybook/client-logger" "6.5.0"
+    "@storybook/components" "6.5.0"
+    "@storybook/router" "6.5.0"
+    "@storybook/source-loader" "6.5.0"
+    "@storybook/theming" "6.5.0"
+    core-js "^3.8.2"
+    estraverse "^5.2.0"
+    loader-utils "^2.0.0"
+    prop-types "^15.7.2"
+    react-syntax-highlighter "^15.4.5"
+    regenerator-runtime "^0.13.7"
+
 "@storybook/addon-toolbars@6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@storybook/addon-toolbars/-/addon-toolbars-6.5.0.tgz#eb583db0d7ab0f97ff7ab132d31d6ac5b8b486d8"

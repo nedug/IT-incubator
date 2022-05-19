@@ -1,6 +1,7 @@
 import React from "react";
 import App from "./App";
 import {ReduxStoreProviderDecorator} from "./stories/ReduxStoreProviderDecorator";
+import {ComponentStory} from "@storybook/react";
 
 
 export default {
@@ -9,8 +10,10 @@ export default {
     decorators: [ReduxStoreProviderDecorator],
 };
 
-// const callback = action("EditableSpan changed value");
+// export const AppExample = () => {
+//     return <App/>
+// };
 
-export const AppExample = () => {
-    return <App/>
-};
+const Template: ComponentStory<typeof App> = () => <App/>;
+
+export const AppExample = Template.bind({});
