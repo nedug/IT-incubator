@@ -12,8 +12,6 @@ type TodoListHeaderPropsType = {
 
 const TodoListHeader = React.memo(({title, removeTodolist, changeTitleTodoListFromTodoList}: TodoListHeaderPropsType) => {
 
-    console.log('TodoListHeader')
-
     const onClickHandler = useCallback(() => {
         removeTodolist();
     }, [removeTodolist]);

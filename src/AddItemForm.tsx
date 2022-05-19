@@ -9,8 +9,6 @@ type AddItemFormPropsType = {
 
 const AddItemForm = React.memo( ({addNewItem}: AddItemFormPropsType) => {
 
-    console.log('AddItemForm')
-
     const [valueInput, setValueInput] = useState('');
     const [error, setError] = useState(false);
 

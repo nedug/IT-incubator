@@ -14,8 +14,6 @@ type TaskPropsType = TaskType & {
 
 const Task = React.memo(({todolistId, isDone, title, id,}: TaskPropsType) => {
 
-    console.log('Task')
-
     const dispatch = useDispatch();
 
     const onClickHandler = useCallback(() => {

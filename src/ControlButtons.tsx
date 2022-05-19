@@ -10,8 +10,6 @@ type ControlButtonsPropsType = {
 
 const ControlButtons = React.memo(({filterTask, filteredTask}: ControlButtonsPropsType) => {
 
-    console.log('ControlButtons')
-
     const onClickFilterTask = useCallback((filter: SortedTask) => {
         return () => filterTask(filter);
     }, [filterTask]);

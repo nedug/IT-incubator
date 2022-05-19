@@ -9,8 +9,6 @@ type CheckboxPropsType = {
 
 const CheckboxCommon = React.memo(({isDone, callback}: CheckboxPropsType) => {
 
-    console.log('CheckboxCommon')
-
     const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
         callback(e.currentTarget.checked)
     };

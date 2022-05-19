@@ -22,8 +22,6 @@ export type TaskType = {
 
 const TodoList = React.memo(({todoList}: TodolistPropsType) => {
 
-    console.log('TodoList')
-
     const dispatch = useDispatch();
 
     const removeTodolistCallback = useCallback(() => {

@@ -19,8 +19,6 @@ const EmptyListStyle: CSSProperties = {
 
 const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
 
-    console.log('TaskList')
-
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
 
 

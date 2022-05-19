@@ -20,8 +20,6 @@ export type TasksStateType = {
 
 const App = () => {
 
-    console.log('App')
-
     const todoListAll = useSelector(selectTodoLists);
 
     const dispatch = useDispatch();
