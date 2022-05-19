@@ -5,7 +5,6 @@
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
-    "@storybook/addon-storysource": "^6.5.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -66,6 +65,7 @@
     "@storybook/addon-essentials": "^6.5.0",
     "@storybook/addon-interactions": "^6.5.0",
     "@storybook/addon-links": "^6.5.0",
+    "@storybook/addon-storyshots": "^6.5.0",
     "@storybook/builder-webpack5": "^6.5.0",
     "@storybook/manager-webpack5": "^6.5.0",
     "@storybook/node-logger": "^6.5.0",
