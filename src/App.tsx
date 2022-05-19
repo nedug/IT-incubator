@@ -1,32 +1,74 @@
 import React from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./TodoList";
+import AddItemForm from "./AddItemForm";
+import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "@material-ui/core";
+import {Menu} from "@material-ui/icons";
+import {addNewTodolistAC, SortedTask} from "./State/todoListReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./State/store";
 
-const task1: Array<TaskType> = [
-    {id: 1, title: 'HTML&CSS', isDone: true},
-    {id: 2, title: 'JS', isDone: false},
-    {id: 3, title: 'React', isDone: true},
-];
 
-const task2: Array<TaskType> = [
-    {id: 1, title: '11', isDone: false},
-    {id: 2, title: '44', isDone: false},
-    {id: 3, title: '55', isDone: true},
-];
+export type TodoListAllStateType = {
+    id: string
+    title: string
+    filter: SortedTask
+}
 
-const App = () => (
-    <div className="App">
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
+}
 
-        <TodoList
-            title={'What to learn'}
-            tasks={task1} />
+const App = () => {
 
-        <TodoList
-            title={'What to buy'}
-            tasks={task2} />
+    const todoListAll = useSelector<AppRootStateType, Array<TodoListAllStateType>>(state => state.todoLists);
 
-    </div>
-);
+    const dispatch = useDispatch();
 
+    const addNewTodolistCallback = (valueInput: string) => dispatch(addNewTodolistAC(valueInput));
+
+    const todoListAllForRender = todoListAll.map(tl => {
+
+        return (
+            <TodoList
+                key={tl.id}
+                todoList={tl}
+            />
+        )
+    })
+
+    return (
+        <div className="App">
+
+            <AppBar position="static">
+                <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6">
+                        TodoList
+                    </Typography>
+                    <Button
+                        variant={"outlined"}
+                        color={"secondary"}
+                    >
+                        Login
+                    </Button>
+                </Toolbar>
+            </AppBar>
+
+            <Container fixed>
+                <Grid container style={{padding: '20px'}}>
+                    <AddItemForm addNewItem={addNewTodolistCallback}/>
+                </Grid>
+
+                <Grid container spacing={2}>
+                    {todoListAllForRender}
+                </Grid>
+            </Container>
+
+        </div>
+    )
+};
 
 export default App;
