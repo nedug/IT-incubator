@@ -8,7 +8,7 @@ export type AppRootStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todoLists: todoListReducer
+    todoLists: todoListReducer,
 });
 
 

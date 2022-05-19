@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
 import {IconButton, TextField} from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
@@ -7,13 +7,15 @@ type AddItemFormPropsType = {
 }
 
 
-const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
+const AddItemForm = React.memo( ({addNewItem}: AddItemFormPropsType) => {
 
     const [valueInput, setValueInput] = useState('');
     const [error, setError] = useState(false);
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError(false);
+        if (error) {
+            setError(false);
+        }
         setValueInput(e.target.value);
     };
 
@@ -23,7 +25,7 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
         }
     };
 
-    const onClickBtnHandler = () => {
+    const onClickBtnHandler = useCallback(() => {
         const valueInputTrim = valueInput.trim();
         if (!valueInputTrim) {
             setError(true);
@@ -33,7 +35,7 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
         setValueInput('');
 
         addNewItem(valueInputTrim);
-    };
+    }, [addNewItem, valueInput]);
 
 
     return (
@@ -59,6 +61,8 @@ const AddItemForm = ({addNewItem}: AddItemFormPropsType) => {
             </IconButton>
         </div>
     );
-};
+});
+
+AddItemForm.displayName = 'AddItemForm'; /* Для ESLint */
 
 export default AddItemForm;

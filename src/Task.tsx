@@ -1,30 +1,36 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {TaskType} from "./TodoList";
 import CheckboxCommon from "./Components/CheckboxCommon";
 import {EditableSpan} from "./EditableSpan";
 import {Delete} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
+import {changeStatusTaskAC, changeTitleTaskAC, removeTaskAC} from "./State/tasksReducer";
+import {useDispatch} from "react-redux";
 
 type TaskPropsType = TaskType & {
-    removeTask: (taskID: string) => void
-    changeStatusTask: (taskID: string, isDone: boolean) => void
-    changeTitleTaskFromTaskList: (taskID: string, newInputValue: string) => void
+    todolistId: string
 }
 
 
-const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskFromTaskList}: TaskPropsType) => {
+const Task = React.memo(({todolistId, isDone, title, id,}: TaskPropsType) => {
 
-    const onClickHandler = () => {
-        removeTask(id);
-    };
+    const dispatch = useDispatch();
 
-    const onChangeHandler = (checked: boolean) => {
-        changeStatusTask(id, checked);
-    };
+    const onClickHandler = useCallback(() => {
+        dispatch(removeTaskAC(todolistId, id))
+    }, [dispatch, todolistId, id]);
 
-    const changeTitleTask = (newInputValue: string) => {
-        changeTitleTaskFromTaskList(id, newInputValue);
-    };
+    const onChangeHandler = useCallback((checked: boolean) => {
+        dispatch(changeStatusTaskAC(todolistId, id, checked))
+    }, [dispatch, todolistId, id]);
+
+    const changeTitleTask = useCallback((newInputValue: string) => {
+        dispatch(changeTitleTaskAC(todolistId, id, newInputValue))
+    }, [dispatch, todolistId, id]);
+
+    const checkboxCallback = useCallback((checked: boolean) => {
+        onChangeHandler(checked);
+    }, [onChangeHandler]);
 
 
     return (
@@ -39,7 +45,7 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskF
 
             <CheckboxCommon
                 isDone={isDone}
-                callback={checked => onChangeHandler(checked)}
+                callback={checkboxCallback}
             />
 
             <EditableSpan
@@ -48,7 +54,9 @@ const Task = ({isDone, title, id, removeTask, changeStatusTask, changeTitleTaskF
             />
         </div>
     );
-};
+});
+
+Task.displayName = 'Task';
 
 export default Task;
 

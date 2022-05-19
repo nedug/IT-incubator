@@ -1,14 +1,13 @@
-import React from "react";
+import React, {useCallback} from "react";
 import TodoListHeader from "./TodoListHeader";
 import TaskList from "./TaskList";
 import ControlButtons from "./ControlButtons";
 import AddItemForm from "./AddItemForm";
 import {Grid, Paper} from "@material-ui/core";
 import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, SortedTask} from "./State/todoListReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./State/store";
+import {useDispatch} from "react-redux";
 import {TodoListAllStateType} from "./App";
-import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC} from "./State/tasksReducer";
+import {addTaskAC} from "./State/tasksReducer";
 
 type TodolistPropsType = {
     todoList: TodoListAllStateType
@@ -21,43 +20,29 @@ export type TaskType = {
 }
 
 
-const TodoList = ({todoList}: TodolistPropsType) => {
-
-    const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todoList.id]);
+const TodoList = React.memo(({todoList}: TodolistPropsType) => {
 
     const dispatch = useDispatch();
 
-    const removeTodolistCallback = () => dispatch(removeTodolistAC(todoList.id));
+    const removeTodolistCallback = useCallback(() => {
+        dispatch(removeTodolistAC(todoList.id))
+    }, [dispatch, todoList.id]);
 
-    const addNewTaskCallback = (valueInputTrim: string) => {
+    const filterTaskCallback = useCallback((filter: SortedTask) => {
+        dispatch(changeFilterTodolistAC(todoList.id, filter))
+    }, [dispatch, todoList.id]);
+
+    const addNewTaskCallback = useCallback((valueInputTrim: string) => {
         dispatch(addTaskAC(todoList.id, valueInputTrim));
 
         if (todoList.filter === SortedTask.completed) {
             filterTaskCallback(SortedTask.active);
         }
-    };
+    }, [dispatch, filterTaskCallback, todoList.id, todoList.filter]);
 
-    const filterTaskCallback = (filter: SortedTask) => dispatch(changeFilterTodolistAC(todoList.id, filter));
-
-    const removeTaskCallback = (taskID: string) => dispatch(removeTaskAC(todoList.id, taskID));
-
-    const changeStatusTaskCallback = (taskID: string, isDone: boolean) => dispatch(changeStatusTaskAC(todoList.id, taskID, isDone));
-
-    const changeTitleTask = (TaskID: string, newInputValue: string) => dispatch(changeTitleTaskAC(todoList.id, TaskID, newInputValue));
-
-    const changeTitleTodoList = (newInputValue: string) => dispatch(changeTitleTodolistAC(todoList.id, newInputValue));
-
-    const getFilteredTaskForRender = () => {
-
-        switch (todoList.filter) {
-            case SortedTask.active:
-                return tasks.filter(task => !task.isDone);
-            case SortedTask.completed:
-                return tasks.filter(task => task.isDone);
-            default:
-                return tasks;
-        }
-    }
+    const changeTitleTodoList = useCallback((newInputValue: string) => {
+        dispatch(changeTitleTodolistAC(todoList.id, newInputValue))
+    }, [dispatch, todoList.id]);
 
 
     return (
@@ -77,10 +62,7 @@ const TodoList = ({todoList}: TodolistPropsType) => {
                 />
 
                 <TaskList
-                    tasks={getFilteredTaskForRender()}
-                    removeTask={removeTaskCallback}
-                    changeStatusTask={changeStatusTaskCallback}
-                    changeTitleTaskFromTodoList={changeTitleTask}
+                    todolist={todoList}
                 />
 
                 <ControlButtons
@@ -90,6 +72,8 @@ const TodoList = ({todoList}: TodolistPropsType) => {
             </Paper>
         </Grid>
     )
-};
+});
+
+TodoList.displayName = 'TodoList';
 
 export default TodoList;

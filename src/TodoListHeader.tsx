@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {EditableSpan} from "./EditableSpan";
 import {IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
@@ -10,15 +10,15 @@ type TodoListHeaderPropsType = {
 }
 
 
-const TodoListHeader = ({title, removeTodolist, changeTitleTodoListFromTodoList}: TodoListHeaderPropsType) => {
+const TodoListHeader = React.memo(({title, removeTodolist, changeTitleTodoListFromTodoList}: TodoListHeaderPropsType) => {
 
-    const onClickHandler = () => {
+    const onClickHandler = useCallback(() => {
         removeTodolist();
-    };
+    }, [removeTodolist]);
 
-    const changeTitleTodoList = (newInputValue: string) => {
+    const changeTitleTodoList = useCallback((newInputValue: string) => {
         changeTitleTodoListFromTodoList(newInputValue);
-    };
+    }, [changeTitleTodoListFromTodoList]);
 
 
     return (
@@ -35,6 +35,8 @@ const TodoListHeader = ({title, removeTodolist, changeTitleTodoListFromTodoList}
             </IconButton>
         </h3>
     )
-};
+});
+
+TodoListHeader.displayName = 'TodoListHeader';
 
 export default TodoListHeader;

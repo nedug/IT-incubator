@@ -73,7 +73,7 @@ type removeTaskACType = ReturnType<typeof removeTaskAC>
 export const removeTaskAC = (todolistId: string, taskId: string) => {
     return {
         type: 'REMOVE-TASK',
-        payload: {todolistId, taskId}
+        payload: {todolistId, taskId,},
     } as const
 };
 
@@ -82,7 +82,7 @@ type addTaskACType = ReturnType<typeof addTaskAC>
 export const addTaskAC = (todolistId: string, titleTask: string) => {
     return {
         type: 'ADD-NEW-TASK',
-        payload: {todolistId, titleTask}
+        payload: {todolistId, titleTask,},
     } as const
 };
 
@@ -91,7 +91,7 @@ type changeStatusTaskACType = ReturnType<typeof changeStatusTaskAC>
 export const changeStatusTaskAC = (todolistId: string, taskId: string, isDone: boolean) => {
     return {
         type: 'CHANGE-STATUS-TASK',
-        payload: {todolistId, taskId, isDone}
+        payload: {todolistId, taskId, isDone,},
     } as const
 };
 
@@ -100,6 +100,6 @@ type changeTitleTaskACType = ReturnType<typeof changeTitleTaskAC>
 export const changeTitleTaskAC = (todolistId: string, taskId: string, titleTask: string) => {
     return {
         type: 'CHANGE-TITLE-TASK',
-        payload: {todolistId, taskId, titleTask}
+        payload: {todolistId, taskId, titleTask,},
     } as const
 };

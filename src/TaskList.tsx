@@ -1,12 +1,13 @@
 import React, {CSSProperties} from 'react';
 import Task from "./Task";
 import {TaskType} from "./TodoList";
+import {TodoListAllStateType} from "./App";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "./State/store";
+import {SortedTask} from "./State/todoListReducer";
 
 type TaskListPropsType = {
-    tasks: Array<TaskType>
-    removeTask: (id: string) => void
-    changeStatusTask: (taskID: string, isDone: boolean) => void
-    changeTitleTaskFromTodoList: (TaskID: string, newInputValue: string) => void
+    todolist: TodoListAllStateType
 }
 
 const EmptyListStyle: CSSProperties = {
@@ -16,11 +17,21 @@ const EmptyListStyle: CSSProperties = {
 }
 
 
-const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoList}: TaskListPropsType) => {
+const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
 
-    const changeTitleTask = (TaskID: string, newInputValue: string) => {
-        changeTitleTaskFromTodoList(TaskID, newInputValue);
-    };
+    const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
+
+
+    const getFilteredTaskForRender = () => {
+        switch (todolist.filter) {
+            case SortedTask.active:
+                return tasks.filter(task => !task.isDone);
+            case SortedTask.completed:
+                return tasks.filter(task => task.isDone);
+            default:
+                return tasks;
+        }
+    }
 
 
     return (
@@ -28,18 +39,19 @@ const TaskList = ({tasks, removeTask, changeStatusTask, changeTitleTaskFromTodoL
             ?
             <div style={{margin: '10px 0'}}>
                 {
-                    tasks.map(task =>
+                    getFilteredTaskForRender().map(task => (
                         <Task key={task.id}
                               {...task}
-                              removeTask={removeTask}
-                              changeStatusTask={changeStatusTask}
-                              changeTitleTaskFromTaskList={changeTitleTask}
-                        />)
+                              todolistId={todolist.id}
+                        />
+                    ))
                 }
             </div>
             :
             <div style={EmptyListStyle}>TaskList is empty. Add new Task</div>
     );
-};
+});
+
+TaskList.displayName = 'TaskList';
 
 export default TaskList;
