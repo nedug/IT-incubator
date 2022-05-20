@@ -5,7 +5,7 @@ import {ComponentStory} from "@storybook/react";
 
 
 export default {
-    title: 'Task Component',
+    title: 'Todolist/Task Component',
     component: Task,
     decorators: [ReduxStoreProviderDecorator],
 };
