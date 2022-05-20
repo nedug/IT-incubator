@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import {combineReducers, legacy_createStore as createStore} from "redux";
 import {tasksReducer} from "../State/tasksReducer";
 import {SortedTask, todoListReducer} from "../State/todoListReducer";
+import {v1} from "uuid";
 
 
 const rootReducer = combineReducers({
@@ -18,12 +19,12 @@ const initialGlobalState = {
     ],
     tasks: {
         ['TodoID1']: [
-            {id: 'TaskID-1', title: 'HTML&CSS', isDone: true},
-            {id: 'TaskID-2', title: 'JS', isDone: true},
+            {id: v1(), title: 'HTML&CSS', isDone: false},
+            {id: v1(), title: 'JS', isDone: true},
         ],
         ['TodoID2']: [
-            {id: 'TaskID-1', title: 'Milk', isDone: true},
-            {id: 'TaskID-2', title: 'Book', isDone: false},
+            {id: v1(), title: 'Milk', isDone: true},
+            {id: v1(), title: 'Book', isDone: false},
         ],
     }
 };
@@ -31,6 +32,6 @@ const initialGlobalState = {
 export const storybookStore = createStore(rootReducer, initialGlobalState as AppRootStateType);
 
 
-export const ReduxStoreProviderDecorator = (storyFn: any) => {
+export const ReduxStoreProviderDecorator = (storyFn: () => React.ReactNode) => {
     return <Provider store={storybookStore}>{storyFn()}</Provider>;
 };
