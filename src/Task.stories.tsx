@@ -12,18 +12,18 @@ export default {
 
 const Template: ComponentStory<typeof Task> = (args) => <Task {...args} />;
 
-export const Task1 = Template.bind({});
-Task1.args = {
-    id: 'TaskID-2',
-    title: 'HTML',
-    isDone: false,
-    todolistId: 'TodoID2',
-};
-
-export const Task2 = Template.bind({});
-Task2.args = {
+export const TaskIsNotDone = Template.bind({});
+TaskIsNotDone.args = {
     id: 'TaskID-1',
-    title: 'CSS',
+    title: 'HTML&CSS',
     isDone: true,
     todolistId: 'TodoID1',
+};
+
+export const TaskIsDone = Template.bind({});
+TaskIsDone.args = {
+    id: 'TaskID-2',
+    title: 'Book',
+    isDone: false,
+    todolistId: 'TodoID2',
 };
