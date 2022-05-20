@@ -5,7 +5,7 @@ import {ComponentMeta, ComponentStory} from "@storybook/react";
 
 
 export default {
-    title: 'Todolist/EditableSpan Component',
+    title: 'Todolist/EditableSpan',
     component: EditableSpan,
     argTypes: {
         addNewItem: {

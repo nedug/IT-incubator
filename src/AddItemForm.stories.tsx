@@ -5,7 +5,7 @@ import {ComponentMeta, ComponentStory} from "@storybook/react";
 
 
 export default {
-    title: 'Todolist/AddItemForm Component',
+    title: 'Todolist/AddItemForm',
     component: AddItemForm,
     argTypes: {
         addNewItem: {

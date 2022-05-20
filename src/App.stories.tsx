@@ -5,7 +5,7 @@ import {ComponentStory} from "@storybook/react";
 
 
 export default {
-    title: 'App/App Component',
+    title: 'App/App',
     component: App,
     decorators: [ReduxStoreProviderDecorator],
 };
