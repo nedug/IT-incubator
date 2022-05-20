@@ -22,10 +22,3 @@ EditableSpanExample.args = {
     title: 'Start Value',
     changeTitleTaskCallback: action("EditableSpan changed value"),
 };
-
-
-// const callback = action("EditableSpan changed value");
-//
-// export const EditableSpanExample = () => {
-//     return <EditableSpan title={'Start Value'} changeTitleTaskCallback={callback}/>
-// };

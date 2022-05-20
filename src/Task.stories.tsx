@@ -27,24 +27,3 @@ Task2.args = {
     isDone: true,
     todolistId: 'TodoID1',
 };
-
-
-/*
-export const TaskExample = () => {
-    return (
-            <>
-                <Task
-                    id={'TaskID-2'}
-                    title={'HTML'}
-                    isDone={true}
-                    todolistId={'TodoID1'}
-                />
-                <Task
-                    id={'TaskID-1'}
-                    title={'CSS'}
-                    isDone={false}
-                    todolistId={'TodoID2'}
-                />
-            </>
-    )
-};*/

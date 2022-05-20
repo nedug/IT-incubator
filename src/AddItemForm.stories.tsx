@@ -21,12 +21,3 @@ export const AddItemFormExample = Template.bind({});
 AddItemFormExample.args = {
     addNewItem: action("Button '+' was pressed from form and return value"),
 };
-
-
-
-
-// const callback = action("Button '+' was pressed from form and return value");
-//
-// export const AddItemFormExample = () => {
-//   return <AddItemForm addNewItem={callback}/>
-// };
