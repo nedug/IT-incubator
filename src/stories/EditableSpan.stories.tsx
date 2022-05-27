@@ -1,7 +1,7 @@
 import React from "react";
 import {action} from "@storybook/addon-actions";
-import {EditableSpan} from "./EditableSpan";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
+import {EditableSpan} from "../EditableSpan";
 
 
 export default {
