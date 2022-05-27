@@ -65,7 +65,7 @@ export const UpdateTodolists = () => {
     const [state, setState] = useState<any>(null);
 
     useEffect(() => {
-        axios.put('https://social-network.samuraijs.com/api/1.1/todo-lists/ec837217-4430-46d1-8ca1-eaf665be6e81', {title: 'Something NEW'}, settings)
+        axios.put('https://social-network.samuraijs.com/api/1.1/todo-lists/5f302d0e-9d95-4df5-b728-a5e59584ad74', {title: 'Something NEW'}, settings)
             .then(res => {
                 setState(res.data);
             })
