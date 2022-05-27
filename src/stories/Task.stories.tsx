@@ -1,10 +1,10 @@
 import React from "react";
-import Task from "./Task";
-import {ReduxStoreProviderDecorator} from "./stories/ReduxStoreProviderDecorator";
 import {ComponentStory} from "@storybook/react";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "./State/store";
-import {TaskType} from "./TodoList";
+import Task from "../Task";
+import {AppRootStateType} from "../State/store";
+import {TaskType} from "../TodoList";
+import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 
 
 export default {
