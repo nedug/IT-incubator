@@ -1,5 +1,18 @@
 import axios from "axios";
 
+export type TodolistType = {
+    id: string
+    title: string
+    addedDate: string
+    order: number
+}
+
+type ResponseType<D> = {
+    resultCode: number
+    messages: Array<string>
+    data: D
+}
+
 
 const settings = {
     withCredentials: true,
@@ -11,18 +24,18 @@ const settings = {
 export const todolistApi = {
 
     getTodolists() {
-        return axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', settings);
+        return axios.get<Array<TodolistType>>('https://social-network.samuraijs.com/api/1.1/todo-lists', settings);
     },
 
     createTodolists(title: string) {
-        return axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, settings);
+        return axios.post<ResponseType<{ item: TodolistType }>>('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, settings);
     },
 
     deleteTodolists(id: string) {
-        return axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, settings);
+        return axios.delete<ResponseType<{}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, settings);
     },
 
     updateTodolists(id: string, title: string) {
-        return axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title}, settings)
+        return axios.put<ResponseType<{}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title}, settings)
     },
 };

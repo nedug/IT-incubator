@@ -12,8 +12,11 @@ export const GetTodolists = () => {
     const [state, setState] = useState<any>(null);
 
     useEffect(() => {
+        // const {data} = await todolistApi.getTodolists();
+        // setState(data);
+
         todolistApi.getTodolists()
-            .then(res => setState(res.data))
+            .then(({data}) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -28,7 +31,7 @@ export const CreateTodolists = () => {
         const title = 'VW POLO';
 
         todolistApi.createTodolists(title)
-            .then(res => setState(res.data))
+            .then(({data}) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -43,7 +46,7 @@ export const DeleteTodolists = () => {
         const todolistId = '5f302d0e-9d95-4df5-b728-a5e59584ad74';
 
         todolistApi.deleteTodolists(todolistId)
-            .then(res => setState(res.data))
+            .then(({data}) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -58,7 +61,7 @@ export const UpdateTodolists = () => {
         const todolistId = '5f302d0e-9d95-4df5-b728-a5e59584ad74';
 
         todolistApi.updateTodolists(todolistId, 'Amazing')
-            .then(res => setState(res.data))
+            .then(({data}) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
