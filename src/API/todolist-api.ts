@@ -14,28 +14,29 @@ type ResponseType<D> = {
 }
 
 
-const settings = {
+const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
         'api-key': '084d9412-68c6-4e63-911d-1c542ec49ed0',
     },
-};
+})
 
 export const todolistApi = {
 
     getTodolists() {
-        return axios.get<Array<TodolistType>>('https://social-network.samuraijs.com/api/1.1/todo-lists', settings);
+        return instance.get<Array<TodolistType>>('todo-lists');
     },
 
     createTodolists(title: string) {
-        return axios.post<ResponseType<{ item: TodolistType }>>('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, settings);
+        return instance.post<ResponseType<{ item: TodolistType }>>('todo-lists', {title});
     },
 
     deleteTodolists(id: string) {
-        return axios.delete<ResponseType<{}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, settings);
+        return instance.delete<ResponseType<{}>>(`todo-lists/${id}`);
     },
 
     updateTodolists(id: string, title: string) {
-        return axios.put<ResponseType<{}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title}, settings)
+        return instance.put<ResponseType<{}>>(`todo-lists/${id}`, {title})
     },
 };
