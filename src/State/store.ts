@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 import {legacy_createStore as createStore} from "redux";
-import {tasksReducer} from "./tasksReducer";
-import {todoListReducer} from "./todoListReducer";
+import {tasksReducer} from "./tasks-Reducer";
+import {todoListReducer} from "./todolist-Reducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 
 

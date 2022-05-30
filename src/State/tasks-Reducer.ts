@@ -1,20 +1,45 @@
-import {TasksStateType} from "../App";
-import {v1} from "uuid";
-import {AddTodolistActionType, RemoveTodolistActionType} from "./todoListReducer";
+import {v1} from 'uuid';
+import {AddTodolistActionType, RemoveTodolistActionType} from './todolist-Reducer';
+import {TasksPriority, TasksStatus, TaskType} from '../API/API';
 
+
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
+}
 
 export const todoListID1 = v1();
 export const todoListID2 = v1();
 
+
 const initialState: TasksStateType = {
     [todoListID1]: [
-        {id: v1(), title: 'HTML&CSS', isDone: true},
-        {id: v1(), title: 'JS', isDone: true},
-        {id: v1(), title: 'React', isDone: false},
+        {
+            id: v1(), title: 'HTML&CSS', status: TasksStatus.Completed,
+            description: '', deadline: '', startDate: '', addedDate: '',
+            priority: TasksPriority.Low, order: 0, todoListId: todoListID1,
+        },
+        {
+            id: v1(), title: 'JS', status: TasksStatus.Completed,
+            description: '', deadline: '', startDate: '', addedDate: '',
+            priority: TasksPriority.Low, order: 0, todoListId: todoListID1,
+        },
+        {
+            id: v1(), title: 'React', status: TasksStatus.New,
+            description: '', deadline: '', startDate: '', addedDate: '',
+            priority: TasksPriority.Low, order: 0, todoListId: todoListID1,
+        },
     ],
     [todoListID2]: [
-        {id: v1(), title: 'Milk', isDone: true},
-        {id: v1(), title: 'Book', isDone: false},
+        {
+            id: v1(), title: 'Milk', status: TasksStatus.Completed,
+            description: '', deadline: '', startDate: '', addedDate: '',
+            priority: TasksPriority.Low, order: 0, todoListId: todoListID2,
+        },
+        {
+            id: v1(), title: 'Book', status: TasksStatus.New,
+            description: '', deadline: '', startDate: '', addedDate: '',
+            priority: TasksPriority.Low, order: 0, todoListId: todoListID2,
+        },
     ],
 };
 
@@ -29,14 +54,18 @@ export const tasksReducer = (state: TasksStateType = initialState, action: tasks
         }
 
         case 'TASK/ADD-NEW-TASK': {
-            const newTask = {id: v1(), title: action.payload.titleTask, isDone: false};
+            const newTask = {
+                id: v1(), title: action.payload.titleTask, status: TasksStatus.New,
+                description: '', deadline: '', startDate: '', addedDate: '',
+                priority: TasksPriority.Low, order: 0, todoListId: action.payload.todolistId,
+            };
             return {...state, [action.payload.todolistId]: [newTask, ...state[action.payload.todolistId]]}
         }
 
         case 'TASK/CHANGE-STATUS-TASK': {
             return {
                 ...state,
-                [action.payload.todolistId]: state[action.payload.todolistId].map(t => t.id === action.payload.taskId ? {...t, isDone: action.payload.isDone} : t)
+                [action.payload.todolistId]: state[action.payload.todolistId].map(t => t.id === action.payload.taskId ? {...t, status: action.payload.status} : t)
             }
         }
 
@@ -88,10 +117,10 @@ export const addTaskAC = (todolistId: string, titleTask: string) => {
 
 type changeStatusTaskACType = ReturnType<typeof changeStatusTaskAC>
 
-export const changeStatusTaskAC = (todolistId: string, taskId: string, isDone: boolean) => {
+export const changeStatusTaskAC = (todolistId: string, taskId: string, status: TasksStatus) => {
     return {
         type: 'TASK/CHANGE-STATUS-TASK',
-        payload: {todolistId, taskId, isDone,},
+        payload: {todolistId, taskId, status,},
     } as const
 };
 

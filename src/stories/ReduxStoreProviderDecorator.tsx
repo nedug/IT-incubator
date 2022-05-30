@@ -1,10 +1,11 @@
 import React from 'react';
-import {AppRootStateType} from "../State/store";
-import {Provider} from "react-redux";
-import {combineReducers, legacy_createStore as createStore} from "redux";
-import {tasksReducer} from "../State/tasksReducer";
-import {SortedTask, todoListReducer} from "../State/todoListReducer";
-import {v1} from "uuid";
+import {AppRootStateType} from '../State/store';
+import {Provider} from 'react-redux';
+import {combineReducers, legacy_createStore as createStore} from 'redux';
+import {tasksReducer, todoListID1} from '../State/tasks-Reducer';
+import {SortedTask, todoListReducer} from '../State/todolist-Reducer';
+import {v1} from 'uuid';
+import {TasksPriority, TasksStatus} from '../API/API';
 
 
 const rootReducer = combineReducers({
@@ -14,17 +15,27 @@ const rootReducer = combineReducers({
 
 const initialGlobalState = {
     todoLists: [
-        {id: 'TodoID1', title: 'What to learn', filter: SortedTask.all},
-        {id: 'TodoID2', title: 'What to buy', filter: SortedTask.completed},
+        {id: 'TodoID1', title: 'What to learn', filter: SortedTask.all, addedDate: '', order: 0},
+        {id: 'TodoID2', title: 'What to buy', filter: SortedTask.completed, addedDate: '', order: 0},
     ],
     tasks: {
         ['TodoID1']: [
-            {id: v1(), title: 'HTML&CSS', isDone: false},
-            {id: v1(), title: 'JS', isDone: true},
+            {
+                id: v1(), title: 'HTML&CSS', status: TasksStatus.New,
+                description: '', deadline: '', startDate: '', addedDate: '',
+                priority: TasksPriority.Low, order: 0, todoListId: 'TodoID1',
+            },
+            {id: v1(), title: 'JS', status: TasksStatus.Completed,
+                description: '', deadline: '', startDate: '', addedDate: '',
+                priority: TasksPriority.Low, order: 0, todoListId: 'TodoID1',},
         ],
         ['TodoID2']: [
-            {id: v1(), title: 'Milk', isDone: true},
-            {id: v1(), title: 'Book', isDone: false},
+            {id: v1(), title: 'Milk', status: TasksStatus.Completed,
+                description: '', deadline: '', startDate: '', addedDate: '',
+                priority: TasksPriority.Low, order: 0, todoListId: 'TodoID2',},
+            {id: v1(), title: 'Book', status: TasksStatus.New,
+                description: '', deadline: '', startDate: '', addedDate: '',
+                priority: TasksPriority.Low, order: 0, todoListId: 'TodoID2',},
         ],
     }
 };

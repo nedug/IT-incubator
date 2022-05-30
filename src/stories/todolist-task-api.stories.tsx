@@ -12,9 +12,6 @@ export const GetTodolists = () => {
     const [state, setState] = useState<any>(null);
 
     useEffect(() => {
-        // const {data} = await todolistApi.getTodolists();
-        // setState(data);
-
         API.getTodolists()
             .then(({data}) => setState(data))
     }, []);

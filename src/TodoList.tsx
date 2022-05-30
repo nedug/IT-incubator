@@ -1,22 +1,15 @@
-import React, {useCallback} from "react";
-import TodoListHeader from "./TodoListHeader";
-import TaskList from "./TaskList";
-import ControlButtons from "./ControlButtons";
-import AddItemForm from "./AddItemForm";
-import {Grid, Paper} from "@material-ui/core";
-import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, SortedTask} from "./State/todoListReducer";
-import {useDispatch} from "react-redux";
-import {TodoListAllStateType} from "./App";
-import {addTaskAC} from "./State/tasksReducer";
+import React, {useCallback} from 'react';
+import TodoListHeader from './TodoListHeader';
+import TaskList from './TaskList';
+import ControlButtons from './ControlButtons';
+import AddItemForm from './AddItemForm';
+import {Grid, Paper} from '@material-ui/core';
+import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, SortedTask, TodoListCommonType} from './State/todolist-Reducer';
+import {useDispatch} from 'react-redux';
+import {addTaskAC} from './State/tasks-Reducer';
 
 type TodolistPropsType = {
-    todoList: TodoListAllStateType
-}
-
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
+    todoList: TodoListCommonType
 }
 
 

@@ -1,13 +1,12 @@
 import React, {CSSProperties} from 'react';
 import Task from "./Task";
-import {TaskType} from "./TodoList";
-import {TodoListAllStateType} from "./App";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "./State/store";
-import {SortedTask} from "./State/todoListReducer";
+import {SortedTask, TodoListCommonType} from './State/todolist-Reducer';
+import {TaskType} from './API/API';
 
 type TaskListPropsType = {
-    todolist: TodoListAllStateType
+    todolist: TodoListCommonType
 }
 
 const EmptyListStyle: CSSProperties = {
@@ -21,13 +20,12 @@ const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
 
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
 
-
     const getFilteredTaskForRender = () => {
         switch (todolist.filter) {
             case SortedTask.active:
-                return tasks.filter(task => !task.isDone);
+                return tasks.filter(task => !task.status);
             case SortedTask.completed:
-                return tasks.filter(task => task.isDone);
+                return tasks.filter(task => task.status);
             default:
                 return tasks;
         }
@@ -42,7 +40,7 @@ const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
                     getFilteredTaskForRender().map(task => (
                         <Task key={task.id}
                               {...task}
-                              todolistId={todolist.id}
+                              todoListId={todolist.id}
                         />
                     ))
                 }

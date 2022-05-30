@@ -1,13 +1,17 @@
-import {TodoListAllStateType} from "../App";
-import {v1} from "uuid";
-import {todoListID1, todoListID2} from "./tasksReducer";
-import {AppRootStateType} from "./store";
+import {v1} from 'uuid';
+import {todoListID1, todoListID2} from './tasks-Reducer';
+import {AppRootStateType} from './store';
+import {TodolistType} from '../API/API';
 
 
 export enum SortedTask {
     all = 'All',
     active = 'Active',
     completed = 'Completed',
+}
+
+export type TodoListCommonType = TodolistType & {
+    filter: SortedTask
 }
 
 export type RemoveTodolistActionType = {
@@ -31,12 +35,12 @@ type todoListReducerType = RemoveTodolistActionType | AddTodolistActionType
     | ChangeTodolistTitleActionType | ChangeTodolistFilterActionType
 
 
-const initialState: Array<TodoListAllStateType> = [
-    {id: todoListID1, title: 'What to learn', filter: SortedTask.all},
-    {id: todoListID2, title: 'What to buy', filter: SortedTask.completed},
+const initialState: Array<TodoListCommonType> = [
+    {id: todoListID1, title: 'What to learn', filter: SortedTask.all, addedDate: '', order: 0},
+    {id: todoListID2, title: 'What to buy', filter: SortedTask.completed, addedDate: '', order: 0},
 ];
 
-export const todoListReducer = (state: Array<TodoListAllStateType> = initialState, action: todoListReducerType): Array<TodoListAllStateType> => {
+export const todoListReducer = (state: Array<TodoListCommonType> = initialState, action: todoListReducerType): Array<TodoListCommonType> => {
     switch (action.type) {
 
         case 'TODOLIST/REMOVE-TODOLIST': {
@@ -44,8 +48,9 @@ export const todoListReducer = (state: Array<TodoListAllStateType> = initialStat
         }
 
         case 'TODOLIST/ADD-NEW-TODOLIST': {
-            const newTodolist: TodoListAllStateType = {
-                id: action.payload.todolistId, title: action.payload.newTodolistTitle, filter: SortedTask.all
+            const newTodolist: TodoListCommonType = {
+                id: action.payload.todolistId, title: action.payload.newTodolistTitle, filter: SortedTask.all,
+                addedDate: '', order: 0,
             };
             return [newTodolist, ...state]
         }
@@ -93,4 +98,4 @@ export const changeFilterTodolistAC = (todolistId: string, filter: SortedTask): 
 };
 
 
-export const selectTodoLists = (state: AppRootStateType): Array<TodoListAllStateType> => state.todoLists;
+export const selectTodoLists = (state: AppRootStateType): Array<TodoListCommonType> => state.todoLists;

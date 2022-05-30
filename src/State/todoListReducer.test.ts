@@ -1,18 +1,17 @@
 import {v1} from 'uuid';
-import {TodoListAllStateType} from '../App';
-import {changeFilterTodolistAC, changeTitleTodolistAC, addNewTodolistAC, removeTodolistAC, todoListReducer, SortedTask} from "./todoListReducer";
+import {changeFilterTodolistAC, changeTitleTodolistAC, addNewTodolistAC, removeTodolistAC, todoListReducer, SortedTask, TodoListCommonType} from './todolist-Reducer';
 
 
 let todolistId1: string;
 let todolistId2: string;
-let startState: Array<TodoListAllStateType> = []; /* Изначально пустой массив */
+let startState: Array<TodoListCommonType> = []; /* Изначально пустой массив */
 
 beforeEach(() => { /* Весь этот код будет перезаписываться перед каждым тестом */
     todolistId1 = v1();
     todolistId2 = v1();
     startState = [
-        {id: todolistId1, title: "What to learn", filter: SortedTask.all},
-        {id: todolistId2, title: "What to buy", filter: SortedTask.all}
+        {id: todolistId1, title: "What to learn", filter: SortedTask.all, addedDate: '', order: 0},
+        {id: todolistId2, title: "What to buy", filter: SortedTask.all, addedDate: '', order: 0},
     ]
 })
 
