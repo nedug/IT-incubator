@@ -36,7 +36,7 @@ type ResponseType<D = {}> = {
 }
 
 type ResponseTaskType = {
-    Items: TaskType
+    items: TaskType
     totalCount: number
     error: null | string
 }
@@ -73,7 +73,7 @@ export const API = {
     },
 
     createTask(todolistId: string, title: string) {
-        return instance.post<ResponseType<TaskType>>(`todo-lists/${todolistId}/tasks`, {title});
+        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title});
     },
 
     deleteTask(todolistId: string, id: string) {
@@ -81,6 +81,6 @@ export const API = {
     },
 
     updateTask(todolistId: string, id: string, updateTaskModel: UpdateTaskModelType) {
-        return instance.put<ResponseType<UpdateTaskModelType>>(`todo-lists/${todolistId}/tasks/${id}`, updateTaskModel);
+        return instance.put<ResponseType<{item: UpdateTaskModelType}>>(`todo-lists/${todolistId}/tasks/${id}`, updateTaskModel);
     },
 };
