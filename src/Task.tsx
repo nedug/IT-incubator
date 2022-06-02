@@ -1,5 +1,4 @@
 import React, {useCallback} from 'react';
-// import {TaskType} from "./TodoList";
 import CheckboxCommon from "./Components/CheckboxCommon";
 import {EditableSpan} from "./EditableSpan";
 import {Delete} from "@material-ui/icons";
