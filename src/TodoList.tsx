@@ -1,28 +1,25 @@
-import React, {useCallback} from "react";
-import TodoListHeader from "./TodoListHeader";
-import TaskList from "./TaskList";
-import ControlButtons from "./ControlButtons";
-import AddItemForm from "./AddItemForm";
-import {Grid, Paper} from "@material-ui/core";
-import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, SortedTask} from "./State/todoListReducer";
-import {useDispatch} from "react-redux";
-import {TodoListAllStateType} from "./App";
-import {addTaskAC} from "./State/tasksReducer";
+import React, {useCallback, useEffect} from 'react';
+import TodoListHeader from './TodoListHeader';
+import TaskList from './TaskList';
+import ControlButtons from './ControlButtons';
+import AddItemForm from './AddItemForm';
+import {Grid, Paper} from '@material-ui/core';
+import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, SortedTask, TodoListCommonType} from './State/todolist-Reducer';
+import {useDispatch} from 'react-redux';
+import {addNewTasksTC, addTaskAC, fetchTasksTC} from './State/tasks-Reducer';
 
 type TodolistPropsType = {
-    todoList: TodoListAllStateType
-}
-
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
+    todoList: TodoListCommonType
 }
 
 
 const TodoList = React.memo(({todoList}: TodolistPropsType) => {
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchTasksTC(todoList.id) as any);
+    }, []);
 
     const removeTodolistCallback = useCallback(() => {
         dispatch(removeTodolistAC(todoList.id))
@@ -33,7 +30,7 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
     }, [dispatch, todoList.id]);
 
     const addNewTaskCallback = useCallback((valueInputTrim: string) => {
-        dispatch(addTaskAC(todoList.id, valueInputTrim));
+        dispatch(addNewTasksTC(todoList.id, valueInputTrim) as any);
 
         if (todoList.filter === SortedTask.completed) {
             filterTaskCallback(SortedTask.active);

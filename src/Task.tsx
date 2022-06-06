@@ -1,32 +1,30 @@
 import React, {useCallback} from 'react';
-import {TaskType} from "./TodoList";
-import CheckboxCommon from "./Components/CheckboxCommon";
-import {EditableSpan} from "./EditableSpan";
-import {Delete} from "@material-ui/icons";
-import {IconButton} from "@material-ui/core";
-import {changeStatusTaskAC, changeTitleTaskAC, removeTaskAC} from "./State/tasksReducer";
-import {useDispatch} from "react-redux";
+import CheckboxCommon from './Components/CheckboxCommon';
+import {EditableSpan} from './EditableSpan';
+import {Delete} from '@material-ui/icons';
+import {IconButton} from '@material-ui/core';
+import {changeStatusTaskAC, changeTitleTaskAC, removeTaskTC} from './State/tasks-Reducer';
+import {useDispatch} from 'react-redux';
+import {TasksStatus, TaskType} from './API/API';
 
-type TaskPropsType = TaskType & {
-    todolistId: string
-}
+type TaskPropsType = TaskType
 
 
-const Task = React.memo(({todolistId, isDone, title, id,}: TaskPropsType) => {
+const Task = React.memo(({todoListId, status, title, id,}: TaskPropsType) => {
 
     const dispatch = useDispatch();
 
     const onClickHandler = useCallback(() => {
-        dispatch(removeTaskAC(todolistId, id))
-    }, [dispatch, todolistId, id]);
+        dispatch(removeTaskTC(todoListId, id) as any)
+    }, [dispatch, todoListId, id]);
 
     const onChangeHandler = useCallback((checked: boolean) => {
-        dispatch(changeStatusTaskAC(todolistId, id, checked))
-    }, [dispatch, todolistId, id]);
+        dispatch(changeStatusTaskAC(todoListId, id, checked ? TasksStatus.Completed : TasksStatus.New))
+    }, [dispatch, todoListId, id]);
 
     const changeTitleTask = useCallback((newInputValue: string) => {
-        dispatch(changeTitleTaskAC(todolistId, id, newInputValue))
-    }, [dispatch, todolistId, id]);
+        dispatch(changeTitleTaskAC(todoListId, id, newInputValue))
+    }, [dispatch, todoListId, id]);
 
     const checkboxCallback = useCallback((checked: boolean) => {
         onChangeHandler(checked);
@@ -34,7 +32,7 @@ const Task = React.memo(({todolistId, isDone, title, id,}: TaskPropsType) => {
 
 
     return (
-        <div style={isDone ? {opacity: '0.5'} : {opacity: 'inherit'}}>
+        <div style={status === TasksStatus.Completed ? {opacity: '0.5'} : {opacity: 'inherit'}}>
             <IconButton
                 size={"small"}
                 style={{color: '#70b070'}}
@@ -44,7 +42,7 @@ const Task = React.memo(({todolistId, isDone, title, id,}: TaskPropsType) => {
             </IconButton>
 
             <CheckboxCommon
-                isDone={isDone}
+                status={status}
                 callback={checkboxCallback}
             />
 

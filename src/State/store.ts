@@ -1,8 +1,8 @@
-import {combineReducers} from "redux";
-import {legacy_createStore as createStore} from "redux";
-import {tasksReducer} from "./tasksReducer";
-import {todoListReducer} from "./todoListReducer";
-import {composeWithDevTools} from "redux-devtools-extension";
+import {applyMiddleware, combineReducers, legacy_createStore as createStore} from 'redux';
+import {tasksReducer} from './tasks-Reducer';
+import {todoListReducer} from './todolist-Reducer';
+// import {composeWithDevTools} from "redux-devtools-extension";
+import thunk from 'redux-thunk';
 
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
 });
 
 
-export const store = createStore(rootReducer, composeWithDevTools());
+export const store = createStore(rootReducer, applyMiddleware(thunk)/*, composeWithDevTools()*/);
 
 
 // @ts-ignore

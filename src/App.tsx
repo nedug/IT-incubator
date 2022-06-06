@@ -1,28 +1,23 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import TodoList, {TaskType} from "./TodoList";
-import AddItemForm from "./AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "@material-ui/core";
-import {Menu} from "@material-ui/icons";
-import {addNewTodolistAC, selectTodoLists, SortedTask} from "./State/todoListReducer";
-import {useDispatch, useSelector} from "react-redux";
+import TodoList from './TodoList';
+import AddItemForm from './AddItemForm';
+import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from '@material-ui/core';
+import {Menu} from '@material-ui/icons';
+import {addNewTodolistAC, fetchTodolistsTC, selectTodoLists} from './State/todolist-Reducer';
+import {useDispatch, useSelector} from 'react-redux';
 
-
-export type TodoListAllStateType = {
-    id: string
-    title: string
-    filter: SortedTask
-}
-
-export type TasksStateType = {
-    [key: string]: Array<TaskType>
-}
 
 const App = () => {
 
     const todoListAll = useSelector(selectTodoLists);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchTodolistsTC() as any);
+    }, []);
+
 
     const addNewTodolistCallback = useCallback((valueInput: string) => {
         dispatch(addNewTodolistAC(valueInput))
