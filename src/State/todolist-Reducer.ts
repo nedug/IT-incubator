@@ -113,7 +113,6 @@ export const setTodolistsAC = (todolists: Array<TodolistType>): SetTodolistsActi
     }
 };
 
-
 export const fetchTodolistsTC = () => { /* Thunk-Creator */
     return (dispatch: Dispatch) => {
         API.getTodolists()

@@ -51,7 +51,7 @@ type ResponseType<D = {}> = {
 }
 
 type ResponseTaskType = {
-    items: TaskType
+    items: Array<TaskType>
     totalCount: number
     error: null | string
 }

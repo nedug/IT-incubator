@@ -15,7 +15,6 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-
         dispatch(fetchTodolistsTC() as any);
     }, []);
 
