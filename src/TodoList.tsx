@@ -6,7 +6,7 @@ import AddItemForm from './AddItemForm';
 import {Grid, Paper} from '@material-ui/core';
 import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, SortedTask, TodoListCommonType} from './State/todolist-Reducer';
 import {useDispatch} from 'react-redux';
-import {addNewTasksTC, addTaskAC, fetchTasksTC} from './State/tasks-Reducer';
+import {addNewTasksTC, fetchTasksTC} from './State/tasks-Reducer';
 
 type TodolistPropsType = {
     todoList: TodoListCommonType
