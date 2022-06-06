@@ -1,6 +1,6 @@
 import {addNewTodolistAC, removeTodolistAC} from './todolist-Reducer';
 import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksReducer, TasksStateType} from './tasks-Reducer';
-import {TasksPriority, TasksStatus, TaskType} from '../API/API';
+import {TasksPriority, TasksStatus} from '../API/API';
 
 
 let startState: TasksStateType = {};
@@ -57,12 +57,16 @@ test('correct task should be removed from correct array', () => {
 
 test('correct task should be added to correct array', () => {
 
-    const endState = tasksReducer(startState, addTaskAC('todoListID2', 'Coffee'))
+    const endState = tasksReducer(startState, addTaskAC({
+        id: '1', title: 'Coffee', status: TasksStatus.Completed,
+        description: '', deadline: '', startDate: '', addedDate: '',
+        priority: TasksPriority.Low, order: 0, todoListId: 'todoListID2'
+    }))
 
     expect(endState['todoListID1'].length).toBe(3);
     expect(endState['todoListID2'].length).toBe(4);
     expect(endState['todoListID2'][0].title).toBe('Coffee');
-    expect(endState['todoListID2'][0].status).toBeFalsy();
+    expect(endState['todoListID2'][0].status).toBeTruthy();
     expect(endState['todoListID2'][0].id).toBeDefined();
 });
 

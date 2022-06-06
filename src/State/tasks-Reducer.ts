@@ -1,6 +1,6 @@
 import {v1} from 'uuid';
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType} from './todolist-Reducer';
-import {API, TasksPriority, TasksStatus, TaskType} from '../API/API';
+import {API, TasksStatus, TaskType} from '../API/API';
 import {Dispatch} from 'redux';
 
 
@@ -55,12 +55,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: tasks
         }
 
         case 'TASK/ADD-NEW-TASK': {
-            const newTask = {
-                id: v1(), title: action.payload.titleTask, status: TasksStatus.New,
-                description: '', deadline: '', startDate: '', addedDate: '',
-                priority: TasksPriority.Low, order: 0, todoListId: action.payload.todolistId,
-            };
-            return {...state, [action.payload.todolistId]: [newTask, ...state[action.payload.todolistId]]}
+            const newTask = action.payload.task;
+            return {...state, [action.payload.task.todoListId]: [newTask, ...state[action.payload.task.todoListId]]}
         }
 
         case 'TASK/CHANGE-STATUS-TASK': {
@@ -122,10 +118,10 @@ export const removeTaskAC = (todolistId: string, taskId: string) => {
 
 type addTaskACType = ReturnType<typeof addTaskAC>
 
-export const addTaskAC = (todolistId: string, titleTask: string) => {
+export const addTaskAC = (task: TaskType) => {
     return {
         type: 'TASK/ADD-NEW-TASK',
-        payload: {todolistId, titleTask,},
+        payload: {task,},
     } as const
 };
 
@@ -163,9 +159,16 @@ export const fetchTasksTC = (todolistId: string) => { /* Thunk-Creator */
     }
 };
 
-export const removeTasksTC = (todolistId: string, id: string) => { /* Thunk-Creator */
+export const removeTaskTC = (todolistId: string, id: string) => { /* Thunk-Creator */
     return (dispatch: Dispatch) => {
         API.deleteTask(todolistId, id)
             .then(() => dispatch(removeTaskAC(todolistId, id)))
+    }
+};
+
+export const addNewTasksTC = (todolistId: string, title: string) => { /* Thunk-Creator */
+    return (dispatch: Dispatch) => {
+        API.createTask(todolistId, title)
+            .then(({data: {data: {item}}}) => dispatch(addTaskAC(item)))
     }
 };
