@@ -1,10 +1,10 @@
 import React, {useCallback} from 'react';
-import CheckboxCommon from "./Components/CheckboxCommon";
-import {EditableSpan} from "./EditableSpan";
-import {Delete} from "@material-ui/icons";
-import {IconButton} from "@material-ui/core";
-import {changeStatusTaskAC, changeTitleTaskAC, removeTaskAC} from "./State/tasks-Reducer";
-import {useDispatch} from "react-redux";
+import CheckboxCommon from './Components/CheckboxCommon';
+import {EditableSpan} from './EditableSpan';
+import {Delete} from '@material-ui/icons';
+import {IconButton} from '@material-ui/core';
+import {changeStatusTaskAC, changeTitleTaskAC, removeTasksTC} from './State/tasks-Reducer';
+import {useDispatch} from 'react-redux';
 import {TasksStatus, TaskType} from './API/API';
 
 type TaskPropsType = TaskType
@@ -15,7 +15,7 @@ const Task = React.memo(({todoListId, status, title, id,}: TaskPropsType) => {
     const dispatch = useDispatch();
 
     const onClickHandler = useCallback(() => {
-        dispatch(removeTaskAC(todoListId, id))
+        dispatch(removeTasksTC(todoListId, id) as any)
     }, [dispatch, todoListId, id]);
 
     const onChangeHandler = useCallback((checked: boolean) => {

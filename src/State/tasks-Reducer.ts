@@ -162,3 +162,10 @@ export const fetchTasksTC = (todolistId: string) => { /* Thunk-Creator */
             .then(({data: {items}}) => dispatch(setTasksAC(todolistId, items)))
     }
 };
+
+export const removeTasksTC = (todolistId: string, id: string) => { /* Thunk-Creator */
+    return (dispatch: Dispatch) => {
+        API.deleteTask(todolistId, id)
+            .then(() => dispatch(removeTaskAC(todolistId, id)))
+    }
+};
