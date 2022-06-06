@@ -12,7 +12,7 @@ export const todoListID2 = v1();
 
 
 const initialState: TasksStateType = {
-    [todoListID1]: [
+    /*[todoListID1]: [
         {
             id: v1(), title: 'HTML&CSS', status: TasksStatus.Completed,
             description: '', deadline: '', startDate: '', addedDate: '',
@@ -40,7 +40,7 @@ const initialState: TasksStateType = {
             description: '', deadline: '', startDate: '', addedDate: '',
             priority: TasksPriority.Low, order: 0, todoListId: todoListID2,
         },
-    ],
+    ],*/
 };
 
 export const tasksReducer = (state: TasksStateType = initialState, action: tasksReducerType): TasksStateType => {

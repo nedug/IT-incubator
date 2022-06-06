@@ -4,9 +4,8 @@ import TodoList from './TodoList';
 import AddItemForm from './AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
-import {addNewTodolistAC, selectTodoLists, setTodolistsAC} from './State/todolist-Reducer';
+import {addNewTodolistAC, fetchTodolistsTC, selectTodoLists} from './State/todolist-Reducer';
 import {useDispatch, useSelector} from 'react-redux';
-import {API} from './API/API';
 
 
 const App = () => {
@@ -16,8 +15,8 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        API.getTodolists()
-            .then(({data}) => dispatch(setTodolistsAC(data)))
+
+        dispatch(fetchTodolistsTC() as any);
     }, []);
 
 

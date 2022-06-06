@@ -1,7 +1,7 @@
 import {v1} from 'uuid';
-import {todoListID1, todoListID2} from './tasks-Reducer';
 import {AppRootStateType} from './store';
-import {TodolistType} from '../API/API';
+import {API, TodolistType} from '../API/API';
+import {Dispatch} from 'redux';
 
 
 export enum SortedTask {
@@ -41,8 +41,8 @@ type todoListReducerType = RemoveTodolistActionType | AddTodolistActionType
 
 
 const initialState: Array<TodoListCommonType> = [
-    {id: todoListID1, title: 'What to learn', filter: SortedTask.all, addedDate: '', order: 0},
-    {id: todoListID2, title: 'What to buy', filter: SortedTask.completed, addedDate: '', order: 0},
+    /*{id: todoListID1, title: 'What to learn', filter: SortedTask.all, addedDate: '', order: 0},
+    {id: todoListID2, title: 'What to buy', filter: SortedTask.completed, addedDate: '', order: 0},*/
 ];
 
 export const todoListReducer = (state: Array<TodoListCommonType> = initialState, action: todoListReducerType): Array<TodoListCommonType> => {
@@ -110,6 +110,14 @@ export const setTodolistsAC = (todolists: Array<TodolistType>): SetTodolistsActi
     return {
         type: 'TODOLIST/SET-TODOLISTS',
         payload: {todolists,},
+    }
+};
+
+
+export const fetchTodolistsTC = () => { /* Thunk-Creator */
+    return (dispatch: Dispatch) => {
+        API.getTodolists()
+            .then(({data}) => dispatch(setTodolistsAC(data)))
     }
 };
 
