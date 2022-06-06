@@ -30,9 +30,14 @@ type ChangeTodolistFilterActionType = {
     type: 'TODOLIST/CHANGE-TODOLIST-FILTER'
     payload: { filter: SortedTask, todolistId: string }
 }
+export type SetTodolistsActionType = {
+    type: 'TODOLIST/SET-TODOLISTS'
+    payload: { todolists: Array<TodolistType> }
+}
 
 type todoListReducerType = RemoveTodolistActionType | AddTodolistActionType
     | ChangeTodolistTitleActionType | ChangeTodolistFilterActionType
+    | SetTodolistsActionType
 
 
 const initialState: Array<TodoListCommonType> = [
@@ -61,6 +66,10 @@ export const todoListReducer = (state: Array<TodoListCommonType> = initialState,
 
         case 'TODOLIST/CHANGE-TODOLIST-FILTER': {
             return state.map(tl => tl.id === action.payload.todolistId ? {...tl, filter: action.payload.filter} : tl)
+        }
+
+        case 'TODOLIST/SET-TODOLISTS': {
+            return action.payload.todolists.map(tl => ({...tl, filter: SortedTask.all}))
         }
 
         default:
@@ -94,6 +103,13 @@ export const changeFilterTodolistAC = (todolistId: string, filter: SortedTask): 
     return {
         type: 'TODOLIST/CHANGE-TODOLIST-FILTER',
         payload: {todolistId, filter,},
+    }
+};
+
+export const setTodolistsAC = (todolists: Array<TodolistType>): SetTodolistsActionType => {
+    return {
+        type: 'TODOLIST/SET-TODOLISTS',
+        payload: {todolists,},
     }
 };
 
