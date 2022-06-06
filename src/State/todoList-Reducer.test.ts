@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {changeFilterTodolistAC, changeTitleTodolistAC, addNewTodolistAC, removeTodolistAC, todoListReducer, SortedTask, TodoListCommonType} from './todolist-Reducer';
+import {changeFilterTodolistAC, changeTitleTodolistAC, addNewTodolistAC, removeTodolistAC, todoListReducer, SortedTask, TodoListCommonType, setTodolistsAC} from './todolist-Reducer';
 
 
 let todolistId1: string;
@@ -67,6 +67,14 @@ test('correct filter of todolist should be changed', () => {
 
     expect(endState[0].filter).toBe(SortedTask.all);
     expect(endState[1].filter).toBe(newFilter);
+});
+
+
+test('todolists should be set to state', () => {
+
+    const endState = todoListReducer([], setTodolistsAC(startState));
+
+    expect(endState.length).toBe(2);
 });
 
 

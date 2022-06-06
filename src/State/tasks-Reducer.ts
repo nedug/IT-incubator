@@ -84,15 +84,15 @@ export const tasksReducer = (state: TasksStateType = initialState, action: tasks
         }
 
         case 'TODOLIST/REMOVE-TODOLIST': {
-            const copyTask = {...state};
-            delete copyTask[action.payload.todolistId];
-            return copyTask;
+            const copyState = {...state};
+            delete copyState[action.payload.todolistId];
+            return copyState;
         }
 
         case 'TODOLIST/SET-TODOLISTS': {
-            const copyTask = {...state};
-            action.payload.todolists.forEach(tl => copyTask[tl.id] = []);
-            return copyTask;
+            const copyState = {...state};
+            action.payload.todolists.forEach(tl => copyState[tl.id] = []);
+            return copyState;
         }
 
         default:
