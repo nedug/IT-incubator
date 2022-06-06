@@ -103,6 +103,7 @@ export const changeFilterTodolistAC = (todolistId: string, filter: SortedTask): 
     return {
         type: 'TODOLIST/CHANGE-TODOLIST-FILTER',
         payload: {todolistId, filter,},
+        title: 'test'
     }
 };
 

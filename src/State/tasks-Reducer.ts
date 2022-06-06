@@ -91,9 +91,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: tasks
 
         case 'TODOLIST/SET-TODOLISTS': {
             const copyTask = {...state};
-
             action.payload.todolists.forEach(tl => copyTask[tl.id] = []);
-
             return copyTask;
         }
 
