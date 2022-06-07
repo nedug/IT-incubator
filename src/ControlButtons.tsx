@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
-import {Button} from "@material-ui/core";
-import {SortedTask} from "./State/todolist-Reducer";
+import {Button} from '@material-ui/core';
+import {SortedTask} from './State/todolist-Reducer';
 
 type ControlButtonsPropsType = {
     filterTask: (filter: SortedTask) => void
@@ -10,14 +10,12 @@ type ControlButtonsPropsType = {
 
 const ControlButtons = React.memo(({filterTask, filteredTask}: ControlButtonsPropsType) => {
 
-    const onClickFilterTask = useCallback((filter: SortedTask) => {
-        return () => filterTask(filter);
-    }, [filterTask]);
+    const onClickFilterTask = useCallback((filter: SortedTask) => () => filterTask(filter), [filterTask]);
 
     return (
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <Button
-                size={"small"}
+                size={'small'}
                 disableElevation
                 variant={filteredTask === SortedTask.all ? 'contained' : 'outlined'}
                 onClick={onClickFilterTask(SortedTask.all)}
@@ -26,8 +24,8 @@ const ControlButtons = React.memo(({filterTask, filteredTask}: ControlButtonsPro
             </Button>
 
             <Button
-                size={"small"}
-                color={"primary"}
+                size={'small'}
+                color={'primary'}
                 disableElevation
                 variant={filteredTask === SortedTask.active ? 'contained' : 'outlined'}
                 onClick={onClickFilterTask(SortedTask.active)}
@@ -36,8 +34,8 @@ const ControlButtons = React.memo(({filterTask, filteredTask}: ControlButtonsPro
             </Button>
 
             <Button
-                size={"small"}
-                color={"secondary"}
+                size={'small'}
+                color={'secondary'}
                 disableElevation
                 variant={filteredTask === SortedTask.completed ? 'contained' : 'outlined'}
                 onClick={onClickFilterTask(SortedTask.completed)}

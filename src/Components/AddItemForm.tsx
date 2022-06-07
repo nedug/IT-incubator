@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
-import {IconButton, TextField} from "@material-ui/core";
+import {IconButton, TextField} from '@material-ui/core';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
 type AddItemFormPropsType = {
@@ -7,7 +7,7 @@ type AddItemFormPropsType = {
 }
 
 
-const AddItemForm = React.memo( ({addNewItem}: AddItemFormPropsType) => {
+const AddItemForm = React.memo(({addNewItem}: AddItemFormPropsType) => {
 
     const [valueInput, setValueInput] = useState('');
     const [error, setError] = useState(false);
@@ -41,8 +41,8 @@ const AddItemForm = React.memo( ({addNewItem}: AddItemFormPropsType) => {
     return (
         <div style={{display: 'flex', alignItems: 'center',}}>
             <TextField
-                size={"small"}
-                variant={"outlined"}
+                size={'small'}
+                variant={'outlined'}
                 label={error ? 'empty value' : 'type value'}
                 value={valueInput}
                 className={error ? 'error' : ''}
@@ -53,8 +53,8 @@ const AddItemForm = React.memo( ({addNewItem}: AddItemFormPropsType) => {
             />
 
             <IconButton
-                size={"small"}
-                color={"primary"}
+                size={'small'}
+                color={'primary'}
                 onClick={onClickBtnHandler}
             >
                 <AddCircleOutlineOutlinedIcon/>

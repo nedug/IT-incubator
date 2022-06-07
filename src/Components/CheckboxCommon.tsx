@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {Checkbox} from "@material-ui/core";
+import {Checkbox} from '@material-ui/core';
 import {TasksStatus} from '../API/API';
 
 type CheckboxPropsType = {
@@ -14,9 +14,10 @@ const CheckboxCommon = React.memo(({status, callback}: CheckboxPropsType) => {
         callback(e.currentTarget.checked)
     };
 
+
     return (
         <Checkbox
-            size={"small"}
+            size={'small'}
             checked={status === TasksStatus.Completed}
             onChange={onChangeStatusHandler}
         />

@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react';
 import TodoListHeader from './TodoListHeader';
 import TaskList from './TaskList';
 import ControlButtons from './ControlButtons';
-import AddItemForm from './AddItemForm';
+import AddItemForm from './Components/AddItemForm';
 import {Grid, Paper} from '@material-ui/core';
 import {changeFilterTodolistAC, changeTitleTodolistTC, removeTodolistTC, SortedTask, TodoListCommonType} from './State/todolist-Reducer';
 import {useDispatch} from 'react-redux';
@@ -17,9 +17,7 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTasksTC(todoList.id) as any);
-    }, []);
+    useEffect(() => dispatch(fetchTasksTC(todoList.id) as any), []);
 
     const removeTodolistCallback = useCallback(() => {
         dispatch(removeTodolistTC(todoList.id) as any)

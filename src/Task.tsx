@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import CheckboxCommon from './Components/CheckboxCommon';
-import {EditableSpan} from './EditableSpan';
+import {EditableSpan} from './Components/EditableSpan';
 import {Delete} from '@material-ui/icons';
 import {IconButton} from '@material-ui/core';
 import {removeTaskTC, updateTaskTC} from './State/tasks-Reducer';
@@ -10,7 +10,7 @@ import {TasksStatus, TaskType} from './API/API';
 type TaskPropsType = TaskType
 
 
-const Task = React.memo(({todoListId, status, title, id,}: TaskPropsType) => {
+const Task = React.memo(({todoListId, status, title, id}: TaskPropsType) => {
 
     const dispatch = useDispatch();
 
@@ -34,11 +34,11 @@ const Task = React.memo(({todoListId, status, title, id,}: TaskPropsType) => {
     return (
         <div style={status === TasksStatus.Completed ? {opacity: '0.5'} : {opacity: 'inherit'}}>
             <IconButton
-                size={"small"}
+                size={'small'}
                 style={{color: '#70b070'}}
                 onClick={onClickHandler}
             >
-                <Delete fontSize={"small"}/>
+                <Delete fontSize={'small'}/>
             </IconButton>
 
             <CheckboxCommon

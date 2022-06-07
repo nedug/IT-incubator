@@ -1,10 +1,10 @@
 import React from 'react';
-import './index.css';
+import './CSS/index.css';
 import App from './App';
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
-import {CssBaseline} from "@material-ui/core";
-import {Provider} from "react-redux";
-import {store} from "./State/store";
+import {CssBaseline} from '@material-ui/core';
+import {Provider} from 'react-redux';
+import {store} from './State/store';
 import ReactDOM from 'react-dom/client';
 
 

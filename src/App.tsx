@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
-import './App.css';
+import './CSS/App.css';
 import TodoList from './TodoList';
-import AddItemForm from './AddItemForm';
+import AddItemForm from './Components/AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
 import {addNewTodolistTC, fetchTodolistsTC, selectTodoLists} from './State/todolist-Reducer';
@@ -11,26 +11,18 @@ import {useDispatch, useSelector} from 'react-redux';
 const App = () => {
 
     const todoListAll = useSelector(selectTodoLists);
-
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTodolistsTC() as any);
-    }, []);
-
+    useEffect(() => dispatch(fetchTodolistsTC() as any), []);
 
     const addNewTodolistCallback = useCallback((valueInput: string) => {
         dispatch(addNewTodolistTC(valueInput) as any)
     }, [dispatch]);
 
-    const todoListAllForRender = todoListAll.map(tl => {
-        return (
-            <TodoList
-                key={tl.id}
-                todoList={tl}
-            />
-        )
-    })
+
+    const todoListAllForRender = todoListAll.map(tl =>
+        <TodoList key={tl.id} todoList={tl}/>
+    )
 
 
     return (
@@ -44,9 +36,7 @@ const App = () => {
                     <Typography variant="h6">
                         TodoList
                     </Typography>
-                    <Button
-                        variant={"outlined"}
-                        color={"secondary"}
+                    <Button variant={'outlined'} color={'secondary'}
                     >
                         Login
                     </Button>
@@ -57,7 +47,6 @@ const App = () => {
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForm addNewItem={addNewTodolistCallback}/>
                 </Grid>
-
                 <Grid container spacing={2}>
                     {todoListAllForRender}
                 </Grid>

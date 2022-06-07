@@ -1,7 +1,7 @@
 import React from "react";
 import {action} from "@storybook/addon-actions";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import AddItemForm from "../AddItemForm";
+import AddItemForm from "../Components/AddItemForm";
 
 
 export default {

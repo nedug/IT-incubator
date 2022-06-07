@@ -36,9 +36,9 @@ export const EditableSpan = React.memo(({title, changeTitleTaskCallback}: Editab
             autoFocus={true}
         />
         :
-        <span
-            onDoubleClick={onDoubleClickSpanHandler}
-        >{title}</span>
+        <span onDoubleClick={onDoubleClickSpanHandler}>
+            {title}
+        </span>
 });
 
 EditableSpan.displayName = 'EditableSpan';

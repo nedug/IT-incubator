@@ -1,7 +1,7 @@
 import React, {CSSProperties} from 'react';
-import Task from "./Task";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "./State/store";
+import Task from './Task';
+import {useSelector} from 'react-redux';
+import {AppRootStateType} from './State/store';
 import {SortedTask, TodoListCommonType} from './State/todolist-Reducer';
 import {TaskType} from './API/API';
 
@@ -10,13 +10,13 @@ type TaskListPropsType = {
 }
 
 const EmptyListStyle: CSSProperties = {
-    fontSize: "small",
-    color: "#858585",
-    padding: "10px",
+    fontSize: 'small',
+    color: '#858585',
+    padding: '10px',
 }
 
 
-const TaskList = React.memo(({todolist,}: TaskListPropsType) => {
+const TaskList = React.memo(({todolist}: TaskListPropsType) => {
 
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
 
