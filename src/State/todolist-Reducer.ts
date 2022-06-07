@@ -77,7 +77,7 @@ export const todoListReducer = (state: Array<TodoListCommonType> = initialState,
     }
 };
 
-
+/* Action Creators */
 export const removeTodolistAC = (todolistId: string): RemoveTodolistActionType => {
     return {
         type: 'TODOLIST/REMOVE-TODOLIST',
@@ -113,7 +113,8 @@ export const setTodolistsAC = (todolists: Array<TodolistType>): SetTodolistsActi
     }
 };
 
-export const fetchTodolistsTC = () => { /* Thunk-Creator */
+/* Thunk Creators */
+export const fetchTodolistsTC = () => {
     return (dispatch: Dispatch) => {
         API.getTodolists()
             .then(({data}) => dispatch(setTodolistsAC(data)))

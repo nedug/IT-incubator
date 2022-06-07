@@ -107,6 +107,7 @@ type tasksReducerType = removeTaskACType | addTaskACType | changeStatusTaskACTyp
     | changeTitleTaskACType | AddTodolistActionType | RemoveTodolistActionType
     | SetTodolistsActionType | setTasksACType
 
+/* Action Creators */
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 
 export const removeTaskAC = (todolistId: string, taskId: string) => {
@@ -152,21 +153,22 @@ export const setTasksAC = (todolistId: string, tasks: Array<TaskType>) => {
     } as const
 };
 
-export const fetchTasksTC = (todolistId: string) => { /* Thunk-Creator */
+/* Thunk Creators */
+export const fetchTasksTC = (todolistId: string) => {
     return (dispatch: Dispatch) => {
         API.getTasks(todolistId)
             .then(({data: {items}}) => dispatch(setTasksAC(todolistId, items)))
     }
 };
 
-export const removeTaskTC = (todolistId: string, id: string) => { /* Thunk-Creator */
+export const removeTaskTC = (todolistId: string, id: string) => {
     return (dispatch: Dispatch) => {
         API.deleteTask(todolistId, id)
             .then(() => dispatch(removeTaskAC(todolistId, id)))
     }
 };
 
-export const addNewTasksTC = (todolistId: string, title: string) => { /* Thunk-Creator */
+export const addNewTasksTC = (todolistId: string, title: string) => {
     return (dispatch: Dispatch) => {
         API.createTask(todolistId, title)
             .then(({data: {data: {item}}}) => dispatch(addTaskAC(item)))
