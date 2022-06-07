@@ -1,6 +1,6 @@
-import {addNewTodolistAC, removeTodolistAC} from '../State/todolist-Reducer';
-import {addTaskAC, removeTaskAC, tasksReducer, TasksStateType, updateTaskAC} from '../State/tasks-Reducer';
-import {TasksPriority, TasksStatus} from '../API/API';
+import { addNewTodolistAC, removeTodolistAC } from '../State/todolist-Reducer';
+import { addTaskAC, removeTaskAC, tasksReducer, TasksStateType, updateTaskAC } from '../State/tasks-Reducer';
+import { TasksPriority, TasksStatus } from '../API/API';
 
 
 let startState: TasksStateType = {};
@@ -74,7 +74,7 @@ test('correct task should be added to correct array', () => {
 test('status of task should be changed', () => {
 
     const endState = tasksReducer(startState,
-        updateTaskAC('todoListID2', '2', {status: TasksStatus.Completed}));
+        updateTaskAC('todoListID2', '2', { status: TasksStatus.Completed }));
 
     expect(endState['todoListID2'][1].status).toBeTruthy();
     expect(endState['todoListID1'][1].status).toBeTruthy();
@@ -84,7 +84,7 @@ test('status of task should be changed', () => {
 test('title of task should be changed', () => {
 
     const endState = tasksReducer(startState,
-        updateTaskAC('todoListID2', '2', {title: 'Table'}));
+        updateTaskAC('todoListID2', '2', { title: 'Table' }));
 
     expect(endState['todoListID2'][1].title).toBe('Table');
     expect(endState['todoListID1'][1].title).toBe('JS');

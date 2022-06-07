@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {API} from '../API/API';
+import React, { useEffect, useState } from 'react';
+import { API } from '../API/API';
 
 
 export default {
@@ -13,7 +13,7 @@ export const GetTodolists = () => {
 
     useEffect(() => {
         API.getTodolists()
-            .then(({data}) => setState(data))
+            .then(({ data }) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -28,7 +28,7 @@ export const CreateTodolists = () => {
         const title = 'VW POLO';
 
         API.createTodolist(title)
-            .then(({data}) => setState(data))
+            .then(({ data }) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -43,7 +43,7 @@ export const DeleteTodolists = () => {
         const todolistId = '35a6b380-3e0d-4220-9225-354637c56449';
 
         API.deleteTodolist(todolistId)
-            .then(({data}) => setState(data))
+            .then(({ data }) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -58,7 +58,7 @@ export const UpdateTodolists = () => {
         const todolistId = '5f302d0e-9d95-4df5-b728-a5e59584ad74';
 
         API.updateTodolist(todolistId, 'Amazing')
-            .then(({data}) => setState(data))
+            .then(({ data }) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -73,7 +73,7 @@ export const GetTasks = () => {
         const todolistId = 'a6eb6283-e156-449c-97e1-84cb8e79481f';
 
         API.getTasks(todolistId)
-            .then(({data: {items}}) => setState(items))
+            .then(({ data: { items } }) => setState(items))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -89,7 +89,7 @@ export const CreateTask = () => {
         const title = 'Nissan';
 
         API.createTask(todolistId, title)
-            .then(({data: {data: {item}}}) => setState(item))
+            .then(({ data: { data: { item } } }) => setState(item))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -105,7 +105,7 @@ export const DeleteTask = () => {
         const taskId = '674698f0-3ea4-4c9c-a706-02bee5e95289';
 
         API.deleteTask(todolistId, taskId)
-            .then(({data}) => setState(data))
+            .then(({ data }) => setState(data))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;
@@ -129,7 +129,7 @@ export const UpdateTask = () => {
         };
 
         API.updateTask(todolistId, taskId, updateTaskModel)
-            .then(({data: {data: {item}}}) => setState(item))
+            .then(({ data: { data: { item } } }) => setState(item))
     }, []);
 
     return <div>{JSON.stringify(state)}</div>;

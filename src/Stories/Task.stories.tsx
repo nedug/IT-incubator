@@ -1,10 +1,10 @@
-import React from "react";
-import {ComponentStory} from "@storybook/react";
-import {useSelector} from "react-redux";
-import Task from "../Task";
-import {AppRootStateType} from "../State/store";
-import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
-import {TaskType} from '../API/API';
+import React from 'react';
+import { ComponentStory } from '@storybook/react';
+import { useSelector } from 'react-redux';
+import Task from '../Task';
+import { AppRootStateType } from '../State/store';
+import { ReduxStoreProviderDecorator } from './ReduxStoreProviderDecorator';
+import { TaskType } from '../API/API';
 
 
 export default {
@@ -13,15 +13,15 @@ export default {
     decorators: [ReduxStoreProviderDecorator],
 };
 
-const TaskUsingRedux = ({task}:{task: number}) => {
+const TaskUsingRedux = ({ task }: { task: number }) => {
 
     const tasks = useSelector<AppRootStateType, TaskType>(state => state.tasks['TodoID1'][task]);
 
-    return <Task {...tasks} todoListId={'TodoID1'}/>;
+    return <Task {...tasks} todoListId={'TodoID1'} />;
 }
 
-const Template: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux task={0}/>;
-const Template2: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux task={1}/>;
+const Template: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux task={0} />;
+const Template2: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux task={1} />;
 
 export const TaskIsNotDone = Template.bind({});
 export const TaskIsDone = Template2.bind({});

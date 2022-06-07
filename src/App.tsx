@@ -21,7 +21,7 @@ const App = () => {
 
 
     const todoListAllForRender = todoListAll.map(tl =>
-        <TodoList key={tl.id} todoList={tl}/>
+        <TodoList key={tl.id} todoList={tl} />
     )
 
 
@@ -31,13 +31,12 @@ const App = () => {
             <AppBar position="static">
                 <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu/>
+                        <Menu />
                     </IconButton>
                     <Typography variant="h6">
                         TodoList
                     </Typography>
-                    <Button variant={'outlined'} color={'secondary'}
-                    >
+                    <Button variant={'outlined'} color={'secondary'}>
                         Login
                     </Button>
                 </Toolbar>
@@ -45,7 +44,7 @@ const App = () => {
 
             <Container fixed>
                 <Grid container style={{ padding: '20px' }}>
-                    <AddItemForm addNewItem={addNewTodolistCallback}/>
+                    <AddItemForm addNewItem={addNewTodolistCallback} />
                 </Grid>
                 <Grid container spacing={2}>
                     {todoListAllForRender}

@@ -38,7 +38,7 @@ const Task = React.memo(({ todoListId, status, title, id }: TaskPropsType) => {
                 style={{ color: '#70b070' }}
                 onClick={onClickHandler}
             >
-                <Delete fontSize={'small'}/>
+                <Delete fontSize={'small'} />
             </IconButton>
 
             <CheckboxCommon
