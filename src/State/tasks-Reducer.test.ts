@@ -91,7 +91,13 @@ test('title of task should be changed', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const endState = tasksReducer(startState, addNewTodolistAC('New TodoList'));
+    const endState = tasksReducer(startState, addNewTodolistAC({
+            id: 'sfsf dgfd',
+            title: 'New Todolist',
+            addedDate: '',
+            order: 0,
+        }
+    ));
 
     const endStateKeys = Object.keys(endState);
 
