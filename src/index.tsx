@@ -1,11 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 import {CssBaseline} from "@material-ui/core";
 import {Provider} from "react-redux";
 import {store} from "./State/store";
+import ReactDOM from 'react-dom/client';
+
 
 const Theme = createTheme({
     palette: {
@@ -14,7 +15,9 @@ const Theme = createTheme({
 });
 
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+root.render(
     <Provider store={store}>
 
         <ThemeProvider theme={Theme}>
@@ -22,7 +25,5 @@ ReactDOM.render(
             <App/>
         </ThemeProvider>
 
-    </Provider>,
-
-    document.getElementById('root')
+    </Provider>
 );
