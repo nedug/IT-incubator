@@ -20,7 +20,7 @@ export type RemoveTodolistActionType = {
 }
 export type AddTodolistActionType = {
     type: 'TODOLIST/ADD-NEW-TODOLIST'
-    payload: { newTodolistTitle: string, todolistId: string }
+    payload: { todolist: TodolistType }
 }
 type ChangeTodolistTitleActionType = {
     type: 'TODOLIST/CHANGE-TODOLIST-TITLE'
@@ -53,10 +53,16 @@ export const todoListReducer = (state: Array<TodoListCommonType> = initialState,
         }
 
         case 'TODOLIST/ADD-NEW-TODOLIST': {
+            // const newTodolist: TodoListCommonType = {
+            //     id: action.payload.todolistId, title: action.payload.newTodolistTitle, filter: SortedTask.all,
+            //     addedDate: '', order: 0,
+            // };
+            // return [newTodolist, ...state]
+
             const newTodolist: TodoListCommonType = {
-                id: action.payload.todolistId, title: action.payload.newTodolistTitle, filter: SortedTask.all,
-                addedDate: '', order: 0,
-            };
+                ...action.payload.todolist,
+                filter: SortedTask.all,
+                };
             return [newTodolist, ...state]
         }
 
@@ -85,10 +91,10 @@ export const removeTodolistAC = (todolistId: string): RemoveTodolistActionType =
     }
 };
 
-export const addNewTodolistAC = (newTodolistTitle: string): AddTodolistActionType => {
+export const addNewTodolistAC = (todolist: TodolistType): AddTodolistActionType => {
     return {
         type: 'TODOLIST/ADD-NEW-TODOLIST',
-        payload: {newTodolistTitle, todolistId: v1(),},
+        payload: {todolist},
     }
 };
 
@@ -120,6 +126,21 @@ export const fetchTodolistsTC = () => {
             .then(({data}) => dispatch(setTodolistsAC(data)))
     }
 };
+
+export const removeTodolistTC = (todolistId: string) => {
+    return (dispatch: Dispatch) => {
+        API.deleteTodolist(todolistId)
+            .then(() => dispatch(removeTodolistAC(todolistId)))
+    }
+};
+
+export const addNewTodolistTC = (title: string) => {
+    return (dispatch: Dispatch) => {
+        API.createTodolist(title)
+            .then(({data: {data: {item}}}) => dispatch(addNewTodolistAC(item)))
+    }
+};
+
 
 /* get Todolists from State */
 export const selectTodoLists = (state: AppRootStateType): Array<TodoListCommonType> => state.todoLists;

@@ -4,7 +4,7 @@ import TodoList from './TodoList';
 import AddItemForm from './AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
-import {addNewTodolistAC, fetchTodolistsTC, selectTodoLists} from './State/todolist-Reducer';
+import {addNewTodolistAC, addNewTodolistTC, fetchTodolistsTC, selectTodoLists} from './State/todolist-Reducer';
 import {useDispatch, useSelector} from 'react-redux';
 
 
@@ -20,7 +20,7 @@ const App = () => {
 
 
     const addNewTodolistCallback = useCallback((valueInput: string) => {
-        dispatch(addNewTodolistAC(valueInput))
+        dispatch(addNewTodolistTC(valueInput) as any)
     }, [dispatch]);
 
     const todoListAllForRender = todoListAll.map(tl => {
