@@ -1,11 +1,11 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import CheckboxCommon from './Components/CheckboxCommon';
-import {EditableSpan} from './Components/EditableSpan';
-import {Delete} from '@material-ui/icons';
-import {IconButton} from '@material-ui/core';
-import {removeTaskTC, updateTaskTC} from './State/tasks-Reducer';
-import {useDispatch} from 'react-redux';
-import {TasksStatus, TaskType} from './API/API';
+import { EditableSpan } from './Components/EditableSpan';
+import { Delete } from '@material-ui/icons';
+import { IconButton } from '@material-ui/core';
+import { removeTaskTC, updateTaskTC } from './State/tasks-Reducer';
+import { useDispatch } from 'react-redux';
+import { TasksStatus, TaskType } from './API/API';
 
 type TaskPropsType = TaskType
 

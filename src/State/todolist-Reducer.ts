@@ -1,6 +1,6 @@
-import {AppRootStateType} from './store';
-import {API, TodolistType} from '../API/API';
-import {Dispatch} from 'redux';
+import { AppRootStateType } from './store';
+import { API, TodolistType } from '../API/API';
+import { Dispatch } from 'redux';
 
 
 const initialState: Array<TodoListCommonType> = [];

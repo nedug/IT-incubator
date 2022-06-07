@@ -1,11 +1,11 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './CSS/App.css';
 import TodoList from './TodoList';
 import AddItemForm from './Components/AddItemForm';
-import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from '@material-ui/core';
-import {Menu} from '@material-ui/icons';
-import {addNewTodolistTC, fetchTodolistsTC, selectTodoLists} from './State/todolist-Reducer';
-import {useDispatch, useSelector} from 'react-redux';
+import { AppBar, Button, Container, Grid, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
+import { addNewTodolistTC, fetchTodolistsTC, selectTodoLists } from './State/todolist-Reducer';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const App = () => {
