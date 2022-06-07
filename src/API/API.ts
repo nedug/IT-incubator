@@ -23,7 +23,7 @@ export enum TasksPriority {
 }
 
 export type TaskType = {
-    description: string | null
+    description: string
     title: string
     status: TasksStatus
     priority: TasksPriority
@@ -37,9 +37,9 @@ export type TaskType = {
 
 export type UpdateTaskModelType = {
     title: string
-    description: string | null
-    status: number
-    priority: number
+    description: string
+    status: TasksStatus
+    priority: TasksPriority
     startDate: string
     deadline: string
 }
