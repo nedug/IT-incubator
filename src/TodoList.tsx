@@ -13,7 +13,7 @@ type TodolistPropsType = {
 }
 
 
-const TodoList = React.memo(({todoList}: TodolistPropsType) => {
+const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
 
     const dispatch = useDispatch();
 
@@ -44,7 +44,7 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
         <Grid item>
             <Paper
                 elevation={4}
-                style={{padding: '20px'}}
+                style={{ padding: '20px' }}
             >
                 <TodoListHeader
                     title={todoList.title}

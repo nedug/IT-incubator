@@ -10,7 +10,7 @@ import { TasksStatus, TaskType } from './API/API';
 type TaskPropsType = TaskType
 
 
-const Task = React.memo(({todoListId, status, title, id}: TaskPropsType) => {
+const Task = React.memo(({ todoListId, status, title, id }: TaskPropsType) => {
 
     const dispatch = useDispatch();
 
@@ -19,11 +19,11 @@ const Task = React.memo(({todoListId, status, title, id}: TaskPropsType) => {
     }, [dispatch, todoListId, id]);
 
     const onChangeHandler = useCallback((checked: boolean) => {
-        dispatch(updateTaskTC(todoListId, id, {status: checked ? TasksStatus.Completed : TasksStatus.New}) as any)
+        dispatch(updateTaskTC(todoListId, id, { status: checked ? TasksStatus.Completed : TasksStatus.New }) as any)
     }, [dispatch, todoListId, id]);
 
     const changeTitleTask = useCallback((newInputValue: string) => {
-        dispatch(updateTaskTC(todoListId, id, {title: newInputValue}) as any)
+        dispatch(updateTaskTC(todoListId, id, { title: newInputValue }) as any)
     }, [dispatch, todoListId, id]);
 
     const checkboxCallback = useCallback((checked: boolean) => {
@@ -32,10 +32,10 @@ const Task = React.memo(({todoListId, status, title, id}: TaskPropsType) => {
 
 
     return (
-        <div style={status === TasksStatus.Completed ? {opacity: '0.5'} : {opacity: 'inherit'}}>
+        <div style={status === TasksStatus.Completed ? { opacity: '0.5' } : { opacity: 'inherit' }}>
             <IconButton
                 size={'small'}
-                style={{color: '#70b070'}}
+                style={{ color: '#70b070' }}
                 onClick={onClickHandler}
             >
                 <Delete fontSize={'small'}/>

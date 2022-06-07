@@ -29,7 +29,7 @@ const App = () => {
         <div className="App">
 
             <AppBar position="static">
-                <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+                <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
                     </IconButton>
@@ -44,7 +44,7 @@ const App = () => {
             </AppBar>
 
             <Container fixed>
-                <Grid container style={{padding: '20px'}}>
+                <Grid container style={{ padding: '20px' }}>
                     <AddItemForm addNewItem={addNewTodolistCallback}/>
                 </Grid>
                 <Grid container spacing={2}>

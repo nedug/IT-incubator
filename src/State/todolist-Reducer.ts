@@ -12,13 +12,13 @@ export const todoListReducer = (state = initialState, action: ActionsTodoListTyp
         case 'TODOLIST/REMOVE-TODOLIST':
             return state.filter(tl => tl.id !== action.payload.todolistId);
         case 'TODOLIST/ADD-NEW-TODOLIST':
-            return [{...action.payload.todolist, filter: SortedTask.all}, ...state];
+            return [{ ...action.payload.todolist, filter: SortedTask.all }, ...state];
         case 'TODOLIST/CHANGE-TODOLIST-TITLE':
-            return state.map(tl => tl.id === action.payload.todolistId ? {...tl, title: action.payload.newTodolistTitle} : tl);
+            return state.map(tl => tl.id === action.payload.todolistId ? { ...tl, title: action.payload.newTodolistTitle } : tl);
         case 'TODOLIST/CHANGE-TODOLIST-FILTER':
-            return state.map(tl => tl.id === action.payload.todolistId ? {...tl, filter: action.payload.filter} : tl);
+            return state.map(tl => tl.id === action.payload.todolistId ? { ...tl, filter: action.payload.filter } : tl);
         case 'TODOLIST/SET-TODOLISTS':
-            return action.payload.todolists.map(tl => ({...tl, filter: SortedTask.all}));
+            return action.payload.todolists.map(tl => ({ ...tl, filter: SortedTask.all }));
         default:
             return state;
     }
@@ -29,31 +29,31 @@ export const todoListReducer = (state = initialState, action: ActionsTodoListTyp
 export const removeTodolistAC = (todolistId: string) => {
     return {
         type: 'TODOLIST/REMOVE-TODOLIST',
-        payload: {todolistId},
+        payload: { todolistId },
     } as const
 };
 export const addNewTodolistAC = (todolist: TodolistType) => {
     return {
         type: 'TODOLIST/ADD-NEW-TODOLIST',
-        payload: {todolist},
+        payload: { todolist },
     } as const
 };
 export const changeTitleTodolistAC = (todolistId: string, newTodolistTitle: string) => {
     return {
         type: 'TODOLIST/CHANGE-TODOLIST-TITLE',
-        payload: {newTodolistTitle, todolistId},
+        payload: { newTodolistTitle, todolistId },
     } as const
 };
 export const changeFilterTodolistAC = (todolistId: string, filter: SortedTask) => {
     return {
         type: 'TODOLIST/CHANGE-TODOLIST-FILTER',
-        payload: {todolistId, filter},
+        payload: { todolistId, filter },
     } as const
 };
 export const setTodolistsAC = (todolists: Array<TodolistType>) => {
     return {
         type: 'TODOLIST/SET-TODOLISTS',
-        payload: {todolists},
+        payload: { todolists },
     } as const
 };
 
@@ -61,7 +61,7 @@ export const setTodolistsAC = (todolists: Array<TodolistType>) => {
 /* Thunk Creators */
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
     API.getTodolists()
-        .then(({data}) => dispatch(setTodolistsAC(data)))
+        .then(({ data }) => dispatch(setTodolistsAC(data)))
 };
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => {
     API.deleteTodolist(todolistId)
@@ -69,7 +69,7 @@ export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => 
 };
 export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
     API.createTodolist(title)
-        .then(({data: {data: {item}}}) => dispatch(addNewTodolistAC(item)))
+        .then(({ data: { data: { item } } }) => dispatch(addNewTodolistAC(item)))
 };
 export const changeTitleTodolistTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
     API.updateTodolist(todolistId, title)

@@ -14,25 +14,26 @@ export const API = {
         return instance.get<Array<TodolistType>>('todo-lists');
     },
     createTodolist(title: string) {
-        return instance.post<ResponseType<{ item: TodolistType }>>('todo-lists', {title});
+        return instance.post<ResponseType<{ item: TodolistType }>>('todo-lists', { title });
     },
     deleteTodolist(id: string) {
         return instance.delete<ResponseType>(`todo-lists/${id}`);
     },
     updateTodolist(id: string, title: string) {
-        return instance.put<ResponseType>(`todo-lists/${id}`, {title});
+        return instance.put<ResponseType>(`todo-lists/${id}`, { title });
     },
     getTasks(todolistId: string) {
         return instance.get<ResponseTaskType>(`todo-lists/${todolistId}/tasks`);
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, {title});
+        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, { title });
     },
     deleteTask(todolistId: string, id: string) {
         return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${id}`);
     },
     updateTask(todolistId: string, id: string, updateTaskModel: UpdateTaskModelType) {
-        return instance.put<ResponseType<{ item: UpdateTaskModelType }>>(`todo-lists/${todolistId}/tasks/${id}`, updateTaskModel);
+        return instance.put<ResponseType<{ item: UpdateTaskModelType }>>(`todo-lists/${todolistId}/tasks/${id}`,
+            updateTaskModel);
     },
 };
 

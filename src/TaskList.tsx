@@ -16,7 +16,7 @@ const EmptyListStyle: CSSProperties = {
 }
 
 
-const TaskList = React.memo(({todolist}: TaskListPropsType) => {
+const TaskList = React.memo(({ todolist }: TaskListPropsType) => {
 
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
 
@@ -35,7 +35,7 @@ const TaskList = React.memo(({todolist}: TaskListPropsType) => {
     return (
         tasks.length
             ?
-            <div style={{margin: '10px 0'}}>
+            <div style={{ margin: '10px 0' }}>
                 {
                     getFilteredTaskForRender().map(task => (
                         <Task key={task.id}
