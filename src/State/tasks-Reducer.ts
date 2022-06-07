@@ -25,53 +25,46 @@ const initialState: TasksStateType = {};
     },
 ], } */
 
-export const tasksReducer = (state = initialState, action: tasksReducerType): TasksStateType => {
+export const tasksReducer = (state = initialState, action: ActionsTasksType): TasksStateType => {
     switch (action.type) {
-
-        case 'TASK/REMOVE-TASK': {
+        case 'TASK/REMOVE-TASK':
             return {
                 ...state,
-                [action.payload.todolistId]: state[action.payload.todolistId].filter(task => task.id !== action.payload.taskId)
-            }
-        }
-
-        case 'TASK/ADD-NEW-TASK': {
-            const newTask = action.payload.task;
-            return {...state, [action.payload.task.todoListId]: [newTask, ...state[action.payload.task.todoListId]]}
-        }
-
-        case 'TASK/UPDATE-TASK': {
+                [action.payload.todolistId]: state[action.payload.todolistId]
+                    .filter(task => task.id !== action.payload.taskId),
+            };
+        case 'TASK/ADD-NEW-TASK':
             return {
                 ...state,
-                [action.payload.todolistId]: state[action.payload.todolistId].map(t => t.id === action.payload.taskId ? {...t, ...action.payload.updateTask} : t)
-            }
-        }
-
-        case 'TODOLIST/ADD-NEW-TODOLIST': {
+                [action.payload.task.todoListId]: [action.payload.task, ...state[action.payload.task.todoListId]],
+            };
+        case 'TASK/UPDATE-TASK':
             return {
                 ...state,
-                [action.payload.todolist.id]: []
-            }
-        }
-
+                [action.payload.todolistId]: state[action.payload.todolistId]
+                    .map(t => t.id === action.payload.taskId ? {...t, ...action.payload.updateTask} : t),
+            };
+        case 'TODOLIST/ADD-NEW-TODOLIST':
+            return {
+                ...state,
+                [action.payload.todolist.id]: [],
+            };
         case 'TODOLIST/REMOVE-TODOLIST': {
             const copyState = {...state};
             delete copyState[action.payload.todolistId];
             return copyState;
         }
-
         case 'TODOLIST/SET-TODOLISTS': {
             const copyState = {...state};
             action.payload.todolists.forEach(tl => copyState[tl.id] = []);
             return copyState;
         }
-
         case 'TASK/SET-TASKS': {
-            const copyState = {...state};
-            copyState[action.payload.todolistId] = action.payload.tasks;
-            return copyState;
+            return {
+                ...state,
+                [action.payload.todolistId]: action.payload.tasks,
+            };
         }
-
         default:
             return state;
     }
@@ -82,7 +75,7 @@ export const tasksReducer = (state = initialState, action: tasksReducerType): Ta
 export const removeTaskAC = (todolistId: string, taskId: string) => {
     return {
         type: 'TASK/REMOVE-TASK',
-        payload: {todolistId, taskId,},
+        payload: {todolistId, taskId},
     } as const
 };
 export const addTaskAC = (task: TaskType) => {
@@ -94,13 +87,13 @@ export const addTaskAC = (task: TaskType) => {
 export const updateTaskAC = (todolistId: string, taskId: string, updateTask: SpecialUpdateTaskModelType) => {
     return {
         type: 'TASK/UPDATE-TASK',
-        payload: {todolistId, taskId, updateTask,},
+        payload: {todolistId, taskId, updateTask},
     } as const
 };
 export const setTasksAC = (todolistId: string, tasks: Array<TaskType>) => {
     return {
         type: 'TASK/SET-TASKS',
-        payload: {todolistId, tasks,},
+        payload: {todolistId, tasks},
     } as const
 };
 
@@ -120,7 +113,6 @@ export const addNewTasksTC = (todolistId: string, title: string) => (dispatch: D
 };
 export const updateTaskTC = (todolistId: string, taskId: string, taskSpecial: SpecialUpdateTaskModelType) => {
     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
-
         const state = getState();
         const task = state.tasks[todolistId].find(t => t.id === taskId)!;
 
@@ -159,7 +151,7 @@ type addTaskACType = ReturnType<typeof addTaskAC>
 type changeStatusTaskACType = ReturnType<typeof updateTaskAC>
 type setTasksACType = ReturnType<typeof setTasksAC>
 
-type tasksReducerType =
+type ActionsTasksType =
     | removeTaskACType
     | addTaskACType
     | changeStatusTaskACType
