@@ -121,5 +121,5 @@ export const fetchTodolistsTC = () => {
     }
 };
 
-
+/* get Todolists from State */
 export const selectTodoLists = (state: AppRootStateType): Array<TodoListCommonType> => state.todoLists;

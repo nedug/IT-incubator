@@ -24,20 +24,10 @@ const initialState: TasksStateType = {
             description: '', deadline: '', startDate: '', addedDate: '',
             priority: TasksPriority.Low, order: 0, todoListId: todoListID1,
         },
-        {
-            id: v1(), title: 'React', status: TasksStatus.New,
-            description: '', deadline: '', startDate: '', addedDate: '',
-            priority: TasksPriority.Low, order: 0, todoListId: todoListID1,
-        },
     ],
     [todoListID2]: [
         {
             id: v1(), title: 'Milk', status: TasksStatus.Completed,
-            description: '', deadline: '', startDate: '', addedDate: '',
-            priority: TasksPriority.Low, order: 0, todoListId: todoListID2,
-        },
-        {
-            id: v1(), title: 'Book', status: TasksStatus.New,
             description: '', deadline: '', startDate: '', addedDate: '',
             priority: TasksPriority.Low, order: 0, todoListId: todoListID2,
         },
