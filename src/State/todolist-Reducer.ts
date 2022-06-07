@@ -63,17 +63,14 @@ export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
     API.getTodolists()
         .then(({data}) => dispatch(setTodolistsAC(data)))
 };
-
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => {
     API.deleteTodolist(todolistId)
         .then(() => dispatch(removeTodolistAC(todolistId)))
 };
-
 export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
     API.createTodolist(title)
         .then(({data: {data: {item}}}) => dispatch(addNewTodolistAC(item)))
 };
-
 export const changeTitleTodolistTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
     API.updateTodolist(todolistId, title)
         .then(() => dispatch(changeTitleTodolistAC(todolistId, title)))
