@@ -1,4 +1,3 @@
-import {v1} from 'uuid';
 import {AppRootStateType} from './store';
 import {API, TodolistType} from '../API/API';
 import {Dispatch} from 'redux';
@@ -53,12 +52,6 @@ export const todoListReducer = (state: Array<TodoListCommonType> = initialState,
         }
 
         case 'TODOLIST/ADD-NEW-TODOLIST': {
-            // const newTodolist: TodoListCommonType = {
-            //     id: action.payload.todolistId, title: action.payload.newTodolistTitle, filter: SortedTask.all,
-            //     addedDate: '', order: 0,
-            // };
-            // return [newTodolist, ...state]
-
             const newTodolist: TodoListCommonType = {
                 ...action.payload.todolist,
                 filter: SortedTask.all,
@@ -138,6 +131,13 @@ export const addNewTodolistTC = (title: string) => {
     return (dispatch: Dispatch) => {
         API.createTodolist(title)
             .then(({data: {data: {item}}}) => dispatch(addNewTodolistAC(item)))
+    }
+};
+
+export const changeTitleTodolistTC = (todolistId: string, title: string) => {
+    return (dispatch: Dispatch) => {
+        API.updateTodolist(todolistId, title)
+            .then(() => dispatch(changeTitleTodolistAC(todolistId, title)))
     }
 };
 

@@ -4,7 +4,7 @@ import TaskList from './TaskList';
 import ControlButtons from './ControlButtons';
 import AddItemForm from './AddItemForm';
 import {Grid, Paper} from '@material-ui/core';
-import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, removeTodolistTC, SortedTask, TodoListCommonType} from './State/todolist-Reducer';
+import {changeFilterTodolistAC, changeTitleTodolistTC, removeTodolistTC, SortedTask, TodoListCommonType} from './State/todolist-Reducer';
 import {useDispatch} from 'react-redux';
 import {addNewTasksTC, fetchTasksTC} from './State/tasks-Reducer';
 
@@ -38,7 +38,7 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
     }, [dispatch, filterTaskCallback, todoList.id, todoList.filter]);
 
     const changeTitleTodoList = useCallback((newInputValue: string) => {
-        dispatch(changeTitleTodolistAC(todoList.id, newInputValue))
+        dispatch(changeTitleTodolistTC(todoList.id, newInputValue) as any)
     }, [dispatch, todoList.id]);
 
 

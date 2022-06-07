@@ -37,7 +37,7 @@ export type TaskType = {
 
 export type UpdateTaskModelType = {
     title: string
-    description: string
+    description: string | null
     status: number
     priority: number
     startDate: string
