@@ -1,6 +1,6 @@
-import React, {useCallback} from 'react';
-import {Button} from '@material-ui/core';
-import {SortedTask} from './State/todolist-Reducer';
+import React, { useCallback } from 'react';
+import { Button } from '@material-ui/core';
+import { SortedTask } from './State/todolist-Reducer';
 
 type ControlButtonsPropsType = {
     filterTask: (filter: SortedTask) => void
@@ -8,12 +8,12 @@ type ControlButtonsPropsType = {
 }
 
 
-const ControlButtons = React.memo(({filterTask, filteredTask}: ControlButtonsPropsType) => {
+const ControlButtons = React.memo(({ filterTask, filteredTask }: ControlButtonsPropsType) => {
 
     const onClickFilterTask = useCallback((filter: SortedTask) => () => filterTask(filter), [filterTask]);
 
     return (
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button
                 size={'small'}
                 disableElevation
