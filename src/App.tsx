@@ -4,7 +4,7 @@ import TodoList from './TodoList';
 import AddItemForm from './Components/AddItemForm';
 import { AppBar, Button, Container, Grid, IconButton, Toolbar, Typography } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
-import { addNewTodolistTC, fetchTodolistsTC, selectTodoLists } from './State/todolist-Reducer';
+import { addNewTodolistTC, fetchTodolistsTC, selectTodoLists } from './State/todolist-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 
 

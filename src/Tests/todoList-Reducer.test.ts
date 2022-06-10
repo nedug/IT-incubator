@@ -2,7 +2,7 @@ import { v1 } from 'uuid';
 import {
     addNewTodolistAC, changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC,
     setTodolistsAC, SortedTask, TodoListCommonType, todoListReducer
-} from '../State/todolist-Reducer';
+} from '../State/todolist-reducer';
 
 
 let todolistId1: string;

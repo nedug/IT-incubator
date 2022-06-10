@@ -4,9 +4,9 @@ import TaskList from './TaskList';
 import ControlButtons from './ControlButtons';
 import AddItemForm from './Components/AddItemForm';
 import { Grid, Paper } from '@material-ui/core';
-import { changeFilterTodolistAC, changeTitleTodolistTC, removeTodolistTC, SortedTask, TodoListCommonType } from './State/todolist-Reducer';
+import { changeFilterTodolistAC, changeTitleTodolistTC, removeTodolistTC, SortedTask, TodoListCommonType } from './State/todolist-reducer';
 import { useDispatch } from 'react-redux';
-import { addNewTasksTC, fetchTasksTC } from './State/tasks-Reducer';
+import { addNewTasksTC, fetchTasksTC } from './State/tasks-reducer';
 
 type TodolistPropsType = {
     todoList: TodoListCommonType

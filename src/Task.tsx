@@ -3,7 +3,7 @@ import CheckboxCommon from './Components/CheckboxCommon';
 import { EditableSpan } from './Components/EditableSpan';
 import { Delete } from '@material-ui/icons';
 import { IconButton } from '@material-ui/core';
-import { removeTaskTC, updateTaskTC } from './State/tasks-Reducer';
+import { removeTaskTC, updateTaskTC } from './State/tasks-reducer';
 import { useDispatch } from 'react-redux';
 import { TasksStatus, TaskType } from './API/API';
 

@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import Task from './Task';
 import { useSelector } from 'react-redux';
 import { AppRootStateType } from './State/store';
-import { SortedTask, TodoListCommonType } from './State/todolist-Reducer';
+import { SortedTask, TodoListCommonType } from './State/todolist-reducer';
 import { TaskType } from './API/API';
 
 type TaskListPropsType = {

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Button } from '@material-ui/core';
-import { SortedTask } from './State/todolist-Reducer';
+import { SortedTask } from './State/todolist-reducer';
 
 type ControlButtonsPropsType = {
     filterTask: (filter: SortedTask) => void
