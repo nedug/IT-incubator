@@ -2,15 +2,17 @@ import React, { useCallback } from 'react';
 import { EditableSpan } from './Components/EditableSpan';
 import { IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
+import { RequestStatus } from './State/app-reducer';
 
 type TodoListHeaderPropsType = {
     title: string
     removeTodolist: () => void
     changeTitleTodoListFromTodoList: (newInputValue: string) => void
+    entityStatus: RequestStatus
 }
 
 
-const TodoListHeader = React.memo(({ title, removeTodolist, changeTitleTodoListFromTodoList }: TodoListHeaderPropsType) => {
+const TodoListHeader = React.memo(({ title, removeTodolist, changeTitleTodoListFromTodoList, ...props }: TodoListHeaderPropsType) => {
 
     const onClickHandler = useCallback(() => {
         removeTodolist();
@@ -29,6 +31,7 @@ const TodoListHeader = React.memo(({ title, removeTodolist, changeTitleTodoListF
             />
 
             <IconButton
+                disabled={props.entityStatus === RequestStatus.loading}
                 style={{ color: '#1e1e1e' }}
                 onClick={onClickHandler}>
                 <Delete />

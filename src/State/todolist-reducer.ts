@@ -11,15 +11,17 @@ const initialState: Array<TodoListCommonType> = [];
 export const todoListReducer = (state = initialState, action: ActionsTodoListType): Array<TodoListCommonType> => {
     switch (action.type) {
         case 'TODOLIST/SET-TODOLISTS':
-            return action.payload.todolists.map(tl => ({ ...tl, filter: SortedTask.all }));
+            return action.payload.todolists.map(tl => ({ ...tl, filter: SortedTask.all, entityStatus: RequestStatus.idle }));
         case 'TODOLIST/REMOVE-TODOLIST':
             return state.filter(tl => tl.id !== action.payload.todolistId);
         case 'TODOLIST/ADD-NEW-TODOLIST':
-            return [{ ...action.payload.todolist, filter: SortedTask.all }, ...state];
+            return [{ ...action.payload.todolist, filter: SortedTask.all, entityStatus: RequestStatus.idle }, ...state];
         case 'TODOLIST/CHANGE-TODOLIST-TITLE':
             return state.map(tl => tl.id === action.payload.todolistId ? { ...tl, title: action.payload.newTodolistTitle } : tl);
         case 'TODOLIST/CHANGE-TODOLIST-FILTER':
             return state.map(tl => tl.id === action.payload.todolistId ? { ...tl, filter: action.payload.filter } : tl);
+        case 'TODOLIST/CHANGE-TODOLIST-ENTITY-STATUS':
+            return state.map(tl => tl.id === action.payload.todolistId ? { ...tl, entityStatus: action.payload.entityStatus } : tl);
         default:
             return state;
     }
@@ -57,6 +59,12 @@ export const changeFilterTodolistAC = (todolistId: string, filter: SortedTask) =
         payload: { todolistId, filter },
     } as const
 };
+export const changeEntityStatusTodolistAC = (todolistId: string, entityStatus: RequestStatus) => {
+    return {
+        type: 'TODOLIST/CHANGE-TODOLIST-ENTITY-STATUS',
+        payload: { todolistId, entityStatus },
+    } as const
+};
 
 
 /* Thunk Creators */
@@ -70,6 +78,7 @@ export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
 
 };
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => {
+    dispatch(changeEntityStatusTodolistAC(todolistId, RequestStatus.loading));
     dispatch(setStatusAC(RequestStatus.loading));
     API.deleteTodolist(todolistId)
         .then(() => {
@@ -115,13 +124,15 @@ export enum SortedTask {
     completed = 'Completed',
 }
 
-export type TodoListCommonType = TodolistType & { filter: SortedTask }
+export type TodoListCommonType = TodolistType
+    & { filter: SortedTask, entityStatus: RequestStatus }
 
 export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
 export type AddTodolistActionType = ReturnType<typeof addNewTodolistAC>
 export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>
 type ChangeTodolistTitleActionType = ReturnType<typeof changeTitleTodolistAC>
 type ChangeTodolistFilterActionType = ReturnType<typeof changeFilterTodolistAC>
+type ChangeEntityStatusTodolistActionType = ReturnType<typeof changeEntityStatusTodolistAC>
 
 type ActionsTodoListType =
     | RemoveTodolistActionType
@@ -129,3 +140,4 @@ type ActionsTodoListType =
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType
     | SetTodolistsActionType
+    | ChangeEntityStatusTodolistActionType

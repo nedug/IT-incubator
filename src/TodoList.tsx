@@ -48,6 +48,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
             >
                 <TodoListHeader
                     title={todoList.title}
+                    entityStatus={todoList.entityStatus}
                     removeTodolist={removeTodolistCallback}
                     changeTitleTodoListFromTodoList={changeTitleTodoList}
                 />
