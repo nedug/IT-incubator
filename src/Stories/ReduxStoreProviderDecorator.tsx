@@ -48,6 +48,7 @@ const initialGlobalState = {
     },
     app: {
         status: RequestStatus.idle,
+        error: null,
     },
 };
 

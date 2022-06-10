@@ -8,6 +8,7 @@ import { addNewTodolistTC, fetchTodolistsTC, selectTodoLists } from './State/tod
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './State/store';
 import { RequestStatus } from './State/app-reducer';
+import { ErrorSnackbar } from './Components/ErrorSnackbar';
 
 
 const App = () => {
@@ -31,6 +32,8 @@ const App = () => {
 
     return (
         <div className="App">
+
+            <ErrorSnackbar />
 
             <AppBar position="static">
                 <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>

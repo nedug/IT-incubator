@@ -6,6 +6,7 @@ let startState: initialStateType;
 beforeEach(() => { /* Весь этот код будет перезаписываться перед каждым тестом */
     startState =  {
         status: RequestStatus.idle,
+        error: null,
     };
 })
 
