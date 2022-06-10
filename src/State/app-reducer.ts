@@ -11,12 +11,12 @@ const initialState: initialStateType = {
     error: null,
 }
 
-export const appReducer = (state= initialState, action: ActionsType): initialStateType => {
+export const appReducer = (state = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case 'APP/SET-STATUS':
-            return {...state, status: action.status};
+            return { ...state, status: action.status };
         case 'APP/SET-ERROR':
-            return {...state, error: action.error};
+            return { ...state, error: action.error };
         default:
             return state;
     }
