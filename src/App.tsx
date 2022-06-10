@@ -55,7 +55,9 @@ const App = () => {
 
             <Container fixed>
                 <Grid container style={{ padding: '20px' }}>
-                    <AddItemForm addNewItem={addNewTodolistCallback} />
+                    <AddItemForm
+                        addNewItem={addNewTodolistCallback}
+                    />
                 </Grid>
                 <Grid container spacing={2}>
                     {todoListAllForRender}
