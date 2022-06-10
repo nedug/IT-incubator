@@ -1,28 +1,26 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import TodoListHeader from './TodoListHeader';
 import TaskList from './TaskList';
 import ControlButtons from './ControlButtons';
-import AddItemForm from './AddItemForm';
-import {Grid, Paper} from '@material-ui/core';
-import {changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, SortedTask, TodoListCommonType} from './State/todolist-Reducer';
-import {useDispatch} from 'react-redux';
-import {addNewTasksTC, addTaskAC, fetchTasksTC} from './State/tasks-Reducer';
+import AddItemForm from './Components/AddItemForm';
+import { Grid, Paper } from '@material-ui/core';
+import { changeFilterTodolistAC, changeTitleTodolistTC, removeTodolistTC, SortedTask, TodoListCommonType } from './State/todolist-reducer';
+import { useDispatch } from 'react-redux';
+import { addNewTasksTC, fetchTasksTC } from './State/tasks-reducer';
 
 type TodolistPropsType = {
     todoList: TodoListCommonType
 }
 
 
-const TodoList = React.memo(({todoList}: TodolistPropsType) => {
+const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTasksTC(todoList.id) as any);
-    }, []);
+    useEffect(() => dispatch(fetchTasksTC(todoList.id) as any), []);
 
     const removeTodolistCallback = useCallback(() => {
-        dispatch(removeTodolistAC(todoList.id))
+        dispatch(removeTodolistTC(todoList.id) as any)
     }, [dispatch, todoList.id]);
 
     const filterTaskCallback = useCallback((filter: SortedTask) => {
@@ -38,7 +36,7 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
     }, [dispatch, filterTaskCallback, todoList.id, todoList.filter]);
 
     const changeTitleTodoList = useCallback((newInputValue: string) => {
-        dispatch(changeTitleTodolistAC(todoList.id, newInputValue))
+        dispatch(changeTitleTodolistTC(todoList.id, newInputValue) as any)
     }, [dispatch, todoList.id]);
 
 
@@ -46,10 +44,11 @@ const TodoList = React.memo(({todoList}: TodolistPropsType) => {
         <Grid item>
             <Paper
                 elevation={4}
-                style={{padding: '20px'}}
+                style={{ padding: '20px' }}
             >
                 <TodoListHeader
                     title={todoList.title}
+                    entityStatus={todoList.entityStatus}
                     removeTodolist={removeTodolistCallback}
                     changeTitleTodoListFromTodoList={changeTitleTodoList}
                 />

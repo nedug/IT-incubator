@@ -1,19 +1,21 @@
-import {applyMiddleware, combineReducers, legacy_createStore as createStore} from 'redux';
-import {tasksReducer} from './tasks-Reducer';
-import {todoListReducer} from './todolist-Reducer';
-// import {composeWithDevTools} from "redux-devtools-extension";
+import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux';
+import { tasksReducer } from './tasks-reducer';
+import { todoListReducer } from './todolist-reducer';
 import thunk from 'redux-thunk';
+import {composeWithDevTools} from "redux-devtools-extension";
+import { appReducer } from './app-reducer';
 
-
-export type AppRootStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todoLists: todoListReducer,
+    app: appReducer,
 });
 
+export type AppRootStateType = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer, applyMiddleware(thunk)/*, composeWithDevTools()*/);
+
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 
 // @ts-ignore

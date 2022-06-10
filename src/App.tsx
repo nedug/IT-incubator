@@ -1,63 +1,64 @@
-import React, {useCallback, useEffect} from 'react';
-import './App.css';
+import React, { useCallback, useEffect } from 'react';
+import './CSS/App.css';
 import TodoList from './TodoList';
-import AddItemForm from './AddItemForm';
-import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from '@material-ui/core';
-import {Menu} from '@material-ui/icons';
-import {addNewTodolistAC, fetchTodolistsTC, selectTodoLists} from './State/todolist-Reducer';
-import {useDispatch, useSelector} from 'react-redux';
+import AddItemForm from './Components/AddItemForm';
+import { AppBar, Button, Container, Grid, IconButton, LinearProgress, Toolbar, Typography } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
+import { addNewTodolistTC, fetchTodolistsTC, selectTodoLists } from './State/todolist-reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppRootStateType } from './State/store';
+import { RequestStatus } from './State/app-reducer';
+import { ErrorSnackbar } from './Components/ErrorSnackbar';
 
 
 const App = () => {
 
-    const todoListAll = useSelector(selectTodoLists);
+    const requestStatus = useSelector<AppRootStateType, RequestStatus>(state => state.app.status);
 
+    const todoListAll = useSelector(selectTodoLists);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTodolistsTC() as any);
-    }, []);
-
+    useEffect(() => dispatch(fetchTodolistsTC() as any), []);
 
     const addNewTodolistCallback = useCallback((valueInput: string) => {
-        dispatch(addNewTodolistAC(valueInput))
+        dispatch(addNewTodolistTC(valueInput) as any)
     }, [dispatch]);
 
-    const todoListAllForRender = todoListAll.map(tl => {
-        return (
-            <TodoList
-                key={tl.id}
-                todoList={tl}
-            />
-        )
-    })
+
+    const todoListAllForRender = todoListAll.map(tl =>
+        <TodoList key={tl.id} todoList={tl} />
+    )
 
 
     return (
         <div className="App">
 
+            <ErrorSnackbar />
+
             <AppBar position="static">
-                <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+                <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu/>
+                        <Menu />
                     </IconButton>
                     <Typography variant="h6">
                         TodoList
                     </Typography>
-                    <Button
-                        variant={"outlined"}
-                        color={"secondary"}
-                    >
+                    <Button variant={'outlined'} color={'secondary'}>
                         Login
                     </Button>
                 </Toolbar>
             </AppBar>
 
-            <Container fixed>
-                <Grid container style={{padding: '20px'}}>
-                    <AddItemForm addNewItem={addNewTodolistCallback}/>
-                </Grid>
+            <div style={{ height: '20px' }}>
+                {requestStatus === RequestStatus.loading && <LinearProgress color="secondary" />}
+            </div>
 
+            <Container fixed>
+                <Grid container style={{ padding: '20px' }}>
+                    <AddItemForm
+                        addNewItem={addNewTodolistCallback}
+                    />
+                </Grid>
                 <Grid container spacing={2}>
                     {todoListAllForRender}
                 </Grid>
