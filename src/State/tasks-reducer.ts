@@ -2,6 +2,7 @@ import { AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType
 import { API, TasksPriority, TasksStatus, TaskType, UpdateTaskModelType } from '../API/API';
 import { Dispatch } from 'redux';
 import { AppRootStateType } from './store';
+import { RequestStatus, setStatusAC } from './app-reducer';
 
 
 const initialState: TasksStateType = {};
@@ -27,6 +28,11 @@ const initialState: TasksStateType = {};
 
 export const tasksReducer = (state = initialState, action: ActionsTasksType): TasksStateType => {
     switch (action.type) {
+        case 'TASK/SET-TASKS':
+            return {
+                ...state,
+                [action.payload.todolistId]: action.payload.tasks,
+            };
         case 'TASK/REMOVE-TASK':
             return {
                 ...state,
@@ -59,11 +65,6 @@ export const tasksReducer = (state = initialState, action: ActionsTasksType): Ta
             action.payload.todolists.forEach(tl => copyState[tl.id] = []);
             return copyState;
         }
-        case 'TASK/SET-TASKS':
-            return {
-                ...state,
-                [action.payload.todolistId]: action.payload.tasks,
-            };
         default:
             return state;
     }
@@ -71,6 +72,12 @@ export const tasksReducer = (state = initialState, action: ActionsTasksType): Ta
 
 
 /* Action Creators */
+export const setTasksAC = (todolistId: string, tasks: Array<TaskType>) => {
+    return {
+        type: 'TASK/SET-TASKS',
+        payload: { todolistId, tasks },
+    } as const
+};
 export const removeTaskAC = (todolistId: string, taskId: string) => {
     return {
         type: 'TASK/REMOVE-TASK',
@@ -89,26 +96,28 @@ export const updateTaskAC = (todolistId: string, taskId: string, updateTask: Spe
         payload: { todolistId, taskId, updateTask },
     } as const
 };
-export const setTasksAC = (todolistId: string, tasks: Array<TaskType>) => {
-    return {
-        type: 'TASK/SET-TASKS',
-        payload: { todolistId, tasks },
-    } as const
-};
 
 
 /* Thunk Creators */
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(RequestStatus.loading));
     API.getTasks(todolistId)
-        .then(({ data: { items } }) => dispatch(setTasksAC(todolistId, items)))
+        .then(({ data: { items } }) => {
+            dispatch(setTasksAC(todolistId, items));
+            dispatch(setStatusAC(RequestStatus.succeeded));
+        })
 };
 export const removeTaskTC = (todolistId: string, id: string) => (dispatch: Dispatch) => {
     API.deleteTask(todolistId, id)
         .then(() => dispatch(removeTaskAC(todolistId, id)))
 };
 export const addNewTasksTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(RequestStatus.loading));
     API.createTask(todolistId, title)
-        .then(({ data: { data: { item } } }) => dispatch(addTaskAC(item)))
+        .then(({ data: { data: { item } } }) => {
+            dispatch(addTaskAC(item));
+            dispatch(setStatusAC(RequestStatus.succeeded));
+        })
 };
 export const updateTaskTC = (todolistId: string, taskId: string, taskSpecial: SpecialUpdateTaskModelType) => {
     return (dispatch: Dispatch, getState: () => AppRootStateType) => {

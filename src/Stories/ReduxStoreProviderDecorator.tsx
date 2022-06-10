@@ -6,11 +6,13 @@ import { tasksReducer } from '../State/tasks-reducer';
 import { SortedTask, todoListReducer } from '../State/todolist-reducer';
 import { v1 } from 'uuid';
 import { TasksPriority, TasksStatus } from '../API/API';
+import { appReducer, RequestStatus } from '../State/app-reducer';
 
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todoLists: todoListReducer,
+    app: appReducer,
 });
 
 const initialGlobalState = {
@@ -43,7 +45,10 @@ const initialGlobalState = {
                 priority: TasksPriority.Low, order: 0, todoListId: 'TodoID2',
             },
         ],
-    }
+    },
+    app: {
+        status: RequestStatus.idle,
+    },
 };
 
 export const storybookStore = createStore(rootReducer, initialGlobalState as AppRootStateType);

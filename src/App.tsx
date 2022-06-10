@@ -2,13 +2,17 @@ import React, { useCallback, useEffect } from 'react';
 import './CSS/App.css';
 import TodoList from './TodoList';
 import AddItemForm from './Components/AddItemForm';
-import { AppBar, Button, Container, Grid, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Container, Grid, IconButton, LinearProgress, Toolbar, Typography } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import { addNewTodolistTC, fetchTodolistsTC, selectTodoLists } from './State/todolist-reducer';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppRootStateType } from './State/store';
+import { RequestStatus } from './State/app-reducer';
 
 
 const App = () => {
+
+    const requestStatus = useSelector<AppRootStateType, RequestStatus>(state => state.app.status);
 
     const todoListAll = useSelector(selectTodoLists);
     const dispatch = useDispatch();
@@ -41,6 +45,8 @@ const App = () => {
                     </Button>
                 </Toolbar>
             </AppBar>
+
+            {requestStatus === RequestStatus.loading && <LinearProgress />}
 
             <Container fixed>
                 <Grid container style={{ padding: '20px' }}>
