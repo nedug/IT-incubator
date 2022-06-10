@@ -121,14 +121,15 @@ export const addNewTasksTC = (todolistId: string, title: string) => (dispatch: D
         .then(({ data }) => {
             if (data.resultCode === 0) {
                 dispatch(addTaskAC(data.data.item));
+                dispatch(setStatusAC(RequestStatus.succeeded));
             } else {
                 if (data.messages.length) {
                     dispatch(setErrorAC(data.messages[0]));
                 } else {
                     dispatch(setErrorAC('Some error occurred'));
                 }
+                dispatch(setStatusAC(RequestStatus.failed));
             }
-            dispatch(setStatusAC(RequestStatus.succeeded));
         })
 };
 export const updateTaskTC = (todolistId: string, taskId: string, taskSpecial: SpecialUpdateTaskModelType) => {
