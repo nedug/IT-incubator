@@ -1,7 +1,7 @@
 import { AppRootStateType } from './store';
 import { API, TodolistType } from '../API/API';
 import { Dispatch } from 'redux';
-import { RequestStatus, setStatusAC } from './app-reducer';
+import { RequestStatus, setErrorAC, setStatusAC } from './app-reducer';
 
 
 const initialState: Array<TodoListCommonType> = [];
@@ -80,8 +80,16 @@ export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => 
 export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
     dispatch(setStatusAC(RequestStatus.loading));
     API.createTodolist(title)
-        .then(({ data: { data: { item } } }) => {
-            dispatch(addNewTodolistAC(item));
+        .then(({ data }) => {
+            if (data.resultCode === 0) {
+                dispatch(addNewTodolistAC(data.data.item));
+            } else {
+                if (data.messages.length) {
+                    dispatch(setErrorAC(data.messages[0]));
+                } else {
+                    dispatch(setErrorAC('Some error occurred'));
+                }
+            }
             dispatch(setStatusAC(RequestStatus.succeeded));
         })
 

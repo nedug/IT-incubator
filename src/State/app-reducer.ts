@@ -8,13 +8,15 @@ export enum RequestStatus {
 
 const initialState: initialStateType = {
     status: RequestStatus.idle,
-    error: 'null | string',
+    error: null,
 }
 
 export const appReducer = (state= initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case 'APP/SET-STATUS':
             return {...state, status: action.status};
+        case 'APP/SET-ERROR':
+            return {...state, error: action.error};
         default:
             return state;
     }
@@ -26,6 +28,12 @@ export const setStatusAC = (status: RequestStatus) => {
         status,
     } as const
 }
+export const setErrorAC = (error: null | string) => {
+    return {
+        type: 'APP/SET-ERROR',
+        error,
+    } as const
+}
 
 
 // types
@@ -35,6 +43,8 @@ export type initialStateType = {
 }
 
 type setStatusType = ReturnType<typeof setStatusAC>
+type setErrorType = ReturnType<typeof setErrorAC>
 
 type ActionsType =
     | setStatusType
+    | setErrorType
