@@ -92,7 +92,6 @@ export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
             }
             dispatch(setStatusAC(RequestStatus.succeeded));
         })
-
 };
 export const changeTitleTodolistTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
     dispatch(setStatusAC(RequestStatus.loading));
