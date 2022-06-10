@@ -13,9 +13,9 @@ const initialState: initialStateType = {
 export const appReducer = (state= initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case 'APP/SET-STATUS':
-            return {...state, status: action.status}
+            return {...state, status: action.status};
         default:
-            return state
+            return state;
     }
 }
 
