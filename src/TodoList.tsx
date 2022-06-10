@@ -7,6 +7,7 @@ import { Grid, Paper } from '@material-ui/core';
 import { changeFilterTodolistAC, changeTitleTodolistTC, removeTodolistTC, SortedTask, TodoListCommonType } from './State/todolist-reducer';
 import { useDispatch } from 'react-redux';
 import { addNewTasksTC, fetchTasksTC } from './State/tasks-reducer';
+import { RequestStatus } from './State/app-reducer';
 
 type TodolistPropsType = {
     todoList: TodoListCommonType
@@ -55,6 +56,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
 
                 <AddItemForm
                     addNewItem={addNewTaskCallback}
+                    disabled={todoList.entityStatus === RequestStatus.loading}
                 />
 
                 <TaskList
