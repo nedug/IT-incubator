@@ -46,7 +46,9 @@ const App = () => {
                 </Toolbar>
             </AppBar>
 
-            {requestStatus === RequestStatus.loading && <LinearProgress />}
+            <div style={{ height: '20px' }}>
+                {requestStatus === RequestStatus.loading && <LinearProgress color="secondary" />}
+            </div>
 
             <Container fixed>
                 <Grid container style={{ padding: '20px' }}>

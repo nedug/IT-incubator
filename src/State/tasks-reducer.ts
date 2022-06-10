@@ -108,8 +108,12 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
         })
 };
 export const removeTaskTC = (todolistId: string, id: string) => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(RequestStatus.loading));
     API.deleteTask(todolistId, id)
-        .then(() => dispatch(removeTaskAC(todolistId, id)))
+        .then(() => {
+            dispatch(removeTaskAC(todolistId, id));
+            dispatch(setStatusAC(RequestStatus.succeeded));
+        })
 };
 export const addNewTasksTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
     dispatch(setStatusAC(RequestStatus.loading));
@@ -121,6 +125,8 @@ export const addNewTasksTC = (todolistId: string, title: string) => (dispatch: D
 };
 export const updateTaskTC = (todolistId: string, taskId: string, taskSpecial: SpecialUpdateTaskModelType) => {
     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
+        dispatch(setStatusAC(RequestStatus.loading));
+
         const state = getState();
         const task = state.tasks[todolistId].find(t => t.id === taskId)!;
 
@@ -135,7 +141,10 @@ export const updateTaskTC = (todolistId: string, taskId: string, taskSpecial: Sp
         };
 
         API.updateTask(todolistId, taskId, updateTaskModel)
-            .then(() => dispatch(updateTaskAC(todolistId, taskId, taskSpecial)))
+            .then(() => {
+                dispatch(updateTaskAC(todolistId, taskId, taskSpecial));
+                dispatch(setStatusAC(RequestStatus.succeeded));
+            })
     }
 };
 

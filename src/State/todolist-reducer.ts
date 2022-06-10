@@ -70,8 +70,12 @@ export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
 
 };
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(RequestStatus.loading));
     API.deleteTodolist(todolistId)
-        .then(() => dispatch(removeTodolistAC(todolistId)))
+        .then(() => {
+            dispatch(removeTodolistAC(todolistId));
+            dispatch(setStatusAC(RequestStatus.succeeded));
+        })
 };
 export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
     dispatch(setStatusAC(RequestStatus.loading));
@@ -83,8 +87,12 @@ export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
 
 };
 export const changeTitleTodolistTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(RequestStatus.loading));
     API.updateTodolist(todolistId, title)
-        .then(() => dispatch(changeTitleTodolistAC(todolistId, title)))
+        .then(() => {
+            dispatch(changeTitleTodolistAC(todolistId, title));
+            dispatch(setStatusAC(RequestStatus.succeeded));
+        })
 };
 
 
