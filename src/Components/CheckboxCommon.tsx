@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Checkbox } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
 import { TasksStatus } from '../API/API';
 
 type CheckboxPropsType = {

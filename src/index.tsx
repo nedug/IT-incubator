@@ -1,8 +1,9 @@
 import React from 'react';
 import './CSS/index.css';
 import App from './App';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
+import createTheme from '@material-ui/core/styles/createTheme';
+import { ThemeProvider } from '@material-ui/core/styles/';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { Provider } from 'react-redux';
 import { store } from './State/store';
 import ReactDOM from 'react-dom/client';

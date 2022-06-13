@@ -9,7 +9,7 @@ function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export function ErrorSnackbar() {
+export const ErrorSnackbar = () => {
 
     const dispatch = useDispatch();
     const error = useSelector<AppRootStateType, null | string>(state => state.app.error);
@@ -29,4 +29,4 @@ export function ErrorSnackbar() {
             </Alert>
         </Snackbar>
     );
-}
+};

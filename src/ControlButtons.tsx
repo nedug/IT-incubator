@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import { SortedTask } from './State/todolist-reducer';
 
 type ControlButtonsPropsType = {

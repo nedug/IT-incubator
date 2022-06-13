@@ -1,5 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react';
-import { IconButton, TextField } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
 type AddItemFormPropsType = {
