@@ -25,13 +25,13 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "no-unused-vars": "off",
+        "no-unused-vars": "warn",
         "react/jsx-wrap-multilines": [
             "warn",
             {
                 "prop": "parens-new-line"
             }
         ],
-        "no-debugger":"off"
+        "no-debugger": "warn"
     }
 }

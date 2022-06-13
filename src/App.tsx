@@ -34,7 +34,7 @@ const App = () => {
 
     const todoListAllForRender = todoListAll.map(tl =>
         <TodoList key={tl.id} todoList={tl} />
-    )
+    );
 
 
     return (
