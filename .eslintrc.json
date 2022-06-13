@@ -25,7 +25,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
         "react/jsx-wrap-multilines": [
             "warn",
             {
