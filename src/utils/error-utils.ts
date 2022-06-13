@@ -1,10 +1,10 @@
-import { RequestStatus, setErrorAC, setErrorType, setStatusAC, setStatusType } from '../State/app-reducer';
+import { ActionsType, RequestStatus, setErrorAC, setStatusAC } from '../State/app-reducer';
 import { Dispatch } from 'redux';
 import { ResponseType } from '../API/API';
 import { AxiosError } from 'axios';
 
 /* Ошибки приложения */
-export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: Dispatch<setStatusType | setErrorType>) => {
+export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: Dispatch<ActionsType>) => {
     if (data.messages.length) {
         dispatch(setErrorAC(data.messages[0]))
     } else {
