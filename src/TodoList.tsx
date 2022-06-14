@@ -3,7 +3,6 @@ import TodoListHeader from './TodoListHeader';
 import TaskList from './TaskList';
 import ControlButtons from './ControlButtons';
 import AddItemForm from './Components/AddItemForm';
-// import { Grid, Paper } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { changeFilterTodolistAC, changeTitleTodolistTC, removeTodolistTC, SortedTask, TodoListCommonType } from './State/todolist-reducer';
