@@ -14,11 +14,16 @@ export const Login = () => {
         <Grid container justifyContent="center">
             <Grid item xs={4}>
                 <FormControl>
-                    <FormLabel></FormLabel>
+
+                    <FormLabel>
+
+                    </FormLabel>
                     <FormGroup>
+
                         <TextField label="Email" margin="normal" />
                         <TextField label="Password" margin="normal" />
-                        <FormControlLabel control={<CheckBox name="rememberMe" />} label={'Remember Me'} />
+                        <FormControlLabel control={<CheckBox name="rememberMe" />} label='Remember Me' />
+
                         <Button type={'submit'} variant={'contained'} color={'secondary'}>
                             Login
                         </Button>

@@ -14,7 +14,7 @@ import { AppRootStateType } from './State/store';
 import { RequestStatus } from './State/app-reducer';
 import { ErrorSnackbar } from './Components/ErrorSnackbar';
 import { Login } from './Login';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { TodoListsList } from './TodoListsList';
 
 
@@ -31,7 +31,7 @@ const App = () => {
 
             <div className="App">
 
-                <Login />
+                {/*<Login />*/}
 
                 <AppBar position="static">
                     <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -53,7 +53,28 @@ const App = () => {
 
                 <Container fixed>
 
-                    <TodoListsList />
+                    <Routes>
+
+                        <Route path="/login" element={<Login />} />
+
+                        <Route path="/" element={<TodoListsList />} />
+
+
+                    </Routes>
+
+
+                    {/*<Routes>*/}
+
+                    {/*    <Route*/}
+                    {/*        path="*"*/}
+                    {/*        element={<Navigate to='/posts' />}*/}
+                    {/*    />*/}
+
+                    {/*    <Route path={'/login'} render={() => <Login />} />*/}
+
+                    {/*</Routes>*/}
+
+                    {/*<TodoListsList />*/}
 
                 </Container>
 
