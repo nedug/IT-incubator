@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './State/store';
 import { RequestStatus } from './State/app-reducer';
 import { ErrorSnackbar } from './Components/ErrorSnackbar';
+import { Login } from './Login';
 
 
 const App = () => {
@@ -40,7 +41,7 @@ const App = () => {
     return (
         <div className="App">
 
-            <ErrorSnackbar />
+            <Login/>
 
             <AppBar position="static">
                 <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -70,6 +71,8 @@ const App = () => {
                     {todoListAllForRender}
                 </Grid>
             </Container>
+
+            <ErrorSnackbar />
 
         </div>
     )
