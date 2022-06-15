@@ -22,6 +22,7 @@ export const appReducer = (state = initialState, action: ActionsType): initialSt
     }
 }
 
+/* Action Creators */
 export const setStatusAC = (status: RequestStatus) => {
     return {
         type: 'APP/SET-STATUS',
