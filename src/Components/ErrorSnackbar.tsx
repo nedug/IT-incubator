@@ -19,7 +19,7 @@ export const ErrorSnackbar = () => {
             return;
         }
 
-        dispatch(setErrorAC(null));
+        dispatch(setErrorAC({error: null}));
     };
 
     return (

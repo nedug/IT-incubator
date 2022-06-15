@@ -70,11 +70,11 @@ export const changeEntityStatusTodolistAC = (todolistId: string, entityStatus: R
 
 /* Thunk Creators */
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
-    dispatch(setStatusAC(RequestStatus.loading));
+    dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.getTodolists()
         .then(({ data }) => {
             dispatch(setTodolistsAC(data));
-            dispatch(setStatusAC(RequestStatus.succeeded));
+            dispatch(setStatusAC({ status: RequestStatus.succeeded }));
         })
         .catch(error => {
             handleServerNetworkError(error, dispatch);
@@ -82,12 +82,12 @@ export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
 };
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => {
     dispatch(changeEntityStatusTodolistAC(todolistId, RequestStatus.loading));
-    dispatch(setStatusAC(RequestStatus.loading));
+    dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.deleteTodolist(todolistId)
         .then(({ data }) => {
             if (data.resultCode === 0) {
                 dispatch(removeTodolistAC(todolistId));
-                dispatch(setStatusAC(RequestStatus.succeeded));
+                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
             } else {
                 handleServerAppError(data, dispatch);
             }
@@ -97,12 +97,12 @@ export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => 
         })
 };
 export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
-    dispatch(setStatusAC(RequestStatus.loading));
+    dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.createTodolist(title)
         .then(({ data }) => {
             if (data.resultCode === 0) {
                 dispatch(addNewTodolistAC(data.data.item));
-                dispatch(setStatusAC(RequestStatus.succeeded));
+                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
             } else {
                 handleServerAppError(data, dispatch);
             }
@@ -112,12 +112,12 @@ export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
         })
 };
 export const changeTitleTodolistTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
-    dispatch(setStatusAC(RequestStatus.loading));
+    dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.updateTodolist(todolistId, title)
         .then(({ data }) => {
             if (data.resultCode === 0) {
                 dispatch(changeTitleTodolistAC(todolistId, title));
-                dispatch(setStatusAC(RequestStatus.succeeded));
+                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
             } else {
                 handleServerAppError(data, dispatch);
             }

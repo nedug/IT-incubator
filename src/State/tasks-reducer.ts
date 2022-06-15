@@ -101,23 +101,23 @@ export const updateTaskAC = (todolistId: string, taskId: string, updateTask: Spe
 
 /* Thunk Creators */
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
-    dispatch(setStatusAC(RequestStatus.loading));
+    dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.getTasks(todolistId)
         .then(({ data: { items } }) => {
             dispatch(setTasksAC(todolistId, items));
-            dispatch(setStatusAC(RequestStatus.succeeded));
+            dispatch(setStatusAC({ status: RequestStatus.succeeded }));
         })
         .catch(error => {
             handleServerNetworkError(error, dispatch);
         })
 };
 export const removeTaskTC = (todolistId: string, id: string) => (dispatch: Dispatch) => {
-    dispatch(setStatusAC(RequestStatus.loading));
+    dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.deleteTask(todolistId, id)
         .then(({ data }) => {
             if (data.resultCode === 0) {
                 dispatch(removeTaskAC(todolistId, id));
-                dispatch(setStatusAC(RequestStatus.succeeded));
+                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
             } else {
                 handleServerAppError(data, dispatch);
             }
@@ -127,12 +127,12 @@ export const removeTaskTC = (todolistId: string, id: string) => (dispatch: Dispa
         })
 };
 export const addNewTasksTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
-    dispatch(setStatusAC(RequestStatus.loading));
+    dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.createTask(todolistId, title)
         .then(({ data }) => {
             if (data.resultCode === 0) {
                 dispatch(addTaskAC(data.data.item));
-                dispatch(setStatusAC(RequestStatus.succeeded));
+                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
             } else {
                 handleServerAppError(data, dispatch);
             }
@@ -143,7 +143,7 @@ export const addNewTasksTC = (todolistId: string, title: string) => (dispatch: D
 };
 export const updateTaskTC = (todolistId: string, taskId: string, taskSpecial: SpecialUpdateTaskModelType) => {
     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
-        dispatch(setStatusAC(RequestStatus.loading));
+        dispatch(setStatusAC({ status: RequestStatus.loading }));
 
         const state = getState();
         const task = state.tasks[todolistId].find(t => t.id === taskId)!;
@@ -162,7 +162,7 @@ export const updateTaskTC = (todolistId: string, taskId: string, taskSpecial: Sp
             .then(({ data }) => {
                 if (data.resultCode === 0) {
                     dispatch(updateTaskAC(todolistId, taskId, taskSpecial));
-                    dispatch(setStatusAC(RequestStatus.succeeded));
+                    dispatch(setStatusAC({ status: RequestStatus.succeeded }));
                 } else {
                     handleServerAppError(data, dispatch);
                 }

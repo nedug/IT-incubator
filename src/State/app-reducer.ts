@@ -1,3 +1,5 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 export enum RequestStatus {
     idle = 'idle',
     loading = 'loading',
@@ -9,32 +11,27 @@ export enum RequestStatus {
 const initialState: initialStateType = {
     status: RequestStatus.idle,
     error: null,
-}
+};
 
-export const appReducer = (state = initialState, action: ActionsType): initialStateType => {
-    switch (action.type) {
-        case 'APP/SET-STATUS':
-            return { ...state, status: action.status };
-        case 'APP/SET-ERROR':
-            return { ...state, error: action.error };
-        default:
-            return state;
-    }
-}
+// объект slice для создания Actions и Reducer
+const slice = createSlice({
+    name: 'app',
+    initialState,
+    reducers: {
+        setStatusAC(state, action: PayloadAction<{ status: RequestStatus }>) { /* Типизиурем Action как PayloadAction */
+            state.status = action.payload.status;
+        },
+        setErrorAC(state, action: PayloadAction<{ error: string | null }>) {
+            state.error = action.payload.error;
+        },
+    },
+});
 
-/* Action Creators */
-export const setStatusAC = (status: RequestStatus) => {
-    return {
-        type: 'APP/SET-STATUS',
-        status,
-    } as const
-}
-export const setErrorAC = (error: null | string) => {
-    return {
-        type: 'APP/SET-ERROR',
-        error,
-    } as const
-}
+// Создаем Reducer с помощью slice
+export const appReducer = slice.reducer;
+
+// Создаем Actions с помощью slice
+export const { setStatusAC, setErrorAC } = slice.actions;
 
 
 // types
@@ -42,10 +39,3 @@ export type initialStateType = {
     status: RequestStatus
     error: null | string
 }
-
-type setStatusType = ReturnType<typeof setStatusAC>
-type setErrorType = ReturnType<typeof setErrorAC>
-
-export type ActionsType =
-    | setStatusType
-    | setErrorType
