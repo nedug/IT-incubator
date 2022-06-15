@@ -1,4 +1,4 @@
-import { AppRootStateType } from './store';
+import { AppRootStateType } from '../State/store';
 import { API, TodolistType } from '../API/API';
 import { Dispatch } from 'redux';
 import { RequestStatus, setStatusAC } from './_app-reducer';

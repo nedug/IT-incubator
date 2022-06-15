@@ -1,7 +1,7 @@
-import { AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType } from './todolist-reducer';
+import { AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType } from '../State/todolist-reducer';
 import { API, TasksPriority, TasksStatus, TaskType, UpdateTaskModelType } from '../API/API';
 import { Dispatch } from 'redux';
-import { AppRootStateType } from './store';
+import { AppRootStateType } from '../State/store';
 import { RequestStatus, setStatusAC } from './_app-reducer';
 import { handleServerAppError, handleServerNetworkError } from '../utils/error-utils';
 
