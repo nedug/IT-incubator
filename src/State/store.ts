@@ -1,9 +1,9 @@
-import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux';
+import { combineReducers } from 'redux';
 import { tasksReducer } from './tasks-reducer';
 import { todoListReducer } from './todolist-reducer';
 import thunk from 'redux-thunk';
-import {composeWithDevTools} from "redux-devtools-extension";
 import { appReducer } from './app-reducer';
+import { configureStore } from '@reduxjs/toolkit';
 
 
 const rootReducer = combineReducers({
@@ -12,7 +12,14 @@ const rootReducer = combineReducers({
     app: appReducer,
 });
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+// Redux
+// export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
+// Redux Toolkit
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
+})
 
 
 // types
