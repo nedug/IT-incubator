@@ -8,9 +8,16 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useFormik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginTC } from './State/auth-reducer';
+import { AppRootStateType } from './State/store';
+import { Navigate } from 'react-router-dom';
 
 
 export const Login = () => {
+
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -35,10 +42,14 @@ export const Login = () => {
             return errors;
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            dispatch(loginTC(values) as any);
             formik.resetForm();
         },
     });
+
+    if (isLoggedIn) { /* Переадресация после успешной логинизации */
+        return <Navigate to={'/'} />
+    }
 
 
     return (

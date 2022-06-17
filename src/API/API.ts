@@ -37,6 +37,12 @@ export const API = {
     },
 };
 
+export const authAPI = {
+    login(data: LoginParamsType) {
+        return instance.post<ResponseType<{ userId: number }>>('/auth/login', data);
+    },
+};
+
 
 // types
 export type TodolistType = {
@@ -93,4 +99,11 @@ type ResponseTaskType = {
     items: Array<TaskType>
     totalCount: number
     error: null | string
+}
+
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: string
 }
