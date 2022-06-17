@@ -44,15 +44,17 @@ const slice = createSlice({
 export const todoListReducer = slice.reducer;
 
 // Создаем Actions с помощью slice
-export const { setTodolistsAC, removeTodolistAC, addNewTodolistAC, changeTitleTodolistAC,
-    changeFilterTodolistAC, changeEntityStatusTodolistAC } = slice.actions;
+export const {
+    setTodolistsAC, removeTodolistAC, addNewTodolistAC, changeTitleTodolistAC,
+    changeFilterTodolistAC, changeEntityStatusTodolistAC
+} = slice.actions;
 
 /* Thunk Creators */
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
     dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.getTodolists()
         .then(({ data }) => {
-            dispatch(setTodolistsAC({todolists: data }));
+            dispatch(setTodolistsAC({ todolists: data }));
             dispatch(setStatusAC({ status: RequestStatus.succeeded }));
         })
         .catch(error => {
@@ -80,7 +82,7 @@ export const addNewTodolistTC = (title: string) => (dispatch: Dispatch) => {
     API.createTodolist(title)
         .then(({ data }) => {
             if (data.resultCode === 0) {
-                dispatch(addNewTodolistAC({todolist: data.data.item }));
+                dispatch(addNewTodolistAC({ todolist: data.data.item }));
                 dispatch(setStatusAC({ status: RequestStatus.succeeded }));
             } else {
                 handleServerAppError(data, dispatch);
@@ -121,7 +123,3 @@ export type TodoListCommonType = TodolistType & {
     filter: SortedTask,
     entityStatus: RequestStatus
 }
-
-export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
-export type AddTodolistActionType = ReturnType<typeof addNewTodolistAC>
-export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>
