@@ -67,7 +67,7 @@ export const tasksReducer = slice.reducer;
 // Создаем Actions с помощью slice
 export const { setTasksAC, removeTaskAC, addTaskAC, updateTaskAC } = slice.actions;
 
-/* Thunk Creators */
+// Thunk Creators
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
     dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.getTasks(todolistId)

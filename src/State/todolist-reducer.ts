@@ -49,7 +49,7 @@ export const {
     changeFilterTodolistAC, changeEntityStatusTodolistAC
 } = slice.actions;
 
-/* Thunk Creators */
+// Thunk Creators
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
     dispatch(setStatusAC({ status: RequestStatus.loading }));
     API.getTodolists()
