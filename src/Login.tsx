@@ -29,9 +29,7 @@ export const Login = () => {
                         <TextField label="Email" margin="normal" />
                         <TextField label="Password" margin="normal" />
                         <FormControlLabel control={<Checkbox name="rememberMe" />} label={'Remember Me'} />
-                        <Button type={'submit'} variant={'contained'} color={'secondary'}>
-                            Login
-                        </Button>
+                        <Button type={'submit'} variant={'contained'} color={'secondary'}>Login</Button>
 
                     </FormGroup>
                 </FormControl>
