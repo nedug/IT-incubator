@@ -18,6 +18,22 @@ export const Login = () => {
             password: '',
             rememberMe: false,
         },
+        validate: (values) => {
+            const errors: FormikErrorType = {};
+            if (!values.email) {
+                errors.email = 'Email is required';
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address';
+            }
+            if (!values.password) {
+                errors.password = 'Password is required';
+            } else if (values.password.length < 3) {
+                errors.password = 'Length of email can\'t be less 3 symbols';
+            } else if (values.password.length > 15) {
+                errors.password = 'Length of email can\'t be more 15 symbols';
+            }
+            return errors;
+        },
         onSubmit: values => {
             alert(JSON.stringify(values));
         },
@@ -41,6 +57,7 @@ export const Login = () => {
                             <p>Password: free</p>
                         </FormLabel>
                         <FormGroup>
+
                             <TextField
                                 label="Email"
                                 margin="normal"
@@ -48,22 +65,29 @@ export const Login = () => {
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
                             />
+                            {formik.errors.email && <div style={{ color: 'red' }}>{formik.errors.email}</div>}
+
                             <TextField
+                                type="Password"
                                 label="Password"
                                 margin="normal"
                                 name="password"
                                 onChange={formik.handleChange}
                                 value={formik.values.password}
                             />
+                            {formik.errors.password && <div style={{ color: 'red' }}>{formik.errors.password}</div>}
+
                             <FormControlLabel
-                                control={<Checkbox name="rememberMe" onChange={formik.handleChange} value={formik.values.rememberMe} />}
+                                control={<Checkbox name="rememberMe" onChange={formik.handleChange} checked={formik.values.rememberMe} />}
                                 label={'Remember Me'} />
+
                             <Button
                                 type={'submit'}
                                 variant={'contained'}
                                 color={'secondary'}>
                                 Login
                             </Button>
+
                         </FormGroup>
                     </FormControl>
                 </form>
@@ -72,3 +96,10 @@ export const Login = () => {
         </Grid>
     )
 };
+
+
+type FormikErrorType = {
+    email?: string
+    password?: string
+    rememberMe?: boolean
+}
