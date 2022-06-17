@@ -4,8 +4,9 @@ import { authAPI, LoginParamsType } from '../API/API';
 import { handleServerAppError, handleServerNetworkError } from '../utils/error-utils';
 
 const initialState = {
-    isLoggedIn: false
+    isLoggedIn: false,
 };
+
 type InitialStateType = typeof initialState
 
 export const authReducer = (state: InitialStateType = initialState, action: AuthActionsType): InitialStateType => {

@@ -4,17 +4,28 @@ import AddItemForm from './Components/AddItemForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewTodolistTC, fetchTodolistsTC, selectTodoLists } from './State/todolist-reducer';
 import TodoList from './TodoList';
+import { AppRootStateType } from './State/store';
+import { Navigate } from 'react-router-dom';
 
 export const TodoListsList = () => {
 
     const todoListAll = useSelector(selectTodoLists);
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const dispatch = useDispatch();
 
-    useEffect(() => dispatch(fetchTodolistsTC() as any), []);
+    useEffect(() => {
+        if (isLoggedIn) {
+            dispatch(fetchTodolistsTC() as any);
+        }
+    }, []);
 
     const addNewTodolistCallback = useCallback((valueInput: string) => {
         dispatch(addNewTodolistTC(valueInput) as any)
     }, [dispatch]);
+
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'} />
+    }
 
 
     const todoListAllForRender = todoListAll.map(tl =>
