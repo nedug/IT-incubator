@@ -8,11 +8,13 @@ test('id ( should be equal', () => {
     const startTodolistState: Array<TodoListCommonType> = [];
 
     const action = addNewTodolistAC({
-            id: 'sfsf dgfd',
-            title: 'New Todolist',
-            addedDate: '',
-            order: 0,
-        }
+            todolist: {
+                id: 'sfsf dgfd',
+                title: 'New Todolist',
+                addedDate: '',
+                order: 0,
+            },
+        },
     );
 
     const endSTasksState = tasksReducer(startTasksState, action);
