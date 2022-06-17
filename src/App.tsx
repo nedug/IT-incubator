@@ -44,13 +44,11 @@ const App = () => {
             </div>
 
             <Container fixed>
-
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/" element={<TodoListsList />} />
                     <Route path="*" element={<h2>404: PAGE NOT FOUND</h2>} />
                 </Routes>
-
             </Container>
 
             <ErrorSnackbar />
