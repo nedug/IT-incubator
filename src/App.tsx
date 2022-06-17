@@ -13,7 +13,7 @@ import { AppRootStateType } from './State/store';
 import { RequestStatus } from './State/app-reducer';
 import { ErrorSnackbar } from './Components/ErrorSnackbar';
 import { Login } from './Login';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { TodoListsList } from './TodoListsList';
 
 
@@ -47,7 +47,8 @@ const App = () => {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/" element={<TodoListsList />} />
-                    <Route path="*" element={<h2>404: PAGE NOT FOUND</h2>} />
+                    <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>} />
+                    <Route path="*" element={<Navigate to={'/404'} />} />
                 </Routes>
             </Container>
 
