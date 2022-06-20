@@ -39,10 +39,13 @@ export const API = {
 
 export const authAPI = {
     login(data: LoginParamsType) {
-        return instance.post<ResponseType<{ userId: number }>>('/auth/login', data);
+        return instance.post<ResponseType<{ userId: number }>>('auth/login', data);
     },
     me() {
-        return instance.get<ResponseType<AuthParamsType>>('/auth/me');
+        return instance.get<ResponseType<AuthParamsType>>('auth/me');
+    },
+    logout() {
+        return instance.delete<ResponseType>('auth/login');
     },
 };
 
@@ -54,12 +57,14 @@ export type TodolistType = {
     addedDate: string
     order: number
 }
+
 export enum TasksStatus {
     New = 0,
     InProgress = 1,
     Completed = 2,
     Draft = 3,
 }
+
 export enum TasksPriority {
     Low = 0,
     Middle = 1,
@@ -67,6 +72,7 @@ export enum TasksPriority {
     Urgently = 3,
     Later = 4,
 }
+
 export type TaskType = {
     description: string
     title: string

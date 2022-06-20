@@ -37,11 +37,13 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
             handleServerNetworkError(error, dispatch);
         })
 };
-export const initializeAppTC = () => (dispatch: Dispatch) => {
-    authAPI.me()
+export const logoutTC = () => (dispatch: Dispatch) => {
+    dispatch(setStatusAC(RequestStatus.loading));
+    authAPI.logout()
         .then(({ data }) => {
             if (data.resultCode === 0) {
-                dispatch(setIsLoggedInAC(true));
+                dispatch(setIsLoggedInAC(false));
+                dispatch(setStatusAC(RequestStatus.succeeded));
             } else {
                 handleServerAppError(data, dispatch);
             }

@@ -10,38 +10,58 @@ import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/icons/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './State/store';
-import { RequestStatus } from './State/app-reducer';
+import { initializeAppTC, RequestStatus } from './State/app-reducer';
 import { ErrorSnackbar } from './Components/ErrorSnackbar';
 import { Login } from './Login';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { TodoListsList } from './TodoListsList';
-import { initializeAppTC } from './State/auth-reducer';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { logoutTC } from './State/auth-reducer';
 
 
 const App = () => {
 
     const requestStatus = useSelector<AppRootStateType, RequestStatus>(state => state.app.status);
+    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized);
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(initializeAppTC() as any);
     }, []);
 
+    if (!isInitialized) {
+        return (
+            <div
+                style={{ position: 'fixed', top: '40%', textAlign: 'center', width: '100%' }}>
+                <CircularProgress />
+            </div>
+        );
+    }
+
+    const logoutHandler = () => {
+        dispatch(logoutTC() as any);
+    };
+
 
     return (
         <div className="App">
 
             <AppBar position="static">
-                <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Toolbar style={{ display: 'flex', justifyContent: isLoggedIn ? 'space-between' : 'center' }}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu />
                     </IconButton>
                     <Typography variant="h6">
                         TodoList
                     </Typography>
-                    <Button variant={'outlined'} color={'secondary'}>
-                        Login
-                    </Button>
+
+                    {isLoggedIn &&
+                        <Button variant={'outlined'} color={'secondary'}
+                                onClick={logoutHandler}>
+                            Logout
+                        </Button>
+                    }
                 </Toolbar>
             </AppBar>
 
