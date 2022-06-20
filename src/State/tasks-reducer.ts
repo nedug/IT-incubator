@@ -1,4 +1,4 @@
-import { AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType } from './todolist-reducer';
+import { AddTodolistActionType, ClearTodosDataActionType, RemoveTodolistActionType, SetTodolistsActionType } from './todolist-reducer';
 import { API, TasksPriority, TasksStatus, TaskType, UpdateTaskModelType } from '../API/API';
 import { Dispatch } from 'redux';
 import { AppRootStateType } from './store';
@@ -66,11 +66,12 @@ export const tasksReducer = (state = initialState, action: ActionsTasksType): Ta
             action.payload.todolists.forEach(tl => copyState[tl.id] = []);
             return copyState;
         }
+        case 'TODOLIST/CLEAR-DATA':
+            return {};
         default:
             return state;
     }
 };
-
 
 /* Action Creators */
 export const setTasksAC = (todolistId: string, tasks: Array<TaskType>) => {
@@ -97,7 +98,6 @@ export const updateTaskAC = (todolistId: string, taskId: string, updateTask: Spe
         payload: { todolistId, taskId, updateTask },
     } as const
 };
-
 
 /* Thunk Creators */
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
@@ -201,3 +201,4 @@ type ActionsTasksType =
     | RemoveTodolistActionType
     | SetTodolistsActionType
     | setTasksACType
+    | ClearTodosDataActionType

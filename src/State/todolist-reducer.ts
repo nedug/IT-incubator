@@ -23,11 +23,12 @@ export const todoListReducer = (state = initialState, action: ActionsTodoListTyp
             return state.map(tl => tl.id === action.payload.todolistId ? { ...tl, filter: action.payload.filter } : tl);
         case 'TODOLIST/CHANGE-TODOLIST-ENTITY-STATUS':
             return state.map(tl => tl.id === action.payload.todolistId ? { ...tl, entityStatus: action.payload.entityStatus } : tl);
+        case 'TODOLIST/CLEAR-DATA':
+            return [];
         default:
             return state;
     }
 };
-
 
 /* Action Creators */
 export const setTodolistsAC = (todolists: Array<TodolistType>) => {
@@ -66,7 +67,11 @@ export const changeEntityStatusTodolistAC = (todolistId: string, entityStatus: R
         payload: { todolistId, entityStatus },
     } as const
 };
-
+export const clearTodosDataAC = () => {
+    return {
+        type: 'TODOLIST/CLEAR-DATA',
+    } as const
+};
 
 /* Thunk Creators */
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
@@ -127,7 +132,6 @@ export const changeTitleTodolistTC = (todolistId: string, title: string) => (dis
         })
 };
 
-
 /* get Todolists from State */
 export const selectTodoLists = (state: AppRootStateType): Array<TodoListCommonType> => state.todoLists;
 
@@ -148,6 +152,7 @@ export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>
 type ChangeTodolistTitleActionType = ReturnType<typeof changeTitleTodolistAC>
 type ChangeTodolistFilterActionType = ReturnType<typeof changeFilterTodolistAC>
 type ChangeEntityStatusTodolistActionType = ReturnType<typeof changeEntityStatusTodolistAC>
+export type ClearTodosDataActionType = ReturnType<typeof clearTodosDataAC>
 
 type ActionsTodoListType =
     | RemoveTodolistActionType
@@ -156,3 +161,4 @@ type ActionsTodoListType =
     | ChangeTodolistFilterActionType
     | SetTodolistsActionType
     | ChangeEntityStatusTodolistActionType
+    | ClearTodosDataActionType
