@@ -93,7 +93,8 @@ export const Login = () => {
                             <Button
                                 type={'submit'}
                                 variant={'contained'}
-                                color={'secondary'}>
+                                color={'secondary'}
+                            >
                                 Login
                             </Button>
 
