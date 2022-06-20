@@ -7,12 +7,14 @@ import { SortedTask, todoListReducer } from '../State/todolist-reducer';
 import { v1 } from 'uuid';
 import { TasksPriority, TasksStatus } from '../API/API';
 import { appReducer, RequestStatus } from '../State/app-reducer';
+import { authReducer } from '../State/auth-reducer';
 
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todoLists: todoListReducer,
     app: appReducer,
+    auth: authReducer,
 });
 
 const initialGlobalState = {
@@ -49,6 +51,10 @@ const initialGlobalState = {
     app: {
         status: RequestStatus.idle,
         error: null,
+        isInitialized: false,
+    },
+    auth: {
+        isLoggedIn: false,
     },
 };
 

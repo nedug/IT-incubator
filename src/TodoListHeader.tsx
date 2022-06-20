@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { EditableSpan } from './Components/EditableSpan';
-import { IconButton } from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
+import IconButton from '@material-ui/core/IconButton';
+import Delete from '@material-ui/icons/Delete';
 import { RequestStatus } from './State/app-reducer';
 
 type TodoListHeaderPropsType = {

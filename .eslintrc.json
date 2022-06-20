@@ -32,6 +32,6 @@
                 "prop": "parens-new-line"
             }
         ],
-        "no-debugger":"off"
+        "no-debugger": "warn"
     }
 }

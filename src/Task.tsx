@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import CheckboxCommon from './Components/CheckboxCommon';
 import { EditableSpan } from './Components/EditableSpan';
-import { Delete } from '@material-ui/icons';
-import { IconButton } from '@material-ui/core';
+import Delete from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 import { removeTaskTC, updateTaskTC } from './State/tasks-reducer';
 import { useDispatch } from 'react-redux';
 import { TasksStatus, TaskType } from './API/API';

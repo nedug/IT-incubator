@@ -7,6 +7,7 @@ beforeEach(() => { /* Весь этот код будет перезаписыв
     startState = {
         status: RequestStatus.idle,
         error: null,
+        isInitialized: false,
     };
 })
 

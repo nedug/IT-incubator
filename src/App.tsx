@@ -1,51 +1,62 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './CSS/App.css';
-import TodoList from './TodoList';
-import AddItemForm from './Components/AddItemForm';
-import { AppBar, Button, Container, Grid, IconButton, LinearProgress, Toolbar, Typography } from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
-import { addNewTodolistTC, fetchTodolistsTC, selectTodoLists } from './State/todolist-reducer';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './State/store';
-import { RequestStatus } from './State/app-reducer';
+import { initializeAppTC, RequestStatus } from './State/app-reducer';
 import { ErrorSnackbar } from './Components/ErrorSnackbar';
+import { Login } from './Login';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { TodoListsList } from './TodoListsList';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { logoutTC } from './State/auth-reducer';
 
 
 const App = () => {
 
     const requestStatus = useSelector<AppRootStateType, RequestStatus>(state => state.app.status);
-
-    const todoListAll = useSelector(selectTodoLists);
+    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized);
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const dispatch = useDispatch();
 
-    useEffect(() => dispatch(fetchTodolistsTC() as any), []);
+    useEffect(() => {
+        dispatch(initializeAppTC() as any);
+    }, []);
 
-    const addNewTodolistCallback = useCallback((valueInput: string) => {
-        dispatch(addNewTodolistTC(valueInput) as any)
-    }, [dispatch]);
+    if (!isInitialized) {
+        return (
+            <div
+                style={{ position: 'fixed', top: '40%', textAlign: 'center', width: '100%' }}>
+                <CircularProgress />
+            </div>
+        );
+    }
 
-
-    const todoListAllForRender = todoListAll.map(tl =>
-        <TodoList key={tl.id} todoList={tl} />
-    )
+    const logoutHandler = () => {
+        dispatch(logoutTC() as any);
+    };
 
 
     return (
         <div className="App">
 
-            <ErrorSnackbar />
-
             <AppBar position="static">
-                <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu />
-                    </IconButton>
+                <Toolbar style={{ display: 'flex', justifyContent: isLoggedIn ? 'space-between' : 'center' }}>
                     <Typography variant="h6">
                         TodoList
                     </Typography>
-                    <Button variant={'outlined'} color={'secondary'}>
-                        Login
-                    </Button>
+
+                    {isLoggedIn &&
+                        <Button variant={'outlined'} color={'secondary'}
+                                onClick={logoutHandler}>
+                            Logout
+                        </Button>
+                    }
                 </Toolbar>
             </AppBar>
 
@@ -54,15 +65,15 @@ const App = () => {
             </div>
 
             <Container fixed>
-                <Grid container style={{ padding: '20px' }}>
-                    <AddItemForm
-                        addNewItem={addNewTodolistCallback}
-                    />
-                </Grid>
-                <Grid container spacing={2}>
-                    {todoListAllForRender}
-                </Grid>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/" element={<TodoListsList />} />
+                    <Route path="/404" element={<h2>404: PAGE NOT FOUND</h2>} />
+                    <Route path="*" element={<Navigate to={'/404'} />} />
+                </Routes>
             </Container>
+
+            <ErrorSnackbar />
 
         </div>
     )
