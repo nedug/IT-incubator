@@ -37,6 +37,20 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
             handleServerNetworkError(error, dispatch);
         })
 };
+export const initializeAppTC = () => (dispatch: Dispatch) => {
+    authAPI.me()
+        .then(({ data }) => {
+            if (data.resultCode === 0) {
+                dispatch(setIsLoggedInAC(true));
+            } else {
+                handleServerAppError(data, dispatch);
+            }
+        })
+        .catch(error => {
+            handleServerNetworkError(error, dispatch);
+        })
+};
+
 
 // types
 type AuthActionsType = ReturnType<typeof setIsLoggedInAC> | AppActionsType

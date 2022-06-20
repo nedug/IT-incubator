@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './CSS/App.css';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -8,18 +8,24 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/icons/Menu';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './State/store';
 import { RequestStatus } from './State/app-reducer';
 import { ErrorSnackbar } from './Components/ErrorSnackbar';
 import { Login } from './Login';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { TodoListsList } from './TodoListsList';
+import { initializeAppTC } from './State/auth-reducer';
 
 
 const App = () => {
 
     const requestStatus = useSelector<AppRootStateType, RequestStatus>(state => state.app.status);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(initializeAppTC() as any);
+    }, []);
 
 
     return (
