@@ -49,9 +49,6 @@ const App = () => {
 
             <AppBar position="static">
                 <Toolbar style={{ display: 'flex', justifyContent: isLoggedIn ? 'space-between' : 'center' }}>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu />
-                    </IconButton>
                     <Typography variant="h6">
                         TodoList
                     </Typography>
