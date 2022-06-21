@@ -63,7 +63,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
 
 
 // types
-type initialStateType = {
+export type initialStateType = {
     status: RequestStatus
     error: null | string
     isInitialized: boolean
