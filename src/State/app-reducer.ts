@@ -3,6 +3,7 @@ import { authAPI } from '../API/API';
 import { handleServerAppError, handleServerNetworkError } from '../utils/error-utils';
 import { setIsLoggedInAC } from './auth-reducer';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ThunkType } from './store';
 
 export enum RequestStatus {
     idle = 'idle',
@@ -42,23 +43,21 @@ export const appReducer = slice.reducer;
 export const { setStatusAC, setErrorAC, setIsInitializedAC } = slice.actions;
 
 // thunks
-export const initializeAppTC = () => (dispatch: Dispatch) => {
-    dispatch(setStatusAC({ status: RequestStatus.loading }));
-    authAPI.me()
-        .then(({ data }) => {
-            if (data.resultCode === 0) {
-                dispatch(setIsLoggedInAC({ isLoggedIn: true }));
-                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
-            } else {
-                handleServerAppError(data, dispatch);
-            }
-        })
-        .catch(error => {
-            handleServerNetworkError(error, dispatch);
-        })
-        .finally(() => {
-            dispatch(setIsInitializedAC({ isInitialized: true }));
-        })
+export const initializeAppTC = (): ThunkType => async (dispatch: Dispatch) => {
+    try {
+        dispatch(setStatusAC({ status: RequestStatus.loading }));
+        const { data } = await authAPI.me();
+        if (data.resultCode === 0) {
+            dispatch(setIsLoggedInAC({ isLoggedIn: true }));
+            dispatch(setStatusAC({ status: RequestStatus.succeeded }));
+        } else {
+            handleServerAppError(data, dispatch);
+        }
+    } catch (error: any) {
+        handleServerNetworkError(error, dispatch);
+    } finally {
+        dispatch(setIsInitializedAC({ isInitialized: true }));
+    }
 };
 
 

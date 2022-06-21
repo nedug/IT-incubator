@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
+import { AnyAction, combineReducers } from 'redux';
 import { tasksReducer } from './tasks-reducer';
 import { todoListReducer } from './todolist-reducer';
-import thunk from 'redux-thunk';
+import thunk, { ThunkAction } from 'redux-thunk';
 import { appReducer } from './app-reducer';
 import { authReducer } from './auth-reducer';
 import { configureStore } from '@reduxjs/toolkit';
@@ -28,9 +28,10 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 
 // types
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppRootStateType = ReturnType<typeof rootReducer> /* for rootReducer */
 type RootState = ReturnType<typeof store.getState>  /* for useSelector */
 type AppDispatch = typeof store.dispatch /* for useDispatch */
+export type ThunkType<ReturnType = void> = ThunkAction<void, RootState, unknown, AnyAction> /* for Thunks */
 
 // @ts-ignore
 window.store = store;

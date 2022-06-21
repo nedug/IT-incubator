@@ -4,6 +4,7 @@ import { authAPI, LoginParamsType } from '../API/API';
 import { handleServerAppError, handleServerNetworkError } from '../utils/error-utils';
 import { clearTodosDataAC } from './todolist-reducer';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ThunkType } from './store';
 
 
 const initialState: initialStateType = {
@@ -28,36 +29,34 @@ export const authReducer = slice.reducer;
 export const { setIsLoggedInAC } = slice.actions;
 
 // thunks
-export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
-    dispatch(setStatusAC({ status: RequestStatus.loading }));
-    authAPI.login(data)
-        .then(({ data }) => {
-            if (data.resultCode === 0) {
-                dispatch(setIsLoggedInAC({ isLoggedIn: true }));
-                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
-            } else {
-                handleServerAppError(data, dispatch);
-            }
-        })
-        .catch(error => {
-            handleServerNetworkError(error, dispatch);
-        })
+export const loginTC = (loginData: LoginParamsType): ThunkType => async (dispatch: Dispatch) => {
+    try {
+        dispatch(setStatusAC({ status: RequestStatus.loading }));
+        const { data } = await authAPI.login(loginData);
+        if (data.resultCode === 0) {
+            dispatch(setIsLoggedInAC({ isLoggedIn: true }));
+            dispatch(setStatusAC({ status: RequestStatus.succeeded }));
+        } else {
+            handleServerAppError(data, dispatch);
+        }
+    } catch (error: any) {
+        handleServerNetworkError(error, dispatch);
+    }
 };
-export const logoutTC = () => (dispatch: Dispatch) => {
-    dispatch(setStatusAC({ status: RequestStatus.loading }));
-    authAPI.logout()
-        .then(({ data }) => {
-            if (data.resultCode === 0) {
-                dispatch(setIsLoggedInAC({ isLoggedIn: false }));
-                dispatch(clearTodosDataAC());
-                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
-            } else {
-                handleServerAppError(data, dispatch);
-            }
-        })
-        .catch(error => {
-            handleServerNetworkError(error, dispatch);
-        })
+export const logoutTC = (): ThunkType => async (dispatch: Dispatch) => {
+    try {
+        dispatch(setStatusAC({ status: RequestStatus.loading }));
+        const { data } = await authAPI.logout();
+        if (data.resultCode === 0) {
+            dispatch(setIsLoggedInAC({ isLoggedIn: false }));
+            dispatch(clearTodosDataAC());
+            dispatch(setStatusAC({ status: RequestStatus.succeeded }));
+        } else {
+            handleServerAppError(data, dispatch);
+        }
+    } catch (error: any) {
+        handleServerNetworkError(error, dispatch);
+    }
 };
 
 

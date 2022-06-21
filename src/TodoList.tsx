@@ -19,7 +19,9 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
 
     const dispatch = useAppDispatch();
 
-    useEffect(() => dispatch(fetchTasksTC(todoList.id)), []);
+    useEffect(() => {
+        dispatch(fetchTasksTC(todoList.id))
+    }, []);
 
     const removeTodolistCallback = useCallback(() => {
         dispatch(removeTodolistTC(todoList.id))
