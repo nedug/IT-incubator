@@ -1,10 +1,11 @@
-import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux';
+import { combineReducers } from 'redux';
 import { tasksReducer } from './tasks-reducer';
 import { todoListReducer } from './todolist-reducer';
 import thunk from 'redux-thunk';
-import {composeWithDevTools} from "redux-devtools-extension";
 import { appReducer } from './app-reducer';
 import { authReducer } from './auth-reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 
 const rootReducer = combineReducers({
@@ -14,11 +15,22 @@ const rootReducer = combineReducers({
     auth: authReducer,
 });
 
+// Redux Toolkit
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
+});
+
+
+// Use throughout your app instead of plain `useDispatch` and `useSelector`
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+
+// types
 export type AppRootStateType = ReturnType<typeof rootReducer>
-
-
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-
+type RootState = ReturnType<typeof store.getState>  /* for useSelector */
+type AppDispatch = typeof store.dispatch /* for useDispatch */
 
 // @ts-ignore
 window.store = store;

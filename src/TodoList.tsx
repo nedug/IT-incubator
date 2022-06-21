@@ -6,9 +6,9 @@ import AddItemForm from './Components/AddItemForm';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { changeFilterTodolistAC, changeTitleTodolistTC, removeTodolistTC, SortedTask, TodoListCommonType } from './State/todolist-reducer';
-import { useDispatch } from 'react-redux';
 import { addNewTasksTC, fetchTasksTC } from './State/tasks-reducer';
 import { RequestStatus } from './State/app-reducer';
+import { useAppDispatch } from './State/store';
 
 type TodolistPropsType = {
     todoList: TodoListCommonType
@@ -17,12 +17,12 @@ type TodolistPropsType = {
 
 const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    useEffect(() => dispatch(fetchTasksTC(todoList.id) as any), []);
+    useEffect(() => dispatch(fetchTasksTC(todoList.id)), []);
 
     const removeTodolistCallback = useCallback(() => {
-        dispatch(removeTodolistTC(todoList.id) as any)
+        dispatch(removeTodolistTC(todoList.id))
     }, [dispatch, todoList.id]);
 
     const filterTaskCallback = useCallback((filter: SortedTask) => {
@@ -30,7 +30,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
     }, [dispatch, todoList.id]);
 
     const addNewTaskCallback = useCallback((valueInputTrim: string) => {
-        dispatch(addNewTasksTC(todoList.id, valueInputTrim) as any);
+        dispatch(addNewTasksTC(todoList.id, valueInputTrim));
 
         if (todoList.filter === SortedTask.completed) {
             filterTaskCallback(SortedTask.active);
@@ -38,7 +38,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
     }, [dispatch, filterTaskCallback, todoList.id, todoList.filter]);
 
     const changeTitleTodoList = useCallback((newInputValue: string) => {
-        dispatch(changeTitleTodolistTC(todoList.id, newInputValue) as any)
+        dispatch(changeTitleTodolistTC(todoList.id, newInputValue))
     }, [dispatch, todoList.id]);
 
 

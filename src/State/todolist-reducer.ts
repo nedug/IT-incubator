@@ -1,4 +1,3 @@
-import { AppRootStateType } from './store';
 import { API, TodolistType } from '../API/API';
 import { Dispatch } from 'redux';
 import { RequestStatus, setStatusAC } from './app-reducer';
@@ -131,9 +130,6 @@ export const changeTitleTodolistTC = (todolistId: string, title: string) => (dis
             handleServerNetworkError(error, dispatch);
         })
 };
-
-/* get Todolists from State */
-export const selectTodoLists = (state: AppRootStateType): Array<TodoListCommonType> => state.todoLists;
 
 
 // types

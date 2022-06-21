@@ -6,8 +6,7 @@ import Container from '@material-ui/core/Container';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppRootStateType } from './State/store';
+import { useAppDispatch, useAppSelector } from './State/store';
 import { initializeAppTC, RequestStatus } from './State/app-reducer';
 import { ErrorSnackbar } from './Components/ErrorSnackbar';
 import { Login } from './Login';
@@ -19,13 +18,14 @@ import { logoutTC } from './State/auth-reducer';
 
 const App = () => {
 
-    const requestStatus = useSelector<AppRootStateType, RequestStatus>(state => state.app.status);
-    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized);
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
-    const dispatch = useDispatch();
+    const requestStatus = useAppSelector(state => state.app.status);
+    const isInitialized = useAppSelector(state => state.app.isInitialized);
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(initializeAppTC() as any);
+        dispatch(initializeAppTC());
     }, []);
 
     if (!isInitialized) {
@@ -38,7 +38,7 @@ const App = () => {
     }
 
     const logoutHandler = () => {
-        dispatch(logoutTC() as any);
+        dispatch(logoutTC());
     };
 
 
