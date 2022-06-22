@@ -32,7 +32,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
     }, [dispatch, todoList.id]);
 
     const addNewTaskCallback = useCallback((valueInputTrim: string) => {
-        dispatch(addNewTasksTC(todoList.id, valueInputTrim));
+        dispatch(addNewTasksTC({todolistId: todoList.id, title: valueInputTrim }));
 
         if (todoList.filter === SortedTask.completed) {
             filterTaskCallback(SortedTask.active);
