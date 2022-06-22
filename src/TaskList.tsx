@@ -1,9 +1,7 @@
 import React, { CSSProperties } from 'react';
 import Task from './Task';
-import { useSelector } from 'react-redux';
-import { AppRootStateType } from './State/store';
+import { useAppSelector } from './State/store';
 import { SortedTask, TodoListCommonType } from './State/todolist-reducer';
-import { TaskType } from './API/API';
 
 type TaskListPropsType = {
     todolist: TodoListCommonType
@@ -18,7 +16,7 @@ const EmptyListStyle: CSSProperties = {
 
 const TaskList = React.memo(({ todolist }: TaskListPropsType) => {
 
-    const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id]);
+    const tasks = useAppSelector(state => state.tasks[todolist.id]);
 
     const getFilteredTaskForRender = () => {
         switch (todolist.filter) {

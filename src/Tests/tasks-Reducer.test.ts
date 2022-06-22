@@ -132,4 +132,3 @@ test('property with todolist should be removed', () => {
     expect(endState['todoListID2']).toBeUndefined();
     expect(endState['todoListID2']).not.toBeDefined();
 });
-

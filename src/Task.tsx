@@ -4,26 +4,26 @@ import { EditableSpan } from './Components/EditableSpan';
 import Delete from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import { removeTaskTC, updateTaskTC } from './State/tasks-reducer';
-import { useDispatch } from 'react-redux';
 import { TasksStatus, TaskType } from './API/API';
+import { useAppDispatch } from './State/store';
 
 type TaskPropsType = TaskType
 
 
 const Task = React.memo(({ todoListId, status, title, id }: TaskPropsType) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const onClickHandler = useCallback(() => {
-        dispatch(removeTaskTC(todoListId, id) as any)
+        dispatch(removeTaskTC(todoListId, id))
     }, [dispatch, todoListId, id]);
 
     const onChangeHandler = useCallback((checked: boolean) => {
-        dispatch(updateTaskTC(todoListId, id, { status: checked ? TasksStatus.Completed : TasksStatus.New }) as any)
+        dispatch(updateTaskTC(todoListId, id, { status: checked ? TasksStatus.Completed : TasksStatus.New }))
     }, [dispatch, todoListId, id]);
 
     const changeTitleTask = useCallback((newInputValue: string) => {
-        dispatch(updateTaskTC(todoListId, id, { title: newInputValue }) as any)
+        dispatch(updateTaskTC(todoListId, id, { title: newInputValue }))
     }, [dispatch, todoListId, id]);
 
     const checkboxCallback = useCallback((checked: boolean) => {
