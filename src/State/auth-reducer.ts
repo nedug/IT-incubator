@@ -5,10 +5,6 @@ import { clearTodosDataAC } from './todolist-reducer';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
-const initialState: initialStateType = {
-    isLoggedIn: false,
-};
-
 // createAsyncThunk
 export const loginTC = createAsyncThunk(
     'auth/login',
@@ -28,9 +24,10 @@ export const loginTC = createAsyncThunk(
             return rejectWithValue(error);
         }
     });
+
 export const logoutTC = createAsyncThunk(
     'auth/logout',
-    async (loginData, { dispatch, rejectWithValue }) => {
+    async (param, { dispatch, rejectWithValue }) => {
         try {
             dispatch(setStatusAC({ status: RequestStatus.loading }));
             const { data } = await authAPI.logout();
@@ -51,7 +48,9 @@ export const logoutTC = createAsyncThunk(
 // объект slice для создания Actions и Reducer
 const slice = createSlice({
     name: 'auth',
-    initialState,
+    initialState: {
+        isLoggedIn: false,
+    } as initialStateType,
     reducers: {
         setIsLoggedInAC(state, action: PayloadAction<{ isLoggedIn: boolean }>) { /* Типизиурем Action как PayloadAction */
             state.isLoggedIn = action.payload.isLoggedIn;

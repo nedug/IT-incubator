@@ -1,9 +1,7 @@
-import { Dispatch } from 'redux';
 import { authAPI } from '../API/API';
 import { handleServerAppError, handleServerNetworkError } from '../utils/error-utils';
 import { setIsLoggedInAC } from './auth-reducer';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ThunkType } from './store';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export enum RequestStatus {
     idle = 'idle',
@@ -12,17 +10,34 @@ export enum RequestStatus {
     failed = 'failed',
 }
 
-
-const initialState: initialStateType = {
-    status: RequestStatus.idle,
-    error: null,
-    isInitialized: false,
-};
+// createAsyncThunk
+export const initializeAppTC = createAsyncThunk(
+    'app/initializeApp',
+    async (param, { dispatch, rejectWithValue }) => {
+        try {
+            dispatch(setStatusAC({ status: RequestStatus.loading }));
+            const { data } = await authAPI.me();
+            if (data.resultCode === 0) {
+                dispatch(setIsLoggedInAC({ isLoggedIn: true }));
+                dispatch(setStatusAC({ status: RequestStatus.succeeded }));
+            } else {
+                handleServerAppError(data, dispatch);
+                return rejectWithValue({});
+            }
+        } catch (error: any) {
+            handleServerNetworkError(error, dispatch);
+            return rejectWithValue(error);
+        }
+    });
 
 // объект slice для создания Actions и Reducer
 const slice = createSlice({
     name: 'app',
-    initialState,
+    initialState: {
+        status: RequestStatus.idle,
+        error: null,
+        isInitialized: false,
+    } as initialStateType,
     reducers: {
         setStatusAC(state, action: PayloadAction<{ status: RequestStatus }>) { /* Типизиурем Action как PayloadAction */
             state.status = action.payload.status;
@@ -30,9 +45,11 @@ const slice = createSlice({
         setErrorAC(state, action: PayloadAction<{ error: string | null }>) {
             state.error = action.payload.error;
         },
-        setIsInitializedAC(state, action: PayloadAction<{ isInitialized: boolean }>) {
-            state.isInitialized = action.payload.isInitialized;
-        },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(initializeAppTC.fulfilled, (state) => {
+            state.isInitialized = true;
+        });
     },
 });
 
@@ -40,25 +57,7 @@ const slice = createSlice({
 export const appReducer = slice.reducer;
 
 // Создаем Actions с помощью slice
-export const { setStatusAC, setErrorAC, setIsInitializedAC } = slice.actions;
-
-// thunks
-export const initializeAppTC = (): ThunkType => async (dispatch: Dispatch) => {
-    try {
-        dispatch(setStatusAC({ status: RequestStatus.loading }));
-        const { data } = await authAPI.me();
-        if (data.resultCode === 0) {
-            dispatch(setIsLoggedInAC({ isLoggedIn: true }));
-            dispatch(setStatusAC({ status: RequestStatus.succeeded }));
-        } else {
-            handleServerAppError(data, dispatch);
-        }
-    } catch (error: any) {
-        handleServerNetworkError(error, dispatch);
-    } finally {
-        dispatch(setIsInitializedAC({ isInitialized: true }));
-    }
-};
+export const { setStatusAC, setErrorAC } = slice.actions;
 
 
 // types
