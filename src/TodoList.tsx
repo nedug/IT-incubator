@@ -32,7 +32,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
     }, [dispatch, todoList.id]);
 
     const addNewTaskCallback = useCallback((valueInputTrim: string) => {
-        dispatch(addNewTasksTC({todolistId: todoList.id, title: valueInputTrim }));
+        dispatch(addNewTasksTC({ todolistId: todoList.id, title: valueInputTrim }));
 
         if (todoList.filter === SortedTask.completed) {
             filterTaskCallback(SortedTask.active);
@@ -40,7 +40,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
     }, [dispatch, filterTaskCallback, todoList.id, todoList.filter]);
 
     const changeTitleTodoList = useCallback((newInputValue: string) => {
-        dispatch(changeTitleTodolistTC(todoList.id, newInputValue))
+        dispatch(changeTitleTodolistTC({ todolistId: todoList.id, title: newInputValue }))
     }, [dispatch, todoList.id]);
 
 

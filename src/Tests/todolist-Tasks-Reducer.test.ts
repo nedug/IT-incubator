@@ -1,4 +1,4 @@
-import { addNewTodolistAC, TodoListCommonType, todoListReducer } from '../State/todolist-reducer';
+import { addNewTodolistTC, TodoListCommonType, todoListReducer } from '../State/todolist-reducer';
 import { tasksReducer, TasksStateType } from '../State/tasks-reducer';
 
 
@@ -7,14 +7,14 @@ test('id ( should be equal', () => {
     const startTasksState: TasksStateType = {};
     const startTodolistState: Array<TodoListCommonType> = [];
 
-    const action = addNewTodolistAC({
+    const action = addNewTodolistTC.fulfilled({
             todolist: {
                 id: 'sfsf dgfd',
                 title: 'New Todolist',
                 addedDate: '',
                 order: 0,
             },
-        },
+        }, 'requestId', 'Table',
     );
 
     const endSTasksState = tasksReducer(startTasksState, action);

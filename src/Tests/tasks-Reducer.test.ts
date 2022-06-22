@@ -1,6 +1,6 @@
-import { addNewTodolistAC, removeTodolistAC } from '../State/todolist-reducer';
 import { addNewTasksTC, removeTaskTC, tasksReducer, TasksStateType, updateTaskTC } from '../State/tasks-reducer';
 import { TasksPriority, TasksStatus } from '../API/API';
+import { addNewTodolistTC, removeTodolistTC } from '../State/todolist-reducer';
 
 
 let startState: TasksStateType = {};
@@ -111,14 +111,14 @@ test('title of task should be changed', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const endState = tasksReducer(startState, addNewTodolistAC({
+    const endState = tasksReducer(startState, addNewTodolistTC.fulfilled({
             todolist: {
                 id: 'sfsf dgfd',
                 title: 'New Todolist',
                 addedDate: '',
                 order: 0,
             },
-        },
+        }, 'requestId', 'ddddd',
     ));
 
     const endStateKeys = Object.keys(endState);
@@ -133,7 +133,9 @@ test('new array should be added when new todolist is added', () => {
 
 test('property with todolist should be removed', () => {
 
-    const endState = tasksReducer(startState, removeTodolistAC({ todolistId: 'todoListID2' }));
+    const endState = tasksReducer(startState, removeTodolistTC.fulfilled(
+        { todolistId: 'todoListID2' }, 'requestId', 'bbfbf'
+    ));
 
     const endStateKeys = Object.keys(endState);
 
