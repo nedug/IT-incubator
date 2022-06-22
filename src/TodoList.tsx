@@ -26,7 +26,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
     }, [dispatch, todoList.id]);
 
     const filterTaskCallback = useCallback((filter: SortedTask) => {
-        dispatch(changeFilterTodolistAC(todoList.id, filter))
+        dispatch(changeFilterTodolistAC({ todolistId: todoList.id, filter }))
     }, [dispatch, todoList.id]);
 
     const addNewTaskCallback = useCallback((valueInputTrim: string) => {
