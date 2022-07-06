@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Provider } from 'react-redux';
 import { store } from './State/store';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 
 const Theme = createTheme({
@@ -21,13 +21,15 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
+        {/*<BrowserRouter>*/}
+        <HashRouter>
 
             <ThemeProvider theme={Theme}>
                 <CssBaseline />
                 <App />
             </ThemeProvider>
 
-        </BrowserRouter>
+        </HashRouter>
+        {/*</BrowserRouter>*/}
     </Provider>
 );
