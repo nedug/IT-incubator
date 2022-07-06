@@ -59,14 +59,8 @@ export const Login = () => {
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl>
                         <FormLabel>
-                            <p>To log in get registered
-                                <a href={'https://social-network.samuraijs.com/'}
-                                   target={'_blank'} rel="noreferrer"> here
-                                </a>
-                            </p>
-                            <p>or use common test account credentials:</p>
-                            <p>Email: free@samuraijs.com</p>
-                            <p>Password: free</p>
+                            <p>Версия для демонстрации работы приложения</p>
+                            <p>Используйте предсохраненный имейл и пароль</p>
                         </FormLabel>
                         <FormGroup>
 
