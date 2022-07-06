@@ -22,7 +22,6 @@ export const initializeAppTC = createAsyncThunk(
                 dispatch(setStatusAC({ status: RequestStatus.succeeded }));
             } else {
                 handleServerAppError(data, dispatch);
-                return rejectWithValue({});
             }
         } catch (error: any) {
             handleServerNetworkError(error, dispatch);
