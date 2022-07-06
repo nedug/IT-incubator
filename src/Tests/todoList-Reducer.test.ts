@@ -1,5 +1,5 @@
 import { v1 } from 'uuid';
-import { addNewTodolistAC, changeFilterTodolistAC, changeTitleTodolistAC, removeTodolistAC, setTodolistsAC, SortedTask, TodoListCommonType, todoListReducer } from '../State/todolist-reducer';
+import { addNewTodolistTC, changeFilterTodolistAC, changeTitleTodolistTC, fetchTodolistsTC, removeTodolistTC, SortedTask, TodoListCommonType, todoListReducer } from '../State/todolist-reducer';
 import { RequestStatus } from '../State/app-reducer';
 
 
@@ -19,7 +19,9 @@ beforeEach(() => { /* Весь этот код будет перезаписыв
 
 test('correct todolist should be removed', () => {
 
-    const endState = todoListReducer(startState, removeTodolistAC({ todolistId: todolistId1 }));
+    const endState = todoListReducer(startState, removeTodolistTC.fulfilled(
+        { todolistId: todolistId1 }, 'requestId', 'ddddd',
+    ));
 
     expect(endState.length).toBe(1);
     expect(endState[0].id).toBe(todolistId2);
@@ -35,7 +37,9 @@ test('correct todolist should be added', () => {
         order: 0,
     };
 
-    const endState = todoListReducer(startState, addNewTodolistAC({ todolist: newTodolist }));
+    const endState = todoListReducer(startState, addNewTodolistTC.fulfilled(
+        { todolist: newTodolist }, 'requestId', 'ddddd',
+    ));
 
     expect(endState.length).toBe(3);
     expect(endState[0].title).toBe(newTodolist.title);
@@ -46,7 +50,9 @@ test('correct todolist should change its name', () => {
 
     const newTodolistTitle = 'New Todolist';
 
-    const endState = todoListReducer(startState, changeTitleTodolistAC({ todolistId: todolistId2, title: newTodolistTitle }));
+    const endState = todoListReducer(startState, changeTitleTodolistTC.fulfilled(
+        { todolistId: todolistId2, title: newTodolistTitle }, 'requestId', { todolistId: 'string', title: 'string' },
+    ));
 
     expect(endState[0].title).toBe('What to learn');
     expect(endState[1].title).toBe(newTodolistTitle);
@@ -66,7 +72,9 @@ test('correct filter of todolist should be changed', () => {
 
 test('todolists should be set to state', () => {
 
-    const endState = todoListReducer([], setTodolistsAC({ todolists: startState }));
+    const endState = todoListReducer([], fetchTodolistsTC.fulfilled(
+        { todolists: startState }, 'requestId',
+    ));
 
     expect(endState.length).toBe(2);
 });

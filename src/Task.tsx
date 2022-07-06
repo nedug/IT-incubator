@@ -15,15 +15,27 @@ const Task = React.memo(({ todoListId, status, title, id }: TaskPropsType) => {
     const dispatch = useAppDispatch();
 
     const onClickHandler = useCallback(() => {
-        dispatch(removeTaskTC(todoListId, id))
+        dispatch(removeTaskTC({ todoListId, id }))
     }, [dispatch, todoListId, id]);
 
     const onChangeHandler = useCallback((checked: boolean) => {
-        dispatch(updateTaskTC(todoListId, id, { status: checked ? TasksStatus.Completed : TasksStatus.New }))
+        dispatch(updateTaskTC({
+            todolistId: todoListId,
+            id,
+            taskSpecial: {
+                status: checked ? TasksStatus.Completed : TasksStatus.New
+            },
+        }))
     }, [dispatch, todoListId, id]);
 
     const changeTitleTask = useCallback((newInputValue: string) => {
-        dispatch(updateTaskTC(todoListId, id, { title: newInputValue }))
+        dispatch(updateTaskTC({
+            todolistId: todoListId,
+            id,
+            taskSpecial: {
+                title: newInputValue
+            },
+        }))
     }, [dispatch, todoListId, id]);
 
     const checkboxCallback = useCallback((checked: boolean) => {
