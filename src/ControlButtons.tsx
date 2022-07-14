@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import Button from '@material-ui/core/Button';
 import { SortedTask } from './State/todolist-reducer';
+import s from './CSS/ControlButtons.module.css';
 
 type ControlButtonsPropsType = {
     filterTask: (filter: SortedTask) => void
@@ -15,6 +16,7 @@ const ControlButtons = React.memo(({ filterTask, filteredTask }: ControlButtonsP
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button
+                className={filteredTask === SortedTask.all ? undefined : s.notActive}
                 size={'small'}
                 disableElevation
                 variant={filteredTask === SortedTask.all ? 'contained' : 'outlined'}
@@ -24,6 +26,7 @@ const ControlButtons = React.memo(({ filterTask, filteredTask }: ControlButtonsP
             </Button>
 
             <Button
+                className={filteredTask === SortedTask.active ? undefined : s.notActive}
                 size={'small'}
                 color={'primary'}
                 disableElevation
@@ -34,6 +37,7 @@ const ControlButtons = React.memo(({ filterTask, filteredTask }: ControlButtonsP
             </Button>
 
             <Button
+                className={filteredTask === SortedTask.completed ? undefined : s.notActive}
                 size={'small'}
                 color={'secondary'}
                 disableElevation

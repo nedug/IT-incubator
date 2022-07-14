@@ -48,7 +48,7 @@ const App = () => {
             <AppBar position="static">
                 <Toolbar style={{ display: 'flex', justifyContent: isLoggedIn ? 'space-between' : 'center' }}>
                     <Typography variant="h6">
-                        TodoList
+                        My TodoLists
                     </Typography>
 
                     {isLoggedIn &&

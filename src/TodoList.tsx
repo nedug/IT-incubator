@@ -57,6 +57,7 @@ const TodoList = React.memo(({ todoList }: TodolistPropsType) => {
                 <AddItemForm
                     addNewItem={addNewTaskCallback}
                     disabled={todoList.entityStatus === RequestStatus.loading}
+                    title='task'
                 />
 
                 <TaskList

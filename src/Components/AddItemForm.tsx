@@ -6,10 +6,11 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 type AddItemFormPropsType = {
     addNewItem: (valueInput: string) => void
     disabled?: boolean
+    title?: string
 }
 
 
-const AddItemForm = React.memo(({ addNewItem, disabled = false }: AddItemFormPropsType) => {
+const AddItemForm = React.memo(({ addNewItem, disabled = false, title = "value" }: AddItemFormPropsType) => {
 
     const [valueInput, setValueInput] = useState('');
     const [error, setError] = useState(false);
@@ -45,7 +46,7 @@ const AddItemForm = React.memo(({ addNewItem, disabled = false }: AddItemFormPro
             <TextField
                 size={'small'}
                 variant={'outlined'}
-                label={error ? 'empty value' : 'type value'}
+                label={error ? 'empty value' : `type new ${title}`}
                 value={valueInput}
                 className={error ? 'error' : ''}
                 error={error}
