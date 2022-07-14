@@ -44,7 +44,7 @@ const Task = React.memo(({ todoListId, status, title, id }: TaskPropsType) => {
 
 
     return (
-        <div style={status === TasksStatus.Completed ? { opacity: '0.5' } : { opacity: 'inherit' }}>
+        <div style={status === TasksStatus.Completed ? { opacity: '0.4' } : { opacity: 'inherit' }}>
             <IconButton
                 size={'small'}
                 style={{ color: '#70b070' }}
