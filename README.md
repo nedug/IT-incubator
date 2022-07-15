@@ -1,10 +1,10 @@
 ## React Todolist
 
-Development TodoList with CRUD operations.
+Development TodoList with CRUD operations
 ```
 Technologies and libraries in development:
 
-React, Redux Toolkit, TypeScript, Redux Thunk, axios, formik, react-router-dom, storybook, uuid, framer-motion
+React, Redux Toolkit, TypeScript, Redux Thunk, axios, formik, Material-ui, react-router-dom, storybook, uuid, framer-motion
 ```
 
 ***
