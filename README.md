@@ -13,6 +13,8 @@ Development TodoList with CRUD operations:
 * change title task (db click)
 * error processing and loaders loading
 
+***
+
 ```
 Technologies and libraries in development:
 
