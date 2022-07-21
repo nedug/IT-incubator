@@ -1,4 +1,4 @@
-import { RequestStatus, setStatusAC } from './app-reducer'
+import { initializeAppTC, RequestStatus, setLoginAC, setStatusAC } from './app-reducer'
 import { authAPI, LoginParamsType } from '../API/API';
 import { handleServerAppError, handleServerNetworkError } from '../utils/error-utils';
 import { clearTodosDataAC } from './todolist-reducer';
@@ -14,6 +14,7 @@ export const loginTC = createAsyncThunk(
             const { data } = await authAPI.login(loginData);
             if (data.resultCode === 0) {
                 dispatch(setStatusAC({ status: RequestStatus.succeeded }));
+                dispatch(initializeAppTC());
                 return { isLoggedIn: true };
             } else {
                 handleServerAppError(data, dispatch);
@@ -34,6 +35,7 @@ export const logoutTC = createAsyncThunk(
             if (data.resultCode === 0) {
                 dispatch(clearTodosDataAC());
                 dispatch(setStatusAC({ status: RequestStatus.succeeded }));
+                dispatch(setLoginAC({login: null}));
                 return { isLoggedIn: false };
             } else {
                 handleServerAppError(data, dispatch);

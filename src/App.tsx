@@ -21,6 +21,7 @@ const App = () => {
     const requestStatus = useAppSelector(state => state.app.status);
     const isInitialized = useAppSelector(state => state.app.isInitialized);
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+    const login = useAppSelector(state => state.app.login);
 
     const dispatch = useAppDispatch();
 
@@ -52,10 +53,16 @@ const App = () => {
                     </Typography>
 
                     {isLoggedIn &&
-                        <Button variant={'outlined'} color={'secondary'}
-                                onClick={logoutHandler}>
-                            Logout
-                        </Button>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Typography style={{ marginRight: 20, opacity: 0.85 }} variant="h5">
+                                {login}
+                            </Typography>
+
+                            <Button variant={'outlined'} color={'secondary'}
+                                    onClick={logoutHandler}>
+                                Logout
+                            </Button>
+                        </div>
                     }
                 </Toolbar>
             </AppBar>

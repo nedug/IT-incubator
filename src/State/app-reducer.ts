@@ -17,9 +17,11 @@ export const initializeAppTC = createAsyncThunk(
         try {
             dispatch(setStatusAC({ status: RequestStatus.loading }));
             const { data } = await authAPI.me();
-            if (data.resultCode === 0) {
+            const {data: { login }, resultCode} = data;
+            if (resultCode === 0) {
                 dispatch(setIsLoggedInAC({ isLoggedIn: true }));
                 dispatch(setStatusAC({ status: RequestStatus.succeeded }));
+                dispatch(setLoginAC({login}));
             } else {
                 handleServerAppError(data, dispatch);
             }
@@ -36,6 +38,7 @@ const slice = createSlice({
         status: RequestStatus.idle,
         error: null,
         isInitialized: false,
+        login: null,
     } as initialStateType,
     reducers: {
         setStatusAC(state, action: PayloadAction<{ status: RequestStatus }>) { /* Типизиурем Action как PayloadAction */
@@ -43,6 +46,9 @@ const slice = createSlice({
         },
         setErrorAC(state, action: PayloadAction<{ error: string | null }>) {
             state.error = action.payload.error;
+        },
+        setLoginAC(state, action: PayloadAction<{ login: string | null }>) {
+            state.login = action.payload.login;
         },
     },
     extraReducers: (builder) => {
@@ -56,7 +62,7 @@ const slice = createSlice({
 export const appReducer = slice.reducer;
 
 // Создаем Actions с помощью slice
-export const { setStatusAC, setErrorAC } = slice.actions;
+export const { setStatusAC, setErrorAC, setLoginAC } = slice.actions;
 
 
 // types
@@ -64,4 +70,5 @@ export type initialStateType = {
     status: RequestStatus
     error: null | string
     isInitialized: boolean
+    login: null | string
 }
