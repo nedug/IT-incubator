@@ -8,6 +8,7 @@ beforeEach(() => { /* Весь этот код будет перезаписыв
         status: RequestStatus.idle,
         error: null,
         isInitialized: false,
+        login: null,
     };
 })
 

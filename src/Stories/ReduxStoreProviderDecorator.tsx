@@ -52,6 +52,7 @@ const initialGlobalState = {
         status: RequestStatus.idle,
         error: null,
         isInitialized: false,
+        login: null,
     },
     auth: {
         isLoggedIn: false,
