@@ -1,5 +1,7 @@
 ## React Todolist
 
+***
+
 Development TodoList with CRUD operations:
 * application Login
 * application Logout
