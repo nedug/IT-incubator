@@ -17,8 +17,13 @@ Development TodoList with CRUD operations:
 
 ```
 Technologies and libraries in development:
-
-React, Redux Toolkit, TypeScript, Redux Thunk, axios, formik, Material-ui, react-router-dom, storybook, uuid, framer-motion
+- React
+- TypeScript
+- Redux (Redux Thunk) + Redux Toolkit
+- Axios
+- Material-UI
+- react-router-dom, formik, framer-motion
+- Storybook
 ```
 
 ***
